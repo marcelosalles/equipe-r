@@ -1,0 +1,994 @@
+! ESSA ARQUIVO POSSUI OBJETOS NAO RELACIONADOS A GEOMETRIA, MAS QUE NAO 
+! SE REPETEM EM TODOS OS CASOS. PORTANTO, NAO PODEM SER COLOCADOS NO SEED
+
+Building,
+    UNI,                     !- Name
+    0.0,                     !- North Axis {deg}
+    City,                    !- Terrain
+    0.04,                    !- Loads Convergence Tolerance Value
+    0.4,                     !- Temperature Convergence Tolerance Value {deltaC}
+    FullExteriorWithReflections,  !- Solar Distribution
+    25,                      !- Maximum Number of Warmup Days
+    6;                       !- Minimum Number of Warmup Days
+
+!-   ===========  ALL OBJECTS IN CLASS: MATERIAL ===========
+
+! Coloquei a absortância das paredes e coberturas como sendo 0.5...
+Material,
+    fibrocimento telha,      !- Name
+    Rough,                   !- Roughness
+    0.008,                   !- Thickness {m}
+    0.65,                    !- Conductivity {W/m-K}
+    1700,                    !- Density {kg/m3}
+    840,                     !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.5,                     !- Solar Absorptance
+    0.5;                     !- Visible Absorptance
+
+Material,
+    Concreto Piso,           !- Name
+    Rough,                   !- Roughness
+    0.07,                    !- Thickness {m}
+    1.75,                    !- Conductivity {W/m-K}
+    2200,                    !- Density {kg/m3}
+    1000,                    !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.5,                     !- Solar Absorptance
+    0.5;                     !- Visible Absorptance
+
+Material,
+    Piso ceramico,           !- Name
+    Smooth,                  !- Roughness
+    0.0075,                  !- Thickness {m}
+    1.05,                    !- Conductivity {W/m-K}
+    2000,                    !- Density {kg/m3}
+    920,                     !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.5,                     !- Solar Absorptance
+    0.5;                     !- Visible Absorptance
+
+Material,
+    PortaMadInt3cm,          !- Name
+    MediumSmooth,            !- Roughness
+    0.03,                    !- Thickness {m}
+    0.15,                    !- Conductivity {W/m-K}
+    650,                     !- Density {kg/m3}
+    2300,                    !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.5,                     !- Solar Absorptance
+    0.5;                     !- Visible Absorptance
+
+Material,
+    Concreto 10 cm,          !- Name
+    Rough,                   !- Roughness
+    0.1,                     !- Thickness {m}
+    1.75,                    !- Conductivity {W/m-K}
+    2200,                    !- Density {kg/m3}
+    1000,                    !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.5,                     !- Solar Absorptance
+    0.5;                     !- Visible Absorptance
+
+Material,
+    Forro Madeira,           !- Name
+    Smooth,                  !- Roughness
+    0.01,                    !- Thickness {m}
+    0.1,                     !- Conductivity {W/m-K}
+    400,                     !- Density {kg/m3}
+    2300,                    !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.5,                     !- Solar Absorptance
+    0.5;                     !- Visible Absorptance
+
+Material,
+    Tijolo_macico,           !- Name
+    Rough,                   !- Roughness
+    0.1,                     !- Thickness {m}
+    1.05,                    !- Conductivity {W/m-K}
+    1800,                    !- Density {kg/m3}
+    920,                     !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.5,                     !- Solar Absorptance
+    0.5;                     !- Visible Absorptance
+
+
+!-   ===========  ALL OBJECTS IN CLASS: MATERIAL:AIRGAP ===========
+
+Material:AirGap,
+    Camara_ar_atico_telhado, !- Name
+    0.21;                    !- Thermal Resistance {m2-K/W}
+
+
+!-   ===========  ALL OBJECTS IN CLASS: WINDOWMATERIAL:SIMPLEGLAZINGSYSTEM ===========
+
+WindowMaterial:SimpleGlazingSystem,
+    VidFS0.87,               !- Name
+    5.7,                     !- U-Factor {W/m2-K}
+    0.87;                    !- Solar Heat Gain Coefficient
+
+
+!-   ===========  ALL OBJECTS IN CLASS: CONSTRUCTION ===========
+
+Construction,
+    Porta_3_cm,              !- Name
+    PortaMadInt3cm;          !- Outside Layer
+
+Construction,
+    Vid87,                   !- Name
+    VidFS0.87;               !- Outside Layer
+
+Construction,
+    Piso_concreto,           !- Name
+    Concreto Piso,           !- Outside Layer
+    Piso ceramico;           !- Layer 2
+
+Construction,
+    Parede_Concreto,         !- Name
+    Concreto 10 cm;          !- Outside Layer
+
+Construction,
+    Cobertura_REF,           !- Name
+    fibrocimento telha,      !- Outside Layer
+    Camara_ar_atico_telhado, !- Layer 2
+    Forro Madeira;           !- Layer 3
+
+Construction,
+    Parede_REF,              !- Name
+    Tijolo_macico;           !- Outside Layer
+
+Construction,
+    Cob_concreto,            !- Name
+    Piso ceramico,           !- Outside Layer
+    Concreto Piso;           !- Layer 2
+
+
+!-   ===========  ALL OBJECTS IN CLASS: ZONE ===========
+
+Zone,
+    Sala,                    !- Name
+    0.0,                     !- Direction of Relative North {deg}
+    0.0,                     !- X Origin {m}
+    0.0,                     !- Y Origin {m}
+    0.0,                     !- Z Origin {m}
+    ,                        !- Type
+    1;                       !- Multiplier
+
+Zone,
+    Dorm1,                   !- Name
+    0.0,                     !- Direction of Relative North {deg}
+    3.87,                    !- X Origin {m}
+    0.0,                    !- Y Origin {m}
+    0.0,                     !- Z Origin {m}
+    ,                        !- Type
+    1;                       !- Multiplier
+
+Zone,
+    Dorm2,                   !- Name
+    0.0,                     !- Direction of Relative North {deg}
+    3.87,                    !- X Origin {m}
+    4.38,                    !- Y Origin {m}
+    0.0,                     !- Z Origin {m}
+    ,                        !- Type
+    1;                       !- Multiplier
+
+Zone,
+    Banh1,                   !- Name
+    0.0,                     !- Direction of Relative North {deg}
+    0,                       !- X Origin {m}
+    5.54,                    !- Y Origin {m}
+    0.0,                     !- Z Origin {m}
+    ,                        !- Type
+    1;                       !- Multiplier
+
+!-   ===========  ALL OBJECTS IN CLASS: BUILDINGSURFACE:DETAILED ===========
+
+
+BuildingSurface:Detailed,
+  PAREXT_LESTE_DORM1,
+  Wall,
+  Parede_REF,
+  Dorm1,
+  Outdoors,
+  ,
+  SunExposed,
+  WindExposed,
+  Autocalculate,
+  Autocalculate,
+  2.74,
+  0.0,
+  0.0,
+  2.74,
+  4.38,
+  0.0,
+  2.74,
+  4.38,
+  2.5,
+  2.74,
+  0.0,
+  2.5;
+
+BuildingSurface:Detailed,
+  PAREXT_LESTE_DORM2,
+  Wall,
+  Parede_REF,
+  Dorm2,
+  Outdoors,
+  ,
+  SunExposed,
+  WindExposed,
+  Autocalculate,
+  Autocalculate,
+  2.74,
+  0.0,
+  0.0,
+  2.74,
+  3.03,
+  0.0,
+  2.74,
+  3.03,
+  2.5,
+  2.74,
+  0.0,
+  2.5;
+
+BuildingSurface:Detailed,
+  PAREXT_NORTE_BWC,
+  Wall,
+  Parede_REF,
+  Banh1,
+  Outdoors,
+  ,
+  SunExposed,
+  WindExposed,
+  Autocalculate,
+  Autocalculate,
+  3.87,
+  1.2,
+  0.0,
+  0.0,
+  1.2,
+  0.0,
+  0.0,
+  1.2,
+  2.5,
+  3.87,
+  1.2,
+  2.5;
+
+BuildingSurface:Detailed,
+  PAREXT_NORTE_DORM2,
+  Wall,
+  Parede_REF,
+  Dorm2,
+  Outdoors,
+  ,
+  SunExposed,
+  WindExposed,
+  Autocalculate,
+  Autocalculate,
+  2.74,
+  3.03,
+  0.0,
+  0.0,
+  3.03,
+  0.0,
+  0.0,
+  3.03,
+  2.5,
+  2.74,
+  3.03,
+  2.5;
+
+BuildingSurface:Detailed,
+  PAREXT_OESTE_BWC,
+  Wall,
+  Parede_REF,
+  Banh1,
+  Outdoors,
+  ,
+  SunExposed,
+  WindExposed,
+  Autocalculate,
+  Autocalculate,
+  0.0,
+  1.2,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  2.5,
+  0.0,
+  1.2,
+  2.5;
+
+BuildingSurface:Detailed,
+  PAREXT_OESTE_DORM2,
+  Wall,
+  Parede_REF,
+  Dorm2,
+  Outdoors,
+  ,
+  SunExposed,
+  WindExposed,
+  Autocalculate,
+  Autocalculate,
+  0.0,
+  3.03,
+  0.0,
+  0.0,
+  2.36,
+  0.0,
+  0.0,
+  2.36,
+  2.5,
+  0.0,
+  3.03,
+  2.5;
+
+BuildingSurface:Detailed,
+  PAREXT_OESTE_SALA,
+  Wall,
+  Parede_REF,
+  Sala,
+  Outdoors,
+  ,
+  SunExposed,
+  WindExposed,
+  Autocalculate,
+  Autocalculate,
+  0.0,
+  5.54,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  2.5,
+  0.0,
+  5.54,
+  2.5;
+
+BuildingSurface:Detailed,
+  PAREXT_SUL_DORM1,
+  Wall,
+  Parede_REF,
+  Dorm1,
+  Outdoors,
+  ,
+  SunExposed,
+  WindExposed,
+  Autocalculate,
+  Autocalculate,
+  0.0,
+  0.0,
+  0.0,
+  2.74,
+  0.0,
+  0.0,
+  2.74,
+  0.0,
+  2.5,
+  0.0,
+  0.0,
+  2.5;
+
+BuildingSurface:Detailed,
+  PAREXT_SUL_SALA,
+  Wall,
+  Parede_REF,
+  Sala,
+  Outdoors,
+  ,
+  SunExposed,
+  WindExposed,
+  Autocalculate,
+  Autocalculate,
+  0.0,
+  0.0,
+  0.0,
+  3.87,
+  0.0,
+  0.0,
+  3.87,
+  0.0,
+  2.5,
+  0.0,
+  0.0,
+  2.5;
+
+BuildingSurface:Detailed,
+  PARINT1_BWCSALA,
+  Wall,
+  Parede_REF,
+  Banh1,
+  Surface,
+  PARINT1_SALABWC,
+  NoSun,
+  NoWind,
+  Autocalculate,
+  Autocalculate,
+  0.0,
+  0.0,
+  0.0,
+  3.87,
+  0.0,
+  0.0,
+  3.87,
+  0.0,
+  2.5,
+  0.0,
+  0.0,
+  2.5;
+
+BuildingSurface:Detailed,
+  PARINT1_DORM1SALA,
+  Wall,
+  Parede_REF,
+  Dorm1,
+  Surface,
+  PARINT2_SALADORM1,
+  NoSun,
+  NoWind,
+  Autocalculate,
+  Autocalculate,
+  0.0,
+  4.38,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  2.5,
+  0.0,
+  4.38,
+  2.5;
+
+BuildingSurface:Detailed,
+  PARINT1_DORM2BWC,
+  Wall,
+  Parede_REF,
+  Dorm2,
+  Surface,
+  PARINT2_BWCDORM2,
+  NoSun,
+  NoWind,
+  Autocalculate,
+  Autocalculate,
+  0.0,
+  2.36,
+  0.0,
+  0.0,
+  1.16,
+  0.0,
+  0.0,
+  1.16,
+  2.5,
+  0.0,
+  2.36,
+  2.5;
+
+BuildingSurface:Detailed,
+  PARINT1_DORM2SALA,
+  Wall,
+  Parede_REF,
+  Dorm2,
+  Surface,
+  PARINT2_SALADORM2,
+  NoSun,
+  NoWind,
+  Autocalculate,
+  Autocalculate,
+  0.0,
+  1.16,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  2.5,
+  0.0,
+  1.16,
+  2.5;
+
+BuildingSurface:Detailed,
+  PARINT1_SALABWC,
+  Wall,
+  Parede_REF,
+  Sala,
+  Surface,
+  PARINT1_BWCSALA,
+  NoSun,
+  NoWind,
+  Autocalculate,
+  Autocalculate,
+  3.87,
+  5.54,
+  0.0,
+  0.0,
+  5.54,
+  0.0,
+  0.0,
+  5.54,
+  2.5,
+  3.87,
+  5.54,
+  2.5;
+
+BuildingSurface:Detailed,
+  PARINT2_BWCDORM2,
+  Wall,
+  Parede_REF,
+  Banh1,
+  Surface,
+  PARINT1_DORM2BWC,
+  NoSun,
+  NoWind,
+  Autocalculate,
+  Autocalculate,
+  3.87,
+  0.0,
+  0.0,
+  3.87,
+  1.2,
+  0.0,
+  3.87,
+  1.2,
+  2.5,
+  3.87,
+  0.0,
+  2.5;
+
+BuildingSurface:Detailed,
+  PARINT2_SALADORM2,
+  Wall,
+  Parede_REF,
+  Sala,
+  Surface,
+  PARINT1_DORM2SALA,
+  NoSun,
+  NoWind,
+  Autocalculate,
+  Autocalculate,
+  3.87,
+  4.38,
+  0.0,
+  3.87,
+  5.54,
+  0.0,
+  3.87,
+  5.54,
+  2.5,
+  3.87,
+  4.38,
+  2.5;
+
+BuildingSurface:Detailed,
+  PARINT2_DORM1DORM2,
+  Wall,
+  Parede_REF,
+  Dorm1,
+  Surface,
+  PARINT2_DORM2DORM1,
+  NoSun,
+  NoWind,
+  Autocalculate,
+  Autocalculate,
+  2.74,
+  4.38,
+  0.0,
+  0.0,
+  4.38,
+  0.0,
+  0.0,
+  4.38,
+  2.5,
+  2.74,
+  4.38,
+  2.5;
+
+BuildingSurface:Detailed,
+  PARINT2_DORM2DORM1,
+  Wall,
+  Parede_REF,
+  Dorm2,
+  Surface,
+  PARINT2_DORM1DORM2,
+  NoSun,
+  NoWind,
+  Autocalculate,
+  Autocalculate,
+  0.0,
+  0.0,
+  0.0,
+  2.74,
+  0.0,
+  0.0,
+  2.74,
+  0.0,
+  2.5,
+  0.0,
+  0.0,
+  2.5;
+
+BuildingSurface:Detailed,
+  PARINT2_SALADORM1,
+  Wall,
+  Parede_REF,
+  Sala,
+  Surface,
+  PARINT1_DORM1SALA,
+  NoSun,
+  NoWind,
+  Autocalculate,
+  Autocalculate,
+  3.87,
+  0.0,
+  0.0,
+  3.87,
+  4.38,
+  0.0,
+  3.87,
+  4.38,
+  2.5,
+  3.87,
+  0.0,
+  2.5;
+
+!-   ===========  ALL OBJECTS IN CLASS: FENESTRATIONSURFACE:DETAILED ===========
+
+FenestrationSurface:Detailed,
+    JANSALA_OESTE,           !- Name
+    Window,                  !- Surface Type
+    Vid87,                   !- Construction Name
+    PAREXT_OESTE_SALA,       !- Building Surface Name
+    ,                        !- Outside Boundary Condition Object
+    ,                        !- View Factor to Ground
+    ,                        !- Frame and Divider Name
+    ,                        !- Multiplier
+    4,                       !- Number of Vertices
+    0.000000000000,          !- Vertex 1 X-coordinate {m}
+    4.09,                    !- Vertex 1 Y-coordinate {m}
+    1.100000000000,          !- Vertex 1 Z-coordinate {m}
+    0.000000000000,          !- Vertex 2 X-coordinate {m}
+    2.89,                    !- Vertex 2 Y-coordinate {m}
+    1.10,                    !- Vertex 2 Z-coordinate {m}
+    0.000000000000,          !- Vertex 3 X-coordinate {m}
+    2.890000000000,          !- Vertex 3 Y-coordinate {m}
+    2.1,                     !- Vertex 3 Z-coordinate {m}
+    0.000000000000,          !- Vertex 4 X-coordinate {m}
+    4.09,                    !- Vertex 4 Y-coordinate {m}
+    2.1;                     !- Vertex 4 Z-coordinate {m}
+
+FenestrationSurface:Detailed,
+    JANBWC,                  !- Name
+    Window,                  !- Surface Type
+    Vid87,                   !- Construction Name
+    PAREXT_OESTE_BWC,        !- Building Surface Name
+    ,                        !- Outside Boundary Condition Object
+    ,                        !- View Factor to Ground
+    ,                        !- Frame and Divider Name
+    ,                        !- Multiplier
+    4,                       !- Number of Vertices
+    0,                       !- Vertex 1 X-coordinate {m}
+    1.15,          !- Vertex 1 Y-coordinate {m}
+    1.6,                     !- Vertex 1 Z-coordinate {m}
+    0,                       !- Vertex 2 X-coordinate {m}
+    0.35,                    !- Vertex 2 Y-coordinate {m}
+    1.6,                     !- Vertex 2 Z-coordinate {m}
+    0,                       !- Vertex 3 X-coordinate {m}
+    0.35,          !- Vertex 3 Y-coordinate {m}
+    2.2,                     !- Vertex 3 Z-coordinate {m}
+    0,                       !- Vertex 4 X-coordinate {m}
+    1.15,                    !- Vertex 4 Y-coordinate {m}
+    2.2;                     !- Vertex 4 Z-coordinate {m}
+
+FenestrationSurface:Detailed,
+    JANSALA_SUL,             !- Name
+    Window,                  !- Surface Type
+    Vid87,                   !- Construction Name
+    PAREXT_SUL_SALA,         !- Building Surface Name
+    ,                        !- Outside Boundary Condition Object
+    ,                        !- View Factor to Ground
+    ,                        !- Frame and Divider Name
+    ,                        !- Multiplier
+    4,                       !- Number of Vertices
+    1.200000000000,          !- Vertex 1 X-coordinate {m}
+    0.000000000000,          !- Vertex 1 Y-coordinate {m}
+    1.1,                     !- Vertex 1 Z-coordinate {m}
+    2.7,                     !- Vertex 2 X-coordinate {m}
+    0.000000000000,          !- Vertex 2 Y-coordinate {m}
+    1.100000000000,          !- Vertex 2 Z-coordinate {m}
+    2.7,                     !- Vertex 3 X-coordinate {m}
+    0.000000000000,          !- Vertex 3 Y-coordinate {m}
+    2.1,                     !- Vertex 3 Z-coordinate {m}
+    1.2,                     !- Vertex 4 X-coordinate {m}
+    0.000000000000,          !- Vertex 4 Y-coordinate {m}
+    2.1;                     !- Vertex 4 Z-coordinate {m}
+
+FenestrationSurface:Detailed,
+    JANQUARTO1_SUL,          !- Name
+    Window,                  !- Surface Type
+    Vid87,                   !- Construction Name
+    PAREXT_SUL_DORM1,        !- Building Surface Name
+    ,                        !- Outside Boundary Condition Object
+    ,                        !- View Factor to Ground
+    ,                        !- Frame and Divider Name
+    ,                        !- Multiplier
+    4,                       !- Number of Vertices
+    0.620000000000,          !- Vertex 1 X-coordinate {m}
+    0,                       !- Vertex 1 Y-coordinate {m}
+    1.1,                     !- Vertex 1 Z-coordinate {m}
+    2.12,                    !- Vertex 2 X-coordinate {m}
+    0,                       !- Vertex 2 Y-coordinate {m}
+    1.100000000000,          !- Vertex 2 Z-coordinate {m}
+    2.120000000000,          !- Vertex 3 X-coordinate {m}
+    0,                       !- Vertex 3 Y-coordinate {m}
+    2.1,                     !- Vertex 3 Z-coordinate {m}
+    0.62,                    !- Vertex 4 X-coordinate {m}
+    0,                       !- Vertex 4 Y-coordinate {m}
+    2.1;                     !- Vertex 4 Z-coordinate {m}
+
+FenestrationSurface:Detailed,
+    JANQUARTO2_LESTE,        !- Name
+    Window,                  !- Surface Type
+    Vid87,                   !- Construction Name
+    PAREXT_LESTE_DORM2,      !- Building Surface Name
+    ,                        !- Outside Boundary Condition Object
+    ,                        !- View Factor to Ground
+    ,                        !- Frame and Divider Name
+    ,                        !- Multiplier
+    4,                       !- Number of Vertices
+    2.740000000000,          !- Vertex 1 X-coordinate {m}
+    0.76,                    !- Vertex 1 Y-coordinate {m}
+    1.1,                     !- Vertex 1 Z-coordinate {m}
+    2.740000000000,          !- Vertex 2 X-coordinate {m}
+    2.26,                    !- Vertex 2 Y-coordinate {m}
+    1.100000000000,          !- Vertex 2 Z-coordinate {m}
+    2.740000000000,          !- Vertex 3 X-coordinate {m}
+    2.26,                    !- Vertex 3 Y-coordinate {m}
+    2.1,                     !- Vertex 3 Z-coordinate {m}
+    2.740000000000,          !- Vertex 4 X-coordinate {m}
+    0.76,                    !- Vertex 4 Y-coordinate {m}
+    2.1;                     !- Vertex 4 Z-coordinate {m}
+
+FenestrationSurface:Detailed,
+    PORTAEXT_NORTE,          !- Name
+    Door,                    !- Surface Type
+    Porta_3_cm,              !- Construction Name
+    PAREXT_NORTE_BWC,        !- Building Surface Name
+    ,                        !- Outside Boundary Condition Object
+    ,                        !- View Factor to Ground
+    ,                        !- Frame and Divider Name
+    ,                        !- Multiplier
+    4,                       !- Number of Vertices
+    3.7,                     !- Vertex 1 X-coordinate {m}
+    1.2,                    !- Vertex 1 Y-coordinate {m}
+    0,                       !- Vertex 1 Z-coordinate {m}
+    2.9,                     !- Vertex 2 X-coordinate {m}
+    1.2,                 !- Vertex 2 Y-coordinate {m}
+    0.000000000000,          !- Vertex 2 Z-coordinate {m}
+    2.900000000000,          !- Vertex 3 X-coordinate {m}
+    1.2,                   !- Vertex 3 Y-coordinate {m}
+    2.1,                     !- Vertex 3 Z-coordinate {m}
+    3.7,                     !- Vertex 4 X-coordinate {m}
+    1.2,                    !- Vertex 4 Y-coordinate {m}
+    2.1;                     !- Vertex 4 Z-coordinate {m}
+
+FenestrationSurface:Detailed,
+    PORTAINT_SALADORM1,      !- Name
+    Door,                    !- Surface Type
+    Porta_3_cm,              !- Construction Name
+    PARINT2_SALADORM1,       !- Building Surface Name
+    PORTAINT_DORM1SALA,      !- Outside Boundary Condition Object
+    ,                        !- View Factor to Ground
+    ,                        !- Frame and Divider Name
+    ,                        !- Multiplier
+    4,                       !- Number of Vertices
+    3.870000000000,          !- Vertex 1 X-coordinate {m}
+    .2,                      !- Vertex 1 Y-coordinate {m}
+    0,                       !- Vertex 1 Z-coordinate {m}
+    3.870000000000,          !- Vertex 2 X-coordinate {m}
+    1.0,                   !- Vertex 2 Y-coordinate {m}
+    0.000000000000,          !- Vertex 2 Z-coordinate {m}
+    3.870000000000,          !- Vertex 3 X-coordinate {m}
+    1.0,                   !- Vertex 3 Y-coordinate {m}
+    2.1,                     !- Vertex 3 Z-coordinate {m}
+    3.870000000000,          !- Vertex 4 X-coordinate {m}
+    .2,                   !- Vertex 4 Y-coordinate {m}
+    2.1;                     !- Vertex 4 Z-coordinate {m}
+
+FenestrationSurface:Detailed,
+    PORTAINT_BWCDORM2,       !- Name
+    Door,                    !- Surface Type
+    Porta_3_cm,              !- Construction Name
+    PARINT2_BWCDORM2,        !- Building Surface Name
+    PORTAINT_DORM2BWC,       !- Outside Boundary Condition Object
+    ,                        !- View Factor to Ground
+    ,                        !- Frame and Divider Name
+    ,                        !- Multiplier
+    4,                       !- Number of Vertices
+    3.87,                    !- Vertex 1 X-coordinate {m}
+    0.2,                     !- Vertex 1 Y-coordinate {m}
+    0,                       !- Vertex 1 Z-coordinate {m}
+    3.870000000000,          !- Vertex 2 X-coordinate {m}
+    1.0,                     !- Vertex 2 Y-coordinate {m}
+    0.000000000000,          !- Vertex 2 Z-coordinate {m}
+    3.870000000000,          !- Vertex 3 X-coordinate {m}
+    1.0,                     !- Vertex 3 Y-coordinate {m}
+    2.1,                     !- Vertex 3 Z-coordinate {m}
+    3.870000000000,          !- Vertex 4 X-coordinate {m}
+    0.2,                     !- Vertex 4 Y-coordinate {m}
+    2.1;                     !- Vertex 4 Z-coordinate {m}
+
+FenestrationSurface:Detailed,
+    PORTAINT_DORM2BWC,       !- Name
+    Door,                    !- Surface Type
+    Porta_3_cm,              !- Construction Name
+    PARINT1_DORM2BWC,        !- Building Surface Name
+    PORTAINT_BWCDORM2,       !- Outside Boundary Condition Object
+    ,                        !- View Factor to Ground
+    ,                        !- Frame and Divider Name
+    ,                        !- Multiplier
+    4,                       !- Number of Vertices
+    0.000000000000,          !- Vertex 1 X-coordinate {m}
+    2.16,                    !- Vertex 1 Y-coordinate {m}
+    0,                       !- Vertex 1 Z-coordinate {m}
+    0.000000000000,          !- Vertex 2 X-coordinate {m}
+    1.36,                    !- Vertex 2 Y-coordinate {m}
+    0.000000000000,          !- Vertex 2 Z-coordinate {m}
+    0.000000000000,          !- Vertex 3 X-coordinate {m}
+    1.36,                    !- Vertex 3 Y-coordinate {m}
+    2.1,                     !- Vertex 3 Z-coordinate {m}
+    0.000000000000,          !- Vertex 4 X-coordinate {m}
+    2.16,                    !- Vertex 4 Y-coordinate {m}
+    2.1;                     !- Vertex 4 Z-coordinate {m}
+
+FenestrationSurface:Detailed,
+    PORTAINT_DORM1SALA,      !- Name
+    Door,                    !- Surface Type
+    Porta_3_cm,              !- Construction Name
+    PARINT1_DORM1SALA,       !- Building Surface Name
+    PORTAINT_SALADORM1,      !- Outside Boundary Condition Object
+    ,                        !- View Factor to Ground
+    ,                        !- Frame and Divider Name
+    ,                        !- Multiplier
+    4,                       !- Number of Vertices
+    0.000000000000,          !- Vertex 1 X-coordinate {m}
+    1.0,                   !- Vertex 1 Y-coordinate {m}
+    0,                       !- Vertex 1 Z-coordinate {m}
+    0.000000000000,          !- Vertex 2 X-coordinate {m}
+    .2,                   !- Vertex 2 Y-coordinate {m}
+    0.000000000000,          !- Vertex 2 Z-coordinate {m}
+    0.000000000000,          !- Vertex 3 X-coordinate {m}
+    .2,                   !- Vertex 3 Y-coordinate {m}
+    2.1,                     !- Vertex 3 Z-coordinate {m}
+    0.000000000000,          !- Vertex 4 X-coordinate {m}
+    1.0,                   !- Vertex 4 Y-coordinate {m}
+    2.1;                     !- Vertex 4 Z-coordinate {m}
+
+
+!-   ===========  ALL OBJECTS IN CLASS: SHADING:BUILDING:DETAILED ===========
+
+Shading:Building:Detailed,
+    BEIRAL_SUL,             !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    6.66,          !- Vertex 1 X-coordinate {m}
+    0.000000000000,          !- Vertex 1 Y-coordinate {m}
+    2.5,                     !- Vertex 1 Z-coordinate {m}
+    0.000000000000,          !- Vertex 2 X-coordinate {m}
+    0.000000000000,          !- Vertex 2 Y-coordinate {m}
+    2.500000000000,          !- Vertex 2 Z-coordinate {m}
+    0.000000000000,          !- Vertex 3 X-coordinate {m}
+    -0.500000000000,         !- Vertex 3 Y-coordinate {m}
+    2.500000000000,          !- Vertex 3 Z-coordinate {m}
+    6.6600000,          !- Vertex 4 X-coordinate {m}
+    -0.500000000000,         !- Vertex 4 Y-coordinate {m}
+    2.5;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    BEIRAL1_OESTE,           !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    0.000000000000,          !- Vertex 1 X-coordinate {m}
+    6.740000000000,          !- Vertex 1 Y-coordinate {m}
+    2.500000000000,          !- Vertex 1 Z-coordinate {m}
+    -0.460397061830,         !- Vertex 2 X-coordinate {m}
+    6.740000000000,          !- Vertex 2 Y-coordinate {m}
+    2.5,                     !- Vertex 2 Z-coordinate {m}
+    -0.460397061830,         !- Vertex 3 X-coordinate {m}
+    -0.500000000000,         !- Vertex 3 Y-coordinate {m}
+    2.5,                     !- Vertex 3 Z-coordinate {m}
+    0.000000000000,          !- Vertex 4 X-coordinate {m}
+    -0.500000000000,         !- Vertex 4 Y-coordinate {m}
+    2.500000000000;          !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    BEIRAL1_NORTE,           !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    3.305000000000,          !- Vertex 1 X-coordinate {m}
+    7.240000000000,          !- Vertex 1 Y-coordinate {m}
+    2.5,                     !- Vertex 1 Z-coordinate {m}
+    -0.460397061830,         !- Vertex 2 X-coordinate {m}
+    7.240000000000,          !- Vertex 2 Y-coordinate {m}
+    2.5,                     !- Vertex 2 Z-coordinate {m}
+    -0.460397061830,         !- Vertex 3 X-coordinate {m}
+    6.740000000000,          !- Vertex 3 Y-coordinate {m}
+    2.5,                     !- Vertex 3 Z-coordinate {m}
+    3.305000000000,          !- Vertex 4 X-coordinate {m}
+    6.740000000000,          !- Vertex 4 Y-coordinate {m}
+    2.5;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    BEIRAL2_NORTE,           !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    3.305000000000,          !- Vertex 1 X-coordinate {m}
+    6.740000000000,          !- Vertex 1 Y-coordinate {m}
+    2.5,                     !- Vertex 1 Z-coordinate {m}
+    3.870000000000,          !- Vertex 2 X-coordinate {m}
+    6.740000000000,          !- Vertex 2 Y-coordinate {m}
+    2.5,                     !- Vertex 2 Z-coordinate {m}
+    3.870000000000,          !- Vertex 3 X-coordinate {m}
+    7.240000000000,          !- Vertex 3 Y-coordinate {m}
+    2.5,                     !- Vertex 3 Z-coordinate {m}
+    3.305000000000,          !- Vertex 4 X-coordinate {m}
+    7.240000000000,          !- Vertex 4 Y-coordinate {m}
+    2.5;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    BEIRAL3_NORTE,           !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    3.305000000000,          !- Vertex 1 X-coordinate {m}
+    7.240000000000,          !- Vertex 1 Y-coordinate {m}
+    2.5,                     !- Vertex 1 Z-coordinate {m}
+    3.870000000000,          !- Vertex 2 X-coordinate {m}
+    7.240000000000,          !- Vertex 2 Y-coordinate {m}
+    2.5,                     !- Vertex 2 Z-coordinate {m}
+    3.870000000000,          !- Vertex 3 X-coordinate {m}
+    7.910000000000,          !- Vertex 3 Y-coordinate {m}
+    2.5,                     !- Vertex 3 Z-coordinate {m}
+    3.305000000000,          !- Vertex 4 X-coordinate {m}
+    7.910000000000,          !- Vertex 4 Y-coordinate {m}
+    2.5;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    BEIRAL4_NORTE,           !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    3.870000000000,          !- Vertex 1 X-coordinate {m}
+    7.410000000000,          !- Vertex 1 Y-coordinate {m}
+    2.5,                     !- Vertex 1 Z-coordinate {m}
+    7.070397061830,          !- Vertex 2 X-coordinate {m}
+    7.410000000000,          !- Vertex 2 Y-coordinate {m}
+    2.5,                     !- Vertex 2 Z-coordinate {m}
+    7.070397061830,          !- Vertex 3 X-coordinate {m}
+    7.910000000000,          !- Vertex 3 Y-coordinate {m}
+    2.5,                     !- Vertex 3 Z-coordinate {m}
+    3.870000000000,          !- Vertex 4 X-coordinate {m}
+    7.910000000000,          !- Vertex 4 Y-coordinate {m}
+    2.5;                     !- Vertex 4 Z-coordinate {m}
+
+Shading:Building:Detailed,
+    BEIRAL1_LESTE,           !- Name
+    ,                        !- Transmittance Schedule Name
+    4,                       !- Number of Vertices
+    6.610000000000,          !- Vertex 1 X-coordinate {m}
+    -0.50000000000,          !- Vertex 1 Y-coordinate {m}
+    2.500000000000,          !- Vertex 1 Z-coordinate {m}
+    7.070397061830,          !- Vertex 2 X-coordinate {m}
+    -.50000000000,          !- Vertex 2 Y-coordinate {m}
+    2.5,                     !- Vertex 2 Z-coordinate {m}
+    7.070397061830,          !- Vertex 3 X-coordinate {m}
+    7.410000000000,          !- Vertex 3 Y-coordinate {m}
+    2.5,                     !- Vertex 3 Z-coordinate {m}
+    6.610000000000,          !- Vertex 4 X-coordinate {m}
+    7.410000000000,          !- Vertex 4 Y-coordinate {m}
+    2.500000000000;          !- Vertex 4 Z-coordinate {m}

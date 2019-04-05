@@ -1,0 +1,75 @@
+
+
+
+
+BuildingSurface:Detailed,
+    floor_Singlezone,        !- Name
+    Floor,                   !- Surface Type
+    Exterior Floor,          !- Construction Name
+    Singlezone,              !- Zone Name
+    Adiabatic,!- Outside Boundary Condition
+    ,       !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    4.0,                     !- Number of Vertices
+    5.54,                   !- Vertex 1 X-coordinate {m}
+    3.87,                    !- Vertex 1 Y-coordinate {m}
+    0.0,                     !- Vertex 1 Z-coordinate {m}
+    5.54,                   !- Vertex 2 X-coordinate {m}
+    0.0,                     !- Vertex 2 Y-coordinate {m}
+    0.0,                     !- Vertex 2 Z-coordinate {m}
+    0.0,                     !- Vertex 3 X-coordinate {m}
+    0.0,                     !- Vertex 3 Y-coordinate {m}
+    0.0,                     !- Vertex 3 Z-coordinate {m}
+    0.0,                     !- Vertex 4 X-coordinate {m}
+    3.87,                    !- Vertex 4 Y-coordinate {m}
+    0.0;                     !- Vertex 4 Z-coordinate {m}
+
+BuildingSurface:Detailed,
+  hive_1_floor,
+  Floor,
+  Exterior Floor,
+  hive_1,
+  Adiabatic,
+  ,
+  NoSun,
+  NoWind,
+  ,
+  4.0,
+  11.080000000624145,
+  3.8699999997820004,
+  0.0,
+  11.080000000624145,
+  0.0,
+  0.0,
+  5.540000000312072,
+  0.0,
+  0.0,
+  5.540000000312072,
+  3.8699999997820004,
+  0.0;
+
+BuildingSurface:Detailed,
+  hive_2_floor,
+  Floor,
+  Exterior Floor,
+  hive_2,
+  Adiabatic,
+  ,
+  NoSun,
+  NoWind,
+  ,
+  4.0,
+  5.540000000312072,
+  0.0,
+  0.0,
+  5.540000000312072,
+  -3.8699999997820004,
+  0.0,
+  0.0,
+  -3.8699999997820004,
+  0.0,
+  0.0,
+  0.0,
+  0.0;

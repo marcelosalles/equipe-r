@@ -1,0 +1,898 @@
+!-   ===========  ALL OBJECTS IN CLASS: LIGHTS ===========
+
+Lights,
+    Dormitorio1,             !- Name
+    Dorm1,                   !- Zone or ZoneList Name
+    IlumDorm1,               !- Schedule Name
+    Watts/Area,              !- Design Level Calculation Method
+    ,                        !- Lighting Level {W}
+    5,                       !- Watts per Zone Floor Area {W/m2}
+    ,                        !- Watts per Person {W/person}
+    0,                       !- Return Air Fraction
+    0.32,                    !- Fraction Radiant
+    0.23,                    !- Fraction Visible
+    0,                       !- Fraction Replaceable
+    GeneralLights;           !- End-Use Subcategory
+
+Lights,
+    Dormitorio2,             !- Name
+    Dorm2,                   !- Zone or ZoneList Name
+    IlumDorm2,               !- Schedule Name
+    Watts/Area,              !- Design Level Calculation Method
+    ,                        !- Lighting Level {W}
+    5,                       !- Watts per Zone Floor Area {W/m2}
+    ,                        !- Watts per Person {W/person}
+    0,                       !- Return Air Fraction
+    0.32,                    !- Fraction Radiant
+    0.23,                    !- Fraction Visible
+    0,                       !- Fraction Replaceable
+    GeneralLights;           !- End-Use Subcategory
+
+Lights,
+    Sala,                    !- Name
+    Sala,                    !- Zone or ZoneList Name
+    IlumSala,                !- Schedule Name
+    Watts/Area,              !- Design Level Calculation Method
+    ,                        !- Lighting Level {W}
+    5,                       !- Watts per Zone Floor Area {W/m2}
+    ,                        !- Watts per Person {W/person}
+    0,                       !- Return Air Fraction
+    0.32,                    !- Fraction Radiant
+    0.23,                    !- Fraction Visible
+    0,                       !- Fraction Replaceable
+    GeneralLights;           !- End-Use Subcategory
+
+
+!-   ===========  ALL OBJECTS IN CLASS: ELECTRICEQUIPMENT ===========
+
+ElectricEquipment,
+    Sala,                    !- Name
+    Sala,                    !- Zone or ZoneList Name
+    EquipSala,               !- Schedule Name
+    EquipmentLevel,          !- Design Level Calculation Method
+    120,                     !- Design Level {W}
+    ,                        !- Watts per Zone Floor Area {W/m2}
+    ,                        !- Watts per Person {W/person}
+    0,                       !- Fraction Latent
+    0.3,                     !- Fraction Radiant
+    0,                       !- Fraction Lost
+    General;                 !- End-Use Subcategory
+
+!-   ===========  ALL OBJECTS IN CLASS: PEOPLE ===========
+
+People,
+    Dormitorio1,             !- Name
+    Dorm1,                   !- Zone or ZoneList Name
+    OcupDorm1,               !- Number of People Schedule Name
+    People,                  !- Number of People Calculation Method
+    2,                       !- Number of People
+    ,                        !- People per Zone Floor Area {person/m2}
+    ,                        !- Zone Floor Area per Person {m2/person}
+    0.3,                     !- Fraction Radiant
+    ,                        !- Sensible Heat Fraction
+    AtivDorm;                !- Activity Level Schedule Name
+
+People,
+    Dormitorio2,             !- Name
+    Dorm2,                   !- Zone or ZoneList Name
+    OcupDorm2,               !- Number of People Schedule Name
+    People,                  !- Number of People Calculation Method
+    2,                       !- Number of People
+    ,                        !- People per Zone Floor Area {person/m2}
+    ,                        !- Zone Floor Area per Person {m2/person}
+    0.3,                     !- Fraction Radiant
+    ,                        !- Sensible Heat Fraction
+    AtivDorm;                !- Activity Level Schedule Name
+
+People,
+    Sala1,                   !- Name
+    Sala,                    !- Zone or ZoneList Name
+    OcupSala,                !- Number of People Schedule Name
+    People,                  !- Number of People Calculation Method
+    4,                       !- Number of People
+    ,                        !- People per Zone Floor Area {person/m2}
+    ,                        !- Zone Floor Area per Person {m2/person}
+    0.3,                     !- Fraction Radiant
+    ,                        !- Sensible Heat Fraction
+    AtivSala;                !- Activity Level Schedule Name
+
+
+!-   ===========  ALL OBJECTS IN CLASS: SCHEDULE:COMPACT ===========
+
+Schedule:Compact,
+    OcupSala,                !- Name
+    fracao,                  !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 14:00,            !- Field 3
+    0,                       !- Field 4
+    Until: 18:00,            !- Field 5
+    .5,                      !- Field 6
+    Until: 22:00,            !- Field 7
+    1,                       !- Field 8
+    Until: 24:00,            !- Field 9
+    0;                       !- Field 10
+
+Schedule:Compact,
+    OcupDorm1,               !- Name
+    fracao,                  !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until:  8:00,            !- Field 3
+    1,                       !- Field 4
+    Until: 22:00,            !- Field 5
+    0,                       !- Field 6
+    Until: 24:00,            !- Field 7
+    1;                       !- Field 8
+
+Schedule:Compact,
+    OcupDorm2,               !- Name
+    fracao,                  !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until:  8:00,            !- Field 3
+    1,                       !- Field 4
+    Until: 22:00,            !- Field 5
+    0,                       !- Field 6
+    Until: 24:00,            !- Field 7
+    1;                       !- Field 8
+
+Schedule:Compact,
+    IlumSala,                !- Name
+    fracao,                  !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 16:00,            !- Field 3
+    0,                       !- Field 4
+    Until: 22:00,            !- Field 5
+    1,                       !- Field 6
+    Until: 24:00,            !- Field 7
+    0;                       !- Field 8
+
+Schedule:Compact,
+    IlumDorm1,               !- Name
+    fracao,                  !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 6:00,             !- Field 3
+    0,                       !- Field 4
+    Until: 8:00,             !- Field 5
+    1,                       !- Field 6
+    Until: 22:00,            !- Field 7
+    0,                       !- Field 8
+    Until: 24:00,            !- Field 9
+    1;                       !- Field 10
+
+Schedule:Compact,
+    IlumDorm2,               !- Name
+    fracao,                  !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 6:00,             !- Field 3
+    0,                       !- Field 4
+    Until: 8:00,             !- Field 5
+    1,                       !- Field 6
+    Until: 22:00,            !- Field 7
+    0,                       !- Field 8
+    Until: 24:00,            !- Field 9
+    1;                       !- Field 10
+
+Schedule:Compact,
+    AtivSala,                !- Name
+    atividade,               !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For:AllDays,             !- Field 2
+    Until: 24:00,            !- Field 3
+    108;                     !- Field 4
+
+Schedule:Compact,
+    AtivDorm,                !- Name
+    atividade,               !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For:AllDays,             !- Field 2
+    Until: 24:00,            !- Field 3
+    81;                      !- Field 4
+
+Schedule:Compact,
+    EquipSala,               !- Name
+    fracao,                  !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For:AllDays,             !- Field 2
+    Until: 14:00,            !- Field 3
+    0,                       !- Field 4
+    Until: 22:00,            !- Field 5
+    1,                       !- Field 6
+    Until: 24:00,            !- Field 7
+    0;                       !- Field 8
+
+Schedule:Compact,
+    TempVentilacao,          !- Name
+    TEMPERATURE,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    19;                      !- Field 4
+
+
+!-   ===========  ALL OBJECTS IN CLASS: SCHEDULE:CONSTANT ===========
+
+Schedule:Constant,
+    HVAC_Sala,               !- Name
+    On_Off,                  !- Schedule Type Limits Name
+    0;                       !- Hourly Value
+
+Schedule:Constant,
+    VN_Sala,                 !- Name
+    On_Off,                  !- Schedule Type Limits Name
+    1;                       !- Hourly Value
+
+Schedule:Constant,
+    HVAC_Dorm1,              !- Name
+    On_Off,                  !- Schedule Type Limits Name
+    0;                       !- Hourly Value
+
+Schedule:Constant,
+    VN_Dorm1,                !- Name
+    On_Off,                  !- Schedule Type Limits Name
+    1;                       !- Hourly Value
+
+Schedule:Constant,
+    HVAC_Dorm2,              !- Name
+    On_Off,                  !- Schedule Type Limits Name
+    0;                       !- Hourly Value
+
+Schedule:Constant,
+    VN_Dorm2,                !- Name
+    On_Off,                  !- Schedule Type Limits Name
+    1;                       !- Hourly Value
+
+
+
+
+
+!-   ===========  ALL OBJECTS IN CLASS: AIRFLOWNETWORK:SIMULATIONCONTROL ===========
+
+AirflowNetwork:SimulationControl,
+    CasaMCMV,                !- Name
+    MultizoneWithoutDistribution,  !- AirflowNetwork Control
+    SurfaceAverageCalculation,  !- Wind Pressure Coefficient Type
+    OpeningHeight,           !- Height Selection for Local Wind Pressure Calculation
+    LowRise,                 !- Building Type
+    500,                     !- Maximum Number of Iterations {dimensionless}
+    LinearInitializationMethod,  !- Initialization Type
+    0.0001,                  !- Relative Airflow Convergence Tolerance {dimensionless}
+    0.000001,                !- Absolute Airflow Convergence Tolerance {kg/s}
+    -.5,                     !- Convergence Acceleration Limit {dimensionless}
+    0,                       !- Azimuth Angle of Long Axis of Building {deg}
+    0.85;                    !- Ratio of Building Width Along Short Axis to Width Along Long Axis
+
+
+!-   ===========  ALL OBJECTS IN CLASS: AIRFLOWNETWORK:MULTIZONE:ZONE ===========
+
+AirflowNetwork:MultiZone:Zone,
+    Sala,                    !- Zone Name
+    ,                        !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    ,                        !- Minimum Venting Open Factor {dimensionless}
+    ,                        !- Indoor and Outdoor Temperature Difference Lower Limit For Maximum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Temperature Difference Upper Limit for Minimum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Enthalpy Difference Lower Limit For Maximum Venting Open Factor {deltaJ/kg}
+    ;                        !- Indoor and Outdoor Enthalpy Difference Upper Limit for Minimum Venting Open Factor {deltaJ/kg}
+
+AirflowNetwork:MultiZone:Zone,
+    Dorm1,                   !- Zone Name
+    ,                        !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    ,                        !- Minimum Venting Open Factor {dimensionless}
+    ,                        !- Indoor and Outdoor Temperature Difference Lower Limit For Maximum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Temperature Difference Upper Limit for Minimum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Enthalpy Difference Lower Limit For Maximum Venting Open Factor {deltaJ/kg}
+    ;                        !- Indoor and Outdoor Enthalpy Difference Upper Limit for Minimum Venting Open Factor {deltaJ/kg}
+
+AirflowNetwork:MultiZone:Zone,
+    Banh1,                   !- Zone Name
+    ,                        !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    ,                        !- Minimum Venting Open Factor {dimensionless}
+    ,                        !- Indoor and Outdoor Temperature Difference Lower Limit For Maximum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Temperature Difference Upper Limit for Minimum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Enthalpy Difference Lower Limit For Maximum Venting Open Factor {deltaJ/kg}
+    ;                        !- Indoor and Outdoor Enthalpy Difference Upper Limit for Minimum Venting Open Factor {deltaJ/kg}
+
+AirflowNetwork:MultiZone:Zone,
+    Dorm2,                   !- Zone Name
+    ,                        !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    ,                        !- Minimum Venting Open Factor {dimensionless}
+    ,                        !- Indoor and Outdoor Temperature Difference Lower Limit For Maximum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Temperature Difference Upper Limit for Minimum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Enthalpy Difference Lower Limit For Maximum Venting Open Factor {deltaJ/kg}
+    ;                        !- Indoor and Outdoor Enthalpy Difference Upper Limit for Minimum Venting Open Factor {deltaJ/kg}
+
+
+!-   ===========  ALL OBJECTS IN CLASS: AIRFLOWNETWORK:MULTIZONE:SURFACE ===========
+
+AirflowNetwork:MultiZone:Surface,
+    JANSALA_OESTE,           !- Surface Name
+    Det_Janela,              !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    Temperature,             !- Ventilation Control Mode
+    TempVentilacao,          !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    0,                       !- Minimum Venting Open Factor {dimensionless}
+    ,                        !- Indoor and Outdoor Temperature Difference Lower Limit For Maximum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Temperature Difference Upper Limit for Minimum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Enthalpy Difference Lower Limit For Maximum Venting Open Factor {deltaJ/kg}
+    ,                        !- Indoor and Outdoor Enthalpy Difference Upper Limit for Minimum Venting Open Factor {deltaJ/kg}
+    VN_Sala;                 !- Venting Availability Schedule Name
+
+AirflowNetwork:MultiZone:Surface,
+    PORTAEXT_LESTE,          !- Surface Name
+    Det_Porta,               !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    NoVent,                  !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    0;                       !- Minimum Venting Open Factor {dimensionless}
+
+AirflowNetwork:MultiZone:Surface,
+    JANSALA_SUL,             !- Surface Name
+    Det_Janela,              !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    Temperature,             !- Ventilation Control Mode
+    TempVentilacao,          !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    0,                       !- Minimum Venting Open Factor {dimensionless}
+    ,                        !- Indoor and Outdoor Temperature Difference Lower Limit For Maximum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Temperature Difference Upper Limit for Minimum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Enthalpy Difference Lower Limit For Maximum Venting Open Factor {deltaJ/kg}
+    ,                        !- Indoor and Outdoor Enthalpy Difference Upper Limit for Minimum Venting Open Factor {deltaJ/kg}
+    VN_Sala;                 !- Venting Availability Schedule Name
+
+AirflowNetwork:MultiZone:Surface,
+    JANQUARTO1_SUL,          !- Surface Name
+    Det_Janela,              !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    Temperature,             !- Ventilation Control Mode
+    TempVentilacao,          !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    0,                       !- Minimum Venting Open Factor {dimensionless}
+    ,                        !- Indoor and Outdoor Temperature Difference Lower Limit For Maximum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Temperature Difference Upper Limit for Minimum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Enthalpy Difference Lower Limit For Maximum Venting Open Factor {deltaJ/kg}
+    ,                        !- Indoor and Outdoor Enthalpy Difference Upper Limit for Minimum Venting Open Factor {deltaJ/kg}
+    VN_Dorm1;                !- Venting Availability Schedule Name
+
+AirflowNetwork:MultiZone:Surface,
+    JANQUARTO2_LESTE,        !- Surface Name
+    Det_Janela,              !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    Temperature,             !- Ventilation Control Mode
+    TempVentilacao,          !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    0,                       !- Minimum Venting Open Factor {dimensionless}
+    ,                        !- Indoor and Outdoor Temperature Difference Lower Limit For Maximum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Temperature Difference Upper Limit for Minimum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Enthalpy Difference Lower Limit For Maximum Venting Open Factor {deltaJ/kg}
+    ,                        !- Indoor and Outdoor Enthalpy Difference Upper Limit for Minimum Venting Open Factor {deltaJ/kg}
+    VN_Dorm2;                !- Venting Availability Schedule Name
+
+AirflowNetwork:MultiZone:Surface,
+    JANBWC,                  !- Surface Name
+    Det_Janela,              !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    Constant,                !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    0;                       !- Minimum Venting Open Factor {dimensionless}
+
+AirflowNetwork:MultiZone:Surface,
+    PORTAEXT_NORTE,          !- Surface Name
+    Det_Porta,               !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    NoVent,                  !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    0;                       !- Minimum Venting Open Factor {dimensionless}
+
+AirflowNetwork:MultiZone:Surface,
+    PORTAINT_BWCSALA,        !- Surface Name
+    Det_Porta,               !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    NoVent,                  !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    0;                       !- Minimum Venting Open Factor {dimensionless}
+
+AirflowNetwork:MultiZone:Surface,
+    PORTAINT_DORM1SALA,      !- Surface Name
+    Det_Porta,               !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    NoVent,                  !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    0;                       !- Minimum Venting Open Factor {dimensionless}
+
+AirflowNetwork:MultiZone:Surface,
+    PORTAINT_DORM2SALA,      !- Surface Name
+    Det_Porta,               !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    NoVent,                  !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    0;                       !- Minimum Venting Open Factor {dimensionless}
+
+
+!-   ===========  ALL OBJECTS IN CLASS: AIRFLOWNETWORK:MULTIZONE:COMPONENT:DETAILEDOPENING ===========
+
+AirflowNetwork:MultiZone:Component:DetailedOpening,
+    Det_Porta,               !- Name
+    0.0024,                  !- Air Mass Flow Coefficient When Opening is Closed {kg/s-m}
+    0.59,                    !- Air Mass Flow Exponent When Opening is Closed {dimensionless}
+    NonPivoted,              !- Type of Rectangular Large Vertical Opening (LVO)
+    0.0,                     !- Extra Crack Length or Height of Pivoting Axis {m}
+    2,                       !- Number of Sets of Opening Factor Data
+    0.0,                     !- Opening Factor 1 {dimensionless}
+    0.001,                   !- Discharge Coefficient for Opening Factor 1 {dimensionless}
+    0.0,                     !- Width Factor for Opening Factor 1 {dimensionless}
+    1.0,                     !- Height Factor for Opening Factor 1 {dimensionless}
+    0.0,                     !- Start Height Factor for Opening Factor 1 {dimensionless}
+    1,                       !- Opening Factor 2 {dimensionless}
+    0.65,                    !- Discharge Coefficient for Opening Factor 2 {dimensionless}
+    1,                       !- Width Factor for Opening Factor 2 {dimensionless}
+    1.0,                     !- Height Factor for Opening Factor 2 {dimensionless}
+    0.0;                     !- Start Height Factor for Opening Factor 2 {dimensionless}
+
+AirflowNetwork:MultiZone:Component:DetailedOpening,
+    janela_bwc,              !- Name
+    0.00041,                 !- Air Mass Flow Coefficient When Opening is Closed {kg/s-m}
+    0.6,                     !- Air Mass Flow Exponent When Opening is Closed {dimensionless}
+    HorizontallyPivoted,     !- Type of Rectangular Large Vertical Opening (LVO)
+    0,                       !- Extra Crack Length or Height of Pivoting Axis {m}
+    2,                       !- Number of Sets of Opening Factor Data
+    0.0,                     !- Opening Factor 1 {dimensionless}
+    0.001,                   !- Discharge Coefficient for Opening Factor 1 {dimensionless}
+    0.0,                     !- Width Factor for Opening Factor 1 {dimensionless}
+    1.0,                     !- Height Factor for Opening Factor 1 {dimensionless}
+    0.0,                     !- Start Height Factor for Opening Factor 1 {dimensionless}
+    1,                       !- Opening Factor 2 {dimensionless}
+    0.65,                    !- Discharge Coefficient for Opening Factor 2 {dimensionless}
+    0.9,                     !- Width Factor for Opening Factor 2 {dimensionless}
+    1.0,                     !- Height Factor for Opening Factor 2 {dimensionless}
+    0.0;                     !- Start Height Factor for Opening Factor 2 {dimensionless}
+
+AirflowNetwork:MultiZone:Component:DetailedOpening,
+    Det_Janela,              !- Name
+    0.00028,                 !- Air Mass Flow Coefficient When Opening is Closed {kg/s-m}
+    0.63,                    !- Air Mass Flow Exponent When Opening is Closed {dimensionless}
+    HorizontallyPivoted,     !- Type of Rectangular Large Vertical Opening (LVO)
+    0,                       !- Extra Crack Length or Height of Pivoting Axis {m}
+    2,                       !- Number of Sets of Opening Factor Data
+    0.0,                     !- Opening Factor 1 {dimensionless}
+    0.001,                   !- Discharge Coefficient for Opening Factor 1 {dimensionless}
+    0.0,                     !- Width Factor for Opening Factor 1 {dimensionless}
+    1.0,                     !- Height Factor for Opening Factor 1 {dimensionless}
+    0.0,                     !- Start Height Factor for Opening Factor 1 {dimensionless}
+    1,                       !- Opening Factor 2 {dimensionless}
+    0.65,                    !- Discharge Coefficient for Opening Factor 2 {dimensionless}
+    0.45,                    !- Width Factor for Opening Factor 2 {dimensionless}
+    1.0,                     !- Height Factor for Opening Factor 2 {dimensionless}
+    0;                       !- Start Height Factor for Opening Factor 2 {dimensionless}
+
+
+!-   ===========  ALL OBJECTS IN CLASS: HVACTEMPLATE:THERMOSTAT ===========
+
+HVACTemplate:Thermostat,
+    Termostato,              !- Name
+    ,                        !- Heating Setpoint Schedule Name
+    18,                      !- Constant Heating Setpoint {C}
+    ,                        !- Cooling Setpoint Schedule Name
+    23;                      !- Constant Cooling Setpoint {C}
+
+
+!-   ===========  ALL OBJECTS IN CLASS: HVACTEMPLATE:ZONE:IDEALLOADSAIRSYSTEM ===========
+
+HVACTemplate:Zone:IdealLoadsAirSystem,
+    Dorm1,                   !- Zone Name
+    Termostato,              !- Template Thermostat Name
+    HVAC_Dorm1,              !- System Availability Schedule Name
+    50,                      !- Maximum Heating Supply Air Temperature {C}
+    13,                      !- Minimum Cooling Supply Air Temperature {C}
+    0.0156,                  !- Maximum Heating Supply Air Humidity Ratio {kgWater/kgDryAir}
+    0.0077,                  !- Minimum Cooling Supply Air Humidity Ratio {kgWater/kgDryAir}
+    NoLimit,                 !- Heating Limit
+    ,                        !- Maximum Heating Air Flow Rate {m3/s}
+    ,                        !- Maximum Sensible Heating Capacity {W}
+    NoLimit,                 !- Cooling Limit
+    ,                        !- Maximum Cooling Air Flow Rate {m3/s}
+    ,                        !- Maximum Total Cooling Capacity {W}
+    ,                        !- Heating Availability Schedule Name
+    ,                        !- Cooling Availability Schedule Name
+    None,                    !- Dehumidification Control Type
+    0.7,                     !- Cooling Sensible Heat Ratio {dimensionless}
+    ,                        !- Dehumidification Setpoint {percent}
+    None,                    !- Humidification Control Type
+    ,                        !- Humidification Setpoint {percent}
+    None,                    !- Outdoor Air Method
+    ,                        !- Outdoor Air Flow Rate per Person {m3/s}
+    ,                        !- Outdoor Air Flow Rate per Zone Floor Area {m3/s-m2}
+    ,                        !- Outdoor Air Flow Rate per Zone {m3/s}
+    ,                        !- Design Specification Outdoor Air Object Name
+    None,                    !- Demand Controlled Ventilation Type
+    NoEconomizer,            !- Outdoor Air Economizer Type
+    None;                    !- Heat Recovery Type
+
+HVACTemplate:Zone:IdealLoadsAirSystem,
+    Sala,                    !- Zone Name
+    Termostato,              !- Template Thermostat Name
+    HVAC_Sala,               !- System Availability Schedule Name
+    50,                      !- Maximum Heating Supply Air Temperature {C}
+    13,                      !- Minimum Cooling Supply Air Temperature {C}
+    0.0156,                  !- Maximum Heating Supply Air Humidity Ratio {kgWater/kgDryAir}
+    0.0077,                  !- Minimum Cooling Supply Air Humidity Ratio {kgWater/kgDryAir}
+    NoLimit,                 !- Heating Limit
+    ,                        !- Maximum Heating Air Flow Rate {m3/s}
+    ,                        !- Maximum Sensible Heating Capacity {W}
+    NoLimit,                 !- Cooling Limit
+    ,                        !- Maximum Cooling Air Flow Rate {m3/s}
+    ,                        !- Maximum Total Cooling Capacity {W}
+    ,                        !- Heating Availability Schedule Name
+    ,                        !- Cooling Availability Schedule Name
+    None,                    !- Dehumidification Control Type
+    0.7,                     !- Cooling Sensible Heat Ratio {dimensionless}
+    ,                        !- Dehumidification Setpoint {percent}
+    None,                    !- Humidification Control Type
+    ,                        !- Humidification Setpoint {percent}
+    None,                    !- Outdoor Air Method
+    ,                        !- Outdoor Air Flow Rate per Person {m3/s}
+    ,                        !- Outdoor Air Flow Rate per Zone Floor Area {m3/s-m2}
+    ,                        !- Outdoor Air Flow Rate per Zone {m3/s}
+    ,                        !- Design Specification Outdoor Air Object Name
+    None,                    !- Demand Controlled Ventilation Type
+    NoEconomizer,            !- Outdoor Air Economizer Type
+    None;                    !- Heat Recovery Type
+
+HVACTemplate:Zone:IdealLoadsAirSystem,
+    Dorm2,                   !- Zone Name
+    Termostato,              !- Template Thermostat Name
+    HVAC_Dorm2,              !- System Availability Schedule Name
+    50,                      !- Maximum Heating Supply Air Temperature {C}
+    13,                      !- Minimum Cooling Supply Air Temperature {C}
+    0.0156,                  !- Maximum Heating Supply Air Humidity Ratio {kgWater/kgDryAir}
+    0.0077,                  !- Minimum Cooling Supply Air Humidity Ratio {kgWater/kgDryAir}
+    NoLimit,                 !- Heating Limit
+    ,                        !- Maximum Heating Air Flow Rate {m3/s}
+    ,                        !- Maximum Sensible Heating Capacity {W}
+    NoLimit,                 !- Cooling Limit
+    ,                        !- Maximum Cooling Air Flow Rate {m3/s}
+    ,                        !- Maximum Total Cooling Capacity {W}
+    ,                        !- Heating Availability Schedule Name
+    ,                        !- Cooling Availability Schedule Name
+    None,                    !- Dehumidification Control Type
+    0.7,                     !- Cooling Sensible Heat Ratio {dimensionless}
+    ,                        !- Dehumidification Setpoint {percent}
+    None,                    !- Humidification Control Type
+    ,                        !- Humidification Setpoint {percent}
+    None,                    !- Outdoor Air Method
+    ,                        !- Outdoor Air Flow Rate per Person {m3/s}
+    ,                        !- Outdoor Air Flow Rate per Zone Floor Area {m3/s-m2}
+    ,                        !- Outdoor Air Flow Rate per Zone {m3/s}
+    ,                        !- Design Specification Outdoor Air Object Name
+    None,                    !- Demand Controlled Ventilation Type
+    NoEconomizer,            !- Outdoor Air Economizer Type
+    None;                    !- Heat Recovery Type
+
+
+!-   ===========  ALL OBJECTS IN CLASS: ENERGYMANAGEMENTSYSTEM:SENSOR ===========
+
+EnergyManagementSystem:Sensor,
+    Temp_Dorm1,              !- Name
+    Dorm1,                   !- Output:Variable or Output:Meter Index Key Name
+    Zone Operative Temperature;  !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Temp_Sala,               !- Name
+    Sala,                    !- Output:Variable or Output:Meter Index Key Name
+    Zone Operative Temperature;  !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Ocup_Dorm1,              !- Name
+    Dormitorio1,             !- Output:Variable or Output:Meter Index Key Name
+    People Occupant Count;   !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Ocup_Sala,               !- Name
+    Sala1,                   !- Output:Variable or Output:Meter Index Key Name
+    People Occupant Count;   !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Temp_Ext,                !- Name
+    Environment,             !- Output:Variable or Output:Meter Index Key Name
+    Site Outdoor Air Drybulb Temperature;  !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Tar_D1,                  !- Name
+    Dorm1,                   !- Output:Variable or Output:Meter Index Key Name
+    Zone Mean Air Temperature;  !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Tar_Sala,                !- Name
+    Sala,                    !- Output:Variable or Output:Meter Index Key Name
+    Zone Mean Air Temperature;  !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Sensor_HVACD1,           !- Name
+    HVAC_Dorm1,              !- Output:Variable or Output:Meter Index Key Name
+    Schedule Value;          !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Sensor_HVACSALA,         !- Name
+    HVAC_Sala,               !- Output:Variable or Output:Meter Index Key Name
+    Schedule Value;          !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Temp_Dorm2,              !- Name
+    Dorm2,                   !- Output:Variable or Output:Meter Index Key Name
+    Zone Operative Temperature;  !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Ocup_Dorm2,              !- Name
+    Dormitorio2,             !- Output:Variable or Output:Meter Index Key Name
+    People Occupant Count;   !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Tar_D2,                  !- Name
+    Dorm2,                   !- Output:Variable or Output:Meter Index Key Name
+    Zone Mean Air Temperature;  !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Sensor_HVACD2,           !- Name
+    HVAC_Dorm2,              !- Output:Variable or Output:Meter Index Key Name
+    Schedule Value;          !- Output:Variable or Output:Meter Name
+
+
+!-   ===========  ALL OBJECTS IN CLASS: ENERGYMANAGEMENTSYSTEM:ACTUATOR ===========
+
+EnergyManagementSystem:Actuator,
+    Controle_HVAC_Dorm1,     !- Name
+    HVAC_Dorm1,              !- Actuated Component Unique Name
+    Schedule:Constant,       !- Actuated Component Type
+    Schedule Value;          !- Actuated Component Control Type
+
+EnergyManagementSystem:Actuator,
+    Controle_VN_Dorm1,       !- Name
+    VN_Dorm1,                !- Actuated Component Unique Name
+    Schedule:Constant,       !- Actuated Component Type
+    Schedule Value;          !- Actuated Component Control Type
+
+EnergyManagementSystem:Actuator,
+    Controle_HVAC_Sala,      !- Name
+    HVAC_Sala,               !- Actuated Component Unique Name
+    Schedule:Constant,       !- Actuated Component Type
+    Schedule Value;          !- Actuated Component Control Type
+
+EnergyManagementSystem:Actuator,
+    Controle_VN_Sala,        !- Name
+    VN_Sala,                 !- Actuated Component Unique Name
+    Schedule:Constant,       !- Actuated Component Type
+    Schedule Value;          !- Actuated Component Control Type
+
+EnergyManagementSystem:Actuator,
+    Controle_HVAC_Dorm2,     !- Name
+    HVAC_Dorm2,              !- Actuated Component Unique Name
+    Schedule:Constant,       !- Actuated Component Type
+    Schedule Value;          !- Actuated Component Control Type
+
+EnergyManagementSystem:Actuator,
+    Controle_VN_Dorm2,       !- Name
+    VN_Dorm2,                !- Actuated Component Unique Name
+    Schedule:Constant,       !- Actuated Component Type
+    Schedule Value;          !- Actuated Component Control Type
+
+
+!-   ===========  ALL OBJECTS IN CLASS: ENERGYMANAGEMENTSYSTEM:PROGRAMCALLINGMANAGER ===========
+
+EnergyManagementSystem:ProgramCallingManager,
+    Meu Controle HVAC,       !- Name
+    BeginTimestepBeforePredictor,  !- EnergyPlus Model Calling Point
+    CompDorm1Ativo,          !- Program Name 1
+    CompSalaAtivo,           !- Program Name 2
+    CompDorm2Ativo;          !- Program Name 3
+
+
+!-   ===========  ALL OBJECTS IN CLASS: ENERGYMANAGEMENTSYSTEM:PROGRAM ===========
+
+EnergyManagementSystem:Program,
+    CompDorm1Ativo,          !- Name
+    SET Temp_Conf = ((Temp_Dorm1 >= 26) || (Temp_Dorm1 <= 16)),  !- Program Line 1
+    IF (Ocup_Dorm1 > 0) && (Temp_Conf == 1),  !- Program Line 2
+    Set Controle_HVAC_Dorm1 = 1,  !- A4
+    Set Controle_VN_Dorm1 = 0,  !- A5
+    ELSEIF ((Ocup_Dorm1 > 0) && (Sensor_HVACD1 > 0)),  !- A6
+    Set Controle_HVAC_Dorm1 = 1,  !- A7
+    Set Controle_VN_Dorm1 = 0,  !- A8
+    ELSEIF ((Ocup_Sala > 0) || (Ocup_Dorm1 > 0)),  !- A9
+    Set Controle_HVAC_Dorm1 = 0,  !- A10
+    IF ((Temp_Ext<Tar_D1) && (Temp_Ext>19)),  !- A11
+    Set Controle_VN_Dorm1 = 1,  !- A12
+    ELSEIF ((Temp_Ext>Tar_D1) && (Temp_Ext>19)),  !- A13
+    Set Controle_VN_Dorm1 = 0,  !- A14
+    ELSEIF (Temp_Ext<19),    !- A15
+    Set Controle_VN_Dorm1 = 0,  !- A16
+    ENDIF,                   !- A17
+    ELSEIF (Ocup_Dorm1 == 0) && (Ocup_Sala == 0),  !- A18
+    Set Controle_HVAC_Dorm1 = 0,  !- A19
+    Set Controle_VN_Dorm1 = 0,  !- A20
+    ENDIF;                   !- A21
+
+EnergyManagementSystem:Program,
+    CompSalaAtivo,           !- Name
+    SET Temp_Conf = ((Temp_Sala >= 26) || (Temp_Sala <= 16)),  !- Program Line 1
+    IF ((Ocup_Sala > 0) && (Temp_Conf == 1)),  !- Program Line 2
+    Set Controle_HVAC_Sala = 1,  !- A4
+    Set Controle_VN_Sala = 0,!- A5
+    ELSEIF ((Ocup_Sala > 0) && (Sensor_HVACSALA > 0)),  !- A6
+    Set Controle_HVAC_Sala = 1,  !- A7
+    Set Controle_VN_Sala = 0,!- A8
+    ELSEIF (Ocup_Sala > 0),  !- A9
+    IF ((Temp_Ext<Tar_Sala) && (Temp_Ext>19)),  !- A10
+    Set Controle_HVAC_Sala = 0,  !- A11
+    Set Controle_VN_Sala = 1,!- A12
+    ELSEIF ((Temp_Ext>Tar_Sala) && (Temp_Ext>19)),  !- A13
+    Set Controle_HVAC_Sala = 0,  !- A14
+    Set Controle_VN_Sala = 0,!- A15
+    ELSEIF (Temp_Ext<19),    !- A16
+    Set Controle_HVAC_Sala = 0,  !- A17
+    Set Controle_VN_Sala = 0,!- A18
+    ENDIF,                   !- A19
+    ELSEIF (Ocup_Sala == 0), !- A20
+    Set Controle_HVAC_Sala = 0,  !- A21
+    Set Controle_VN_Sala = 0,!- A22
+    ENDIF;                   !- A23
+
+EnergyManagementSystem:Program,
+    CompDorm2Ativo,          !- Name
+    SET Temp_Conf = ((Temp_Dorm2 >= 26) || (Temp_Dorm2 <= 16)),  !- Program Line 1
+    IF (Ocup_Dorm2 > 0) && (Temp_Conf == 1),  !- Program Line 2
+    Set Controle_HVAC_Dorm2 = 1,  !- A4
+    Set Controle_VN_Dorm2 = 0,  !- A5
+    ELSEIF ((Ocup_Dorm2 > 0) && (Sensor_HVACD2 > 0)),  !- A6
+    Set Controle_HVAC_Dorm2 = 1,  !- A7
+    Set Controle_VN_Dorm2 = 0,  !- A8
+    ELSEIF ((Ocup_Sala > 0) || (Ocup_Dorm2 > 0)),  !- A9
+    Set Controle_HVAC_Dorm2 = 0,  !- A10
+    IF ((Temp_Ext<Tar_D2) && (Temp_Ext>19)),  !- A11
+    Set Controle_VN_Dorm2 = 1,  !- A12
+    ELSEIF ((Temp_Ext>Tar_D2) && (Temp_Ext>19)),  !- A13
+    Set Controle_VN_Dorm2 = 0,  !- A14
+    ELSEIF (Temp_Ext<19),    !- A15
+    Set Controle_VN_Dorm2 = 0,  !- A16
+    ENDIF,                   !- A17
+    ELSEIF (Ocup_Dorm2 == 0) && (Ocup_Sala == 0),  !- A18
+    Set Controle_HVAC_Dorm2 = 0,  !- A19
+    Set Controle_VN_Dorm2 = 0,  !- A20
+    ENDIF;                   !- A21
+
+
+!-   ===========  ALL OBJECTS IN CLASS: OUTPUT:ENERGYMANAGEMENTSYSTEM ===========
+
+Output:EnergyManagementSystem,
+    NotByUniqueKeyNames,     !- Actuator Availability Dictionary Reporting
+    NotByUniqueKeyNames,     !- Internal Variable Availability Dictionary Reporting
+    ErrorsOnly;              !- EMS Runtime Language Debug Output Level
+
+
+!-   ===========  ALL OBJECTS IN CLASS: OUTPUT:VARIABLE ===========
+
+Output:Variable,
+    *,                       !- Key Value
+    Site Outdoor Air Drybulb Temperature,  !- Variable Name
+    Timestep;                !- Reporting Frequency
+
+Output:Variable,
+    Dorm1,                   !- Key Value
+    Zone Operative Temperature,  !- Variable Name
+    Timestep;                !- Reporting Frequency
+
+Output:Variable,
+    Dorm2,                   !- Key Value
+    Zone Operative Temperature,  !- Variable Name
+    Timestep;                !- Reporting Frequency
+
+Output:Variable,
+    Sala,                    !- Key Value
+    Zone Operative Temperature,  !- Variable Name
+    Timestep;                !- Reporting Frequency
+
+Output:Variable,
+    Sala1,                   !- Key Value
+    People Occupant Count,   !- Variable Name
+    Timestep;                !- Reporting Frequency
+
+Output:Variable,
+    Dormitorio1,             !- Key Value
+    People Occupant Count,   !- Variable Name
+    Timestep;                !- Reporting Frequency
+
+Output:Variable,
+    Dormitorio2,             !- Key Value
+    People Occupant Count,   !- Variable Name
+    Timestep;                !- Reporting Frequency
+
+Output:Variable,
+    *,                       !- Key Value
+    Zone Ideal Loads Zone Total Heating Energy,  !- Variable Name
+    Timestep;                !- Reporting Frequency
+
+Output:Variable,
+    *,                       !- Key Value
+    Zone Ideal Loads Zone Total Cooling Energy,  !- Variable Name
+    Timestep;                !- Reporting Frequency
+
+Output:Variable,
+    *,                       !- Key Value
+    AFN Surface Venting Window or Door Opening Factor,  !- Variable Name
+    Timestep;                !- Reporting Frequency
+
+Output:Variable,
+    *,                       !- Key Value
+    Zone Mean Air Temperature,  !- Variable Name
+    Timestep;                !- Reporting Frequency
+
+Output:Variable,
+    *,                       !- Key Value
+    AFN Zone Infiltration Air Change Rate,  !- Variable Name
+    Timestep;                !- Reporting Frequency
+
+Output:Variable,
+    Dorm1,                   !- Key Value
+    Zone Mean Air Temperature,  !- Variable Name
+    Timestep;                !- Reporting Frequency
+
+Output:Variable,
+    Dorm2,                   !- Key Value
+    Zone Mean Air Temperature,  !- Variable Name
+    Timestep;                !- Reporting Frequency
+
+Output:Variable,
+    Sala,                    !- Key Value
+    Zone Mean Air Temperature,  !- Variable Name
+    Timestep;                !- Reporting Frequency
+
+Output:Variable,
+    VN_Dorm1,                !- Key Value
+    Schedule Value,          !- Variable Name
+    Timestep;                !- Reporting Frequency
+
+Output:Variable,
+    VN_Dorm2,                !- Key Value
+    Schedule Value,          !- Variable Name
+    Timestep;                !- Reporting Frequency
+
+Output:Variable,
+    VN_Sala,                 !- Key Value
+    Schedule Value,          !- Variable Name
+    Timestep;                !- Reporting Frequency
+
+Output:Variable,
+    HVAC_Dorm1,              !- Key Value
+    Schedule Value,          !- Variable Name
+    Timestep;                !- Reporting Frequency
+
+Output:Variable,
+    HVAC_Dorm2,              !- Key Value
+    Schedule Value,          !- Variable Name
+    Timestep;                !- Reporting Frequency
+
+Output:Variable,
+    HVAC_Sala,               !- Key Value
+    Schedule Value,          !- Variable Name
+    Timestep;                !- Reporting Frequency
+
+Output:Variable,
+    *,                       !- Key Value
+    Zone Ideal Loads Zone Total Cooling Energy,  !- Variable Name
+    Timestep;                !- Reporting Frequency
+
+
+

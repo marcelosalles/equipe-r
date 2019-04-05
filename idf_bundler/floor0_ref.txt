@@ -1,0 +1,103 @@
+
+
+BuildingSurface:Detailed,
+    PISO_QUARTO1,            !- Name
+    Floor,                   !- Surface Type
+    Piso_concreto,           !- Construction Name
+    Dorm1,                   !- Zone Name
+    Adiabatic,               !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    autocalculate,           !- View Factor to Ground
+    autocalculate,           !- Number of Vertices
+    0,                       !- Vertex 1 X-coordinate {m}
+    3.23,                    !- Vertex 1 Y-coordinate {m}
+    0.000000000000,          !- Vertex 1 Z-coordinate {m}
+    2.740000000000,          !- Vertex 2 X-coordinate {m}
+    3.23,                    !- Vertex 2 Y-coordinate {m}
+    0.000000000000,          !- Vertex 2 Z-coordinate {m}
+    2.74,                    !- Vertex 3 X-coordinate {m}
+    0,                       !- Vertex 3 Y-coordinate {m}
+    0.000000000000,          !- Vertex 3 Z-coordinate {m}
+    0.000000000000,          !- Vertex 4 X-coordinate {m}
+    0,                       !- Vertex 4 Y-coordinate {m}
+    0.000000000000;          !- Vertex 4 Z-coordinate {m}
+
+BuildingSurface:Detailed,
+    PISO_QUARTO2,            !- Name
+    Floor,                   !- Surface Type
+    Piso_concreto,           !- Construction Name
+    Dorm2,                   !- Zone Name
+    Adiabatic,               !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    autocalculate,           !- View Factor to Ground
+    autocalculate,           !- Number of Vertices
+    0,                       !- Vertex 1 X-coordinate {m}
+    3.03,                    !- Vertex 1 Y-coordinate {m}
+    0.000000000000,          !- Vertex 1 Z-coordinate {m}
+    2.74,                    !- Vertex 2 X-coordinate {m}
+    3.03,                    !- Vertex 2 Y-coordinate {m}
+    0.000000000000,          !- Vertex 2 Z-coordinate {m}
+    2.74,                    !- Vertex 3 X-coordinate {m}
+    0.000000000000,          !- Vertex 3 Y-coordinate {m}
+    0.000000000000,          !- Vertex 3 Z-coordinate {m}
+    0.000000000000,          !- Vertex 4 X-coordinate {m}
+    0,                       !- Vertex 4 Y-coordinate {m}
+    0.000000000000;          !- Vertex 4 Z-coordinate {m}
+
+BuildingSurface:Detailed,
+    PISO_SALA,               !- Name
+    Floor,                   !- Surface Type
+    Piso_concreto,           !- Construction Name
+    Sala,                    !- Zone Name
+    Adiabatic,               !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    autocalculate,           !- View Factor to Ground
+    autocalculate,           !- Number of Vertices
+    2.53,                    !- Vertex 1 X-coordinate {m}
+    6.740000000000,          !- Vertex 1 Y-coordinate {m}
+    0.000000000000,          !- Vertex 1 Z-coordinate {m}
+    3.870000000000,          !- Vertex 2 X-coordinate {m}
+    6.74,                    !- Vertex 2 Y-coordinate {m}
+    0.000000000000,          !- Vertex 2 Z-coordinate {m}
+    3.87,                    !- Vertex 3 X-coordinate {m}
+    0.000000000000,          !- Vertex 3 Y-coordinate {m}
+    0.000000000000,          !- Vertex 3 Z-coordinate {m}
+    0.000000000000,          !- Vertex 4 X-coordinate {m}
+    0,                       !- Vertex 4 Y-coordinate {m}
+    0.000000000000,          !- Vertex 4 Z-coordinate {m}
+    0,                       !- Vertex 5 X-coordinate {m}
+    4.9,                     !- Vertex 5 Y-coordinate {m}
+    0.000000000000,          !- Vertex 5 Z-coordinate {m}
+    2.530000000000,          !- Vertex 6 X-coordinate {m}
+    4.9,                     !- Vertex 6 Y-coordinate {m}
+    0.000000000000;          !- Vertex 6 Z-coordinate {m}
+
+BuildingSurface:Detailed,
+    PISO_BWC,                !- Name
+    Floor,                   !- Surface Type
+    Piso_concreto,           !- Construction Name
+    Banh1,                   !- Zone Name
+    Adiabatic,               !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    autocalculate,           !- View Factor to Ground
+    autocalculate,           !- Number of Vertices
+    0.000000000000,          !- Vertex 1 X-coordinate {m}
+    1.840000000000,          !- Vertex 1 Y-coordinate {m}
+    0.000000000000,          !- Vertex 1 Z-coordinate {m}
+    2.53,                    !- Vertex 2 X-coordinate {m}
+    1.84,                    !- Vertex 2 Y-coordinate {m}
+    0.000000000000,          !- Vertex 2 Z-coordinate {m}
+    2.53,                    !- Vertex 3 X-coordinate {m}
+    0.000000000000,          !- Vertex 3 Y-coordinate {m}
+    0.000000000000,          !- Vertex 3 Z-coordinate {m}
+    0,                       !- Vertex 4 X-coordinate {m}
+    0,                       !- Vertex 4 Y-coordinate {m}
+    0.000000000000;          !- Vertex 4 Z-coordinate {m}

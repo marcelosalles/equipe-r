@@ -1,0 +1,57 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+AirflowNetwork:MultiZone:Surface:Crack,
+  hive_1_wall-0,                   !- Name of Surface Crack Component
+  0.01,                   !- Air Mass Flow Coefficient at Reference Conditions {kg/s}
+  0.667,                  !- Air Mass Flow Exponent {dimensionless}
+  ; !- Reference Crack Conditions
+
+AirflowNetwork:MultiZone:Surface:Crack,
+  hive_1_wall-1,                   !- Name of Surface Crack Component
+  0.01,                   !- Air Mass Flow Coefficient at Reference Conditions {kg/s}
+  0.667,                  !- Air Mass Flow Exponent {dimensionless}
+  ; !- Reference Crack Conditions
+
+AirflowNetwork:MultiZone:Surface:Crack,
+  hive_1_wall-2,                   !- Name of Surface Crack Component
+  0.01,                   !- Air Mass Flow Coefficient at Reference Conditions {kg/s}
+  0.667,                  !- Air Mass Flow Exponent {dimensionless}
+  ; !- Reference Crack Conditions
+
+AirflowNetwork:MultiZone:Surface:Crack,
+  hive_2_wall-1,                   !- Name of Surface Crack Component
+  0.01,                   !- Air Mass Flow Coefficient at Reference Conditions {kg/s}
+  0.667,                  !- Air Mass Flow Exponent {dimensionless}
+  ; !- Reference Crack Conditions
+
+AirflowNetwork:MultiZone:Surface:Crack,
+  hive_2_wall-2,                   !- Name of Surface Crack Component
+  0.01,                   !- Air Mass Flow Coefficient at Reference Conditions {kg/s}
+  0.667,                  !- Air Mass Flow Exponent {dimensionless}
+  ; !- Reference Crack Conditions
+  
+AirflowNetwork:MultiZone:Surface:Crack,
+  hive_2_wall-3,                   !- Name of Surface Crack Component
+  0.01,                   !- Air Mass Flow Coefficient at Reference Conditions {kg/s}
+  0.667,                  !- Air Mass Flow Exponent {dimensionless}
+  ; !- Reference Crack Conditions
+
+!AirflowNetwork:MultiZone:Zone,
+!  hive_1,
+!  ,
+!  ,
+!  ,
+!  ,
+!  100.0,
+!  ,
+!  300000.0;
+!
+!AirflowNetwork:MultiZone:Zone,
+!  hive_2,
+!  ,
+!  ,
+!  ,
+!  ,
+!  100.0,
+!  ,
+!  300000.0;

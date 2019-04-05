@@ -1,0 +1,20 @@
+
+Construction,
+    Exterior Wall,           !- Name
+!   Tijolo_macico;           !- Outside Layer
+    EPS,                     !- Outside Layer
+    concrete;                !- Layer 2
+
+Construction,
+  wall_construction_inverse,
+  concrete,
+  EPS;
+
+Construction,
+  double_wall,
+  EPS,
+  concrete,
+  room_air,
+  EPS,
+  concrete;
+  
