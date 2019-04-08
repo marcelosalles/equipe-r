@@ -286,7 +286,7 @@ def hive(wall_i=2, zone_x=5, zone_y=4, zone_height=3, floor_height=10, ground=1,
                 "vertex_4_y_coordinate": 0,
                 "vertex_4_z_coordinate": 2.1,
                 "idf_max_extensible_fields": 0,
-                "idf_max_fields": 
+                "idf_max_fields": 22
             }
         }
     else:
