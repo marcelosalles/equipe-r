@@ -1,8 +1,10 @@
-
+# baixar a biblioteca do ggplot para desenhar os gráficos
 library(ggplot2)
 
+# defina aqui o seu diretório de trabalho!!!
 setwd('/home/marcelo/Documents/equipe-r/analise_climas/')
-#
+
+# os data frames são baixados a partir daqui
 # REF ----
 #00
 df_ref_PA_00 <- read.csv('PA/ref_floor0_roof0_PAout.csv')
@@ -165,11 +167,11 @@ df_hive_PA_pil <- read.csv('PA/hive_pilotis_roof0_tijolo_PAout.csv')
 df_hive_SM_pil <- read.csv('SM/hive_pilotis_roof0_tijolo_SMout.csv')
 df_hive_SP_pil <- read.csv('SP/hive_pilotis_roof0_tijolo_SPout.csv')
 df_hive_RJ_pil <- read.csv('RJ/hive_pilotis_roof0_tijolo_RJout.csv')
-#
-# TEMP OP----
 
-# PARA TESTE
-# ----- #
+# começo das analises: ---- 
+# analise local ----
+
+# ajuste o nome dos df de acordo com o caso que voce esta analisando
 df_sin_PA <- df_doub_PA_00
 df_sin_SM <- df_doub_SM_00
 df_sin_SP <- df_doub_SP_00
@@ -180,11 +182,14 @@ df_ref_SP <- df_ref_SP_00
 df_ref_RJ <- df_ref_RJ_00
 # ----- #
 
+# cria um vetor com as diferencas de temperatura operativa entre o caso 
+# referencia e o single zone, para cada timestep (apenas quando a zona esta ocupada)
 diff_temp_PA <- df_ref_PA[df_ref_PA$SALA1.People.Occupant.Count....TimeStep. > 0,'SALA.Zone.Operative.Temperature..C..TimeStep.'] - df_sin_PA$SINGLEZONE.Zone.Operative.Temperature..C..TimeStep.[df_sin_PA$SALA1.People.Occupant.Count....TimeStep. > 0]
 diff_temp_SM <- df_ref_SM[df_ref_SM$SALA1.People.Occupant.Count....TimeStep. > 0,'SALA.Zone.Operative.Temperature..C..TimeStep.'] - df_sin_SM$SINGLEZONE.Zone.Operative.Temperature..C..TimeStep.[df_sin_SM$SALA1.People.Occupant.Count....TimeStep. > 0]
 diff_temp_SP <- df_ref_SP[df_ref_SP$SALA1.People.Occupant.Count....TimeStep. > 0,'SALA.Zone.Operative.Temperature..C..TimeStep.'] - df_sin_SP$SINGLEZONE.Zone.Operative.Temperature..C..TimeSte[df_sin_SP$SALA1.People.Occupant.Count....TimeStep. > 0]
 diff_temp_RJ <- df_ref_RJ[df_ref_RJ$SALA1.People.Occupant.Count....TimeStep. > 0,'SALA.Zone.Operative.Temperature..C..TimeStep.'] - df_sin_RJ$SINGLEZONE.Zone.Operative.Temperature..C..TimeStep[df_sin_RJ$SALA1.People.Occupant.Count....TimeStep. > 0]
 
+# calcula media, medianas, min, max, percentis para cada clima
 meandif_PA <- mean(diff_temp_PA)
 mediandif_PA <- median(diff_temp_PA)
 mindif_PA <- min(diff_temp_PA)
@@ -217,29 +222,32 @@ maxabs_RJ <- max(abs(mindif_RJ),abs(maxdif_RJ))
 tile5dif_RJ <- quantile(diff_temp_RJ,.05)
 tile95dif_RJ <- quantile(diff_temp_RJ,.95)
 
+# desenha um histograma com todos os clima simultaneamente,
+# diferenciados por cores.
+# os labels e anotacoes ainda podem ser adicionados...
 ggplot() +
   geom_histogram(aes(diff_temp_PA),fill='red',alpha=.3,binwidth = .005) +
   geom_histogram(aes(diff_temp_SM),fill='blue',alpha=.3,binwidth = .005) +
   geom_histogram(aes(diff_temp_SP),fill='darkgreen',alpha=.3,binwidth = .005) +
-  geom_histogram(aes(diff_temp_RJ),fill='orange',alpha=.3,binwidth = .005)
-  #geom_histogram(aes(diff_temp)) +
-  #ggtitle(title[2]) +
-  ggtitle(paste('Diferenças',title_ref,'e',title_sin)) #+
+  geom_histogram(aes(diff_temp_RJ),fill='orange',alpha=.3,binwidth = .005)  # +
+  #ggtitle("") +
   # ylab('Timesteps') +
   # xlab('Diferença de Temperatura Opertativa (°C)') +
-  # annotate("text", x = textx, y = texty, label = paste("Média =",round(meandif,2),'°C')) +
-  # annotate("text", x = textx*.98, y = texty*.95, label = paste("Mediana =",round(mediandif,2),'°C')) +
-  # annotate("text", x = textx*.93, y = texty*.9, label = paste("Maior dif. abs =",round(maxabs,2),'°C')) +
-  # annotate("text", x = textx*.92, y = texty*.85, label = paste("Percentil 5% =",round(tile5dif,2),'°C')) +
-  # annotate("text", x = textx*.92, y = texty*.8, label = paste("Percentil 95% =",round(tile95dif,2),'°C'))
+  # annotate("text", x = 0, y = texty, label = paste("Média =",round(meandif,2),'°C')) +
+  # annotate("text", x = .98, y = .95, label = paste("Mediana =",round(mediandif,2),'°C')) +
+  # annotate("text", x = .93, y = .9, label = paste("Maior dif. abs =",round(maxabs,2),'°C')) +
+  # annotate("text", x = .92, y = 85, label = paste("Percentil 5% =",round(tile5dif,2),'°C')) +
+  # annotate("text", x = .92, y = .8, label = paste("Percentil 95% =",round(tile95dif,2),'°C'))
 
-# IDEAL LOADS
+# cria um vetor com as diferencas de carga de cooling entre o caso 
+# referencia e o single zone, para cada timestep (apenas quando a zona esta ocupada)
+
+# Belem
 diff_loads_PA <- (df_ref_PA$SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.[
   df_ref_PA$SALA1.People.Occupant.Count....TimeStep. > 0
   ] - df_sin_PA$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.[
     df_sin_PA$SALA1.People.Occupant.Count....TimeStep. > 0
     ])/(area*3600)
-
 
 sum(df_sin_PA$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)/sum(df_ref_PA$SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)
 
@@ -253,12 +261,12 @@ tile95dif_PA <- quantile(diff_loads_PA,.9)
 cooling_ref_PA <- sum(df_ref_PA[,loads_zone])/(area*3600000)
 cooling_sin_PA <- sum(df_sin_PA$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)/(area*3600000)
 
+# Santa Maria
 diff_loads_SM <- (df_ref_SM$SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.[
   df_ref_SM$SALA1.People.Occupant.Count....TimeStep. > 0
   ] - df_sin_SM$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.[
     df_sin_SM$SALA1.People.Occupant.Count....TimeStep. > 0
     ])/(area*3600)
-
 
 sum(df_sin_SM$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)/sum(df_ref_SM$SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)
 
@@ -272,12 +280,12 @@ tile95dif_SM <- quantile(diff_loads_SM,.9)
 cooling_ref_SM <- sum(df_ref_SM[,loads_zone])/(area*3600000)
 cooling_sin_SM <- sum(df_sin_SM$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)/(area*3600000)
 
+# Sao Paulo
 diff_loads_SP <- (df_ref_SP$SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.[
   df_ref_SP$SALA1.People.Occupant.Count....TimeStep. > 0
   ] - df_sin_SP$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.[
     df_sin_SP$SALA1.People.Occupant.Count....TimeStep. > 0
     ])/(area*3600)
-
 
 sum(df_sin_SP$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)/sum(df_ref_SP$SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)
 
@@ -291,12 +299,12 @@ tile95dif_SP <- quantile(diff_loads_SP,.9)
 cooling_ref_SP <- sum(df_ref_SP[,loads_zone])/(area*3600000)
 cooling_sin_SP <- sum(df_sin_SP$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)/(area*3600000)
 
+# Rio de Janeiro
 diff_loads_RJ <- (df_ref_RJ$SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.[
   df_ref_RJ$SALA1.People.Occupant.Count....TimeStep. > 0
   ] - df_sin_RJ$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.[
     df_sin_RJ$SALA1.People.Occupant.Count....TimeStep. > 0
     ])/(area*3600)
-
 
 sum(df_sin_RJ$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)/sum(df_ref_RJ$SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)
 
@@ -313,6 +321,16 @@ cooling_sin_RJ <- sum(df_sin_RJ$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loa
 # DIF RELATIVA ----
 
 comfcount <- function(df, case, t_low=18, t_upp=26){
+  # essa funcao cria um vetor que retorna o valor "1", se
+  # a temperatura operativa da zona estiver dentro da faixa 
+  # de conforto, e "0", caso esteja fora da faixa de conforto.
+  # apenas horas com ocupacao sem idealloads sao consideradas.
+  #
+  # df - data frame analisado (output do eplus)
+  # case - determina se eh um caso single, ou referencia
+  # t_low - limite inferior de conforto
+  # t_upp - limite superior de conforto
+  
   if(case=="ref"){
     zone_name <- "SALA"
   }else{
@@ -326,6 +344,9 @@ comfcount <- function(df, case, t_low=18, t_upp=26){
   return(comf_vec)
 }
 
+# lista de data frames para simplificar as iteracoes.
+# altenando os "#" entre "ref" e "adap", ou entre "doub"
+# e "hive", eh possivel analisar diferentes casos
 dfs <- list(
   df_ref_PA_00,  df_ref_SM_00,  df_ref_SP_00,  df_ref_RJ_00,  df_ref_PA_11,  df_ref_SM_11,  df_ref_SP_11,  df_ref_RJ_11,  # ref
           df_ref_PA_10,  df_ref_SM_10,  df_ref_SP_10,  df_ref_RJ_10,  df_ref_PA_01,  df_ref_SM_01,  df_ref_SP_01,  df_ref_RJ_01,
@@ -341,15 +362,21 @@ dfs <- list(
              df_hive_PA_pil,  df_hive_SM_pil,  df_hive_SP_pil,  df_hive_RJ_pil
 )
 
+# Data Frame de diferencas relativas
+
+# inicialmente, cria-se vetores com os nomes das cidades e as condicoes de exposicao
 climas <- c('Belém-PA','Santa Maria-RS','São Paulo-SP','Rio de Janeiro-RJ')
 exp <- c('Intermediário','Unifamiliar','Cobertura','Térreo','Pilotis')
 
+# data frame em branco, preenchido com "NA"
 df <- data.frame("clima"=rep(NA,length(exp)*length(climas)),
                  "exp"=rep(NA,length(exp)*length(climas)),
                  "conforto"=rep(NA,length(exp)*length(climas)),
                  "carga.termica"=rep(NA,length(exp)*length(climas))
                  )
 
+# aqui comeca a iteracao que preenche o dataframe com as diferencas
+# relativas de temperatura operativa e cargas de cooling/heating
 for(i in 1:length(exp)){
   # print(i)
   for(j in 1:length(climas)){
@@ -363,20 +390,28 @@ for(i in 1:length(exp)){
     diff_temp <- comf_sin/comf_ref
     df[(i-1)*4+j,'conforto'] <- diff_temp
     
-    # loads_sin <- sum(dfs[[20+(i-1)*4+j]][,'SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.'])
-    # loads_ref <- sum(dfs[[(i-1)*4+j]][,'SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.'])
-    loads_sin <- sum(dfs[[20+(i-1)*4+j]][,'SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Heating.Energy..J..TimeStep.'])
-    loads_ref <- sum(dfs[[(i-1)*4+j]][,'SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Heating.Energy..J..TimeStep.'])
+    loads_sin <- sum(dfs[[20+(i-1)*4+j]][,'SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.'])
+    loads_ref <- sum(dfs[[(i-1)*4+j]][,'SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.'])
+    # loads_sin <- sum(dfs[[20+(i-1)*4+j]][,'SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Heating.Energy..J..TimeStep.'])
+    # loads_ref <- sum(dfs[[(i-1)*4+j]][,'SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Heating.Energy..J..TimeStep.'])
     diff_loads <- loads_sin/loads_ref
     df[(i-1)*4+j,'carga.termica'] <- diff_loads
   }
 }
 
-df <- df[df$clima =='Santa Maria-RS' | df$clima =='São Paulo-SP',]
+# soh para analise do heating!!!
+# df <- df[df$clima =='Santa Maria-RS' | df$clima =='São Paulo-SP',]
 
+##### PLOTS 
+
+# Para definir o titulo da legenda
 Cidade <- df$clima
+
+# titulo do grafico
 # plottitle <- 'Double Wall'
 plottitle <- 'Hive'
+
+# grafico de barra das diferencas relativas de Temp. Operativa (anual)
 ggplot(df,aes(df$exp,df$conforto,fill=Cidade)) +
   geom_bar(stat="identity", position=position_dodge()) +
   ylab('Diferença Temp Operativa') +
@@ -384,7 +419,8 @@ ggplot(df,aes(df$exp,df$conforto,fill=Cidade)) +
   ylim(c(0,1.1)) +
   ggtitle(plottitle) +
   geom_hline(yintercept = 1)
-  
+
+# grafico de barra das diferencas relativas de Carga Termica (anual)  
 ggplot(df,aes(df$exp,df$carga.termica,fill=Cidade)) +
   geom_bar(stat="identity", position=position_dodge()) +
   ylab('Diferença Cargas Térmicas') +
@@ -394,8 +430,11 @@ ggplot(df,aes(df$exp,df$carga.termica,fill=Cidade)) +
   geom_hline(yintercept = 1) #+
   geom_hline(yintercept = .75, linetype="dotted")
   
-  # diff_temp <- df_hive_SP_00$SINGLEZONE.Zone.Operative.Temperature..C..TimeStep.[df_hive_SP_00$SALA1.People.Occupant.Count....TimeStep. > 0 & df_adap_SP_00$HVAC_SALA.Schedule.Value....TimeStep. == 0] -
-    diff_temp <- df_doub_SP_00$SINGLEZONE.Zone.Operative.Temperature..C..TimeStep.[df_doub_SP_00$SALA1.People.Occupant.Count....TimeStep. > 0 & df_adap_SP_00$HVAC_SALA.Schedule.Value....TimeStep. == 0] -
+# grafico similar ao da analise do bloco anterior, apenas pra SP
+# hive ou doub
+# diff_temp <- df_hive_SP_00$SINGLEZONE.Zone.Operative.Temperature..C..TimeStep.[df_hive_SP_00$SALA1.People.Occupant.Count....TimeStep. > 0 & df_adap_SP_00$HVAC_SALA.Schedule.Value....TimeStep. == 0] -
+  # df_adap_SP_00$SALA.Zone.Operative.Temperature..C..TimeStep.[df_adap_SP_00$SALA1.People.Occupant.Count....TimeStep. > 0 & df_adap_SP_00$HVAC_SALA.Schedule.Value....TimeStep. == 0]
+diff_temp <- df_doub_SP_00$SINGLEZONE.Zone.Operative.Temperature..C..TimeStep.[df_doub_SP_00$SALA1.People.Occupant.Count....TimeStep. > 0 & df_adap_SP_00$HVAC_SALA.Schedule.Value....TimeStep. == 0] -
   df_adap_SP_00$SALA.Zone.Operative.Temperature..C..TimeStep.[df_adap_SP_00$SALA1.People.Occupant.Count....TimeStep. > 0 & df_adap_SP_00$HVAC_SALA.Schedule.Value....TimeStep. == 0]
 
 ggplot() +
@@ -405,12 +444,12 @@ ggplot() +
   # ggtitle('Hive')
   ggtitle('Double Wall')
   
+# RESTO ----
+# algumas linhas escritas durante o processo que podem ser uteis...
 
-  
 sum(df_hive_SP_00$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Heating.Energy..J..TimeStep.)/(3600000*21.43)
 sum(df_hive_SP_11$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Heating.Energy..J..TimeStep.)/(3600000*21.43)
 
-# RESTO ----
 # PA
 df_sin_PA$comfort <- comfcount(df_sin_PA,case="sin")
 df_ref_PA$comfort <- comfcount(df_ref_PA,case="ref")

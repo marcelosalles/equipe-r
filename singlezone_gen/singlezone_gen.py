@@ -682,7 +682,8 @@ def main(zone_area=10, zone_ratio=1, zone_height=3, azimuth=0,
     
     with open(output, 'w') as file:
         file.write(json.dumps(model))
- 
+
+main() 
 '''     
 main(zone_area=21.4398, zone_ratio=0.6985559566, zone_height=2.5, azimuth=270,
     absorptance=.5, wall_u=4.083, wall_ct=165.6,
