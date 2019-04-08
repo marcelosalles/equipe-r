@@ -15,6 +15,8 @@ def scaling(scalex=1.55, scaley=1.55,scalez=1.55,
     # input_file - The epJSON file to be edited.
     # output_name - The name of the output file to be created.
     
+    print(output_name)
+    
     # reading epJSON file
     file = open(input_file, "r")
     content = json.load(file)
@@ -71,3 +73,13 @@ def scaling(scalex=1.55, scaley=1.55,scalez=1.55,
     content = json.dumps(content)
     file.write(content)
     file.close()
+
+## Test function changing values on the following lines: ---------------
+
+# Define the name of the input file here
+FILE_NAME = 'example.epJSON'
+
+# Define the input parameters here
+scaling(scalex=2, scaley=.5,scalez=1, ratio_of_building_afn=0.85, 
+    window_scale=True, shading_scale=False,
+    input_file= FILE_NAME, output_name='scaling_test.epJSON')
