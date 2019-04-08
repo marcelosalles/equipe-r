@@ -11,11 +11,11 @@ from hive import hive
 
 SEED_DOOR_FILE = 'seed_door.json'
     
-def main(zone_area=10, zone_ratio=1, zone_height=3, azimuth=0,
-    absorptance=.5, wall_u=2.5, wall_ct=100, ground=0, roof=0, 
-    shading=[1,.5,0,0], living_room = True, exp=[1,1,1,0],
-    wwr=[.6,0,0,0], open_fac=[.5,0,0,0], glass_fs=.87, equipment=120,
-    lights = 5, bldg_ratio=1, floor_height=0, door=False, hive=True,
+def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=180,
+    absorptance=.5, wall_u=4.083, wall_ct=165.6, ground=1, roof=1, 
+    shading=[0,0.5,0,0], living_room = False, exp=[1,1,0,0],
+    wwr=[0,0.219,0,0], open_fac=[0,0.45,0,0], glass_fs=.87, equipment=0,
+    lights = 5, bldg_ratio=0.85, floor_height=0, door=False, has_hive=True,
     input_file='seed.json' , output='output.epJSON'):
         
     ## Main function that creates the epJSON model.
@@ -41,7 +41,7 @@ def main(zone_area=10, zone_ratio=1, zone_height=3, azimuth=0,
     ## bldg_ratio - The ratio of the reference building.
     ## floor_height - Distance from zone's floor to the ground in meters.
     ## door - Condition to create or not a door in the zone.
-    ## hive - Condition to use or not the hive model approach.
+    ## has_hive - Condition to use or not the hive model approach.
     ## input_file - The name of the seed file. The seed files contains
     #  the information that do not depend on the input variables.
     ## output - The name of the generated epJSON model.
@@ -323,7 +323,7 @@ def main(zone_area=10, zone_ratio=1, zone_height=3, azimuth=0,
         if exp[i] > 0:
             model["BuildingSurface:Detailed"]["wall-"+str(i)].update(exposed_wall)
         else:
-            if hive:
+            if has_hive:
                 model["BuildingSurface:Detailed"]["wall-"+str(i)].update(hive_wall)
                 model["BuildingSurface:Detailed"]["wall-"+str(i)]["outside_boundary_condition_object"] = "hive_"+str(i)+"_wall-"+str((i+2)%4)
                 model["Zone"]["hive_" +str(i)], afn_zone, hive_carcks, hive_surfaces, hive_door = hive(i, zone_x, zone_y, zone_height,floor_height, ground, roof, door)
@@ -392,37 +392,40 @@ def main(zone_area=10, zone_ratio=1, zone_height=3, azimuth=0,
     
     z_shading = floor_height+zone_height
     
+    # checks if there is shading in model
+    for shade in shading:
+        if shade > 0:
+            model['Shading:Building:Detailed'] = {}
+            
     if shading[0] > 0.01:
         
-        model['Shading:Building:Detailed'] = {
-            'shading_0': {
-                "idf_max_extensible_fields": 12,
-                "idf_max_fields": 15,
-                'transmittance_schedule_name': '',
-                'number_of_vertices': 4,
-                "vertices": [
-                    {
-                    "vertex_x_coordinate": 0,
-                    "vertex_y_coordinate": zone_y+shading[0],
-                    "vertex_z_coordinate": z_shading
-                    },
-                    {
-                    "vertex_x_coordinate": 0,
-                    "vertex_y_coordinate": zone_y,
-                    "vertex_z_coordinate": z_shading
-                    },
-                    {
-                    "vertex_x_coordinate": zone_x,
-                    "vertex_y_coordinate": zone_y,
-                    "vertex_z_coordinate": z_shading
-                    },
-                    {
-                    "vertex_x_coordinate": zone_x,
-                    "vertex_y_coordinate": zone_y+shading[0],
-                    "vertex_z_coordinate": z_shading
-                    }
-                ]
-            }
+        model['Shading:Building:Detailed']['shading_0'] = {
+            "idf_max_extensible_fields": 12,
+            "idf_max_fields": 15,
+            'transmittance_schedule_name': '',
+            'number_of_vertices': 4,
+            "vertices": [
+                {
+                "vertex_x_coordinate": 0,
+                "vertex_y_coordinate": zone_y+shading[0],
+                "vertex_z_coordinate": z_shading
+                },
+                {
+                "vertex_x_coordinate": 0,
+                "vertex_y_coordinate": zone_y,
+                "vertex_z_coordinate": z_shading
+                },
+                {
+                "vertex_x_coordinate": zone_x,
+                "vertex_y_coordinate": zone_y,
+                "vertex_z_coordinate": z_shading
+                },
+                {
+                "vertex_x_coordinate": zone_x,
+                "vertex_y_coordinate": zone_y+shading[0],
+                "vertex_z_coordinate": z_shading
+                }
+            ]
         }
         
     if shading[1] > 0.01:
@@ -635,7 +638,7 @@ def main(zone_area=10, zone_ratio=1, zone_height=3, azimuth=0,
             window_areas.append(wwr[i] * open_fac[i] * zone_y)
             
     if door:
-        if hive:
+        if has_hive:
             model["AirflowNetwork:MultiZone:WindPressureCoefficientValues"] = cp_calc(bldg_ratio, azimuth=azimuth, window_areas=window_areas, cp_eq=False)
             model["FenestrationSurface:Detailed"].update(hive_door)
         else:
@@ -683,7 +686,7 @@ def main(zone_area=10, zone_ratio=1, zone_height=3, azimuth=0,
     with open(output, 'w') as file:
         file.write(json.dumps(model))
 
-main() 
+
 '''     
 main(zone_area=21.4398, zone_ratio=0.6985559566, zone_height=2.5, azimuth=270,
     absorptance=.5, wall_u=4.083, wall_ct=165.6,
