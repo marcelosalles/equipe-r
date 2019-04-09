@@ -11,12 +11,12 @@ from hive import hive
 
 SEED_DOOR_FILE = 'seed_door.json'
     
-def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=180,
-    absorptance=.5, wall_u=4.083, wall_ct=165.6, ground=1, roof=1, 
+def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
+    absorptance=.5, wall_u=4.083, wall_ct=165.6, ground=0, roof=1, 
     shading=[0,0.5,0,0], living_room = False, exp=[1,1,0,0],
     wwr=[0,0.219,0,0], open_fac=[0,0.45,0,0], glass_fs=.87, equipment=0,
-    lights = 5, bldg_ratio=0.85, floor_height=0, door=False, has_hive=True,
-    input_file='seed.json' , output='output.epJSON'):
+    lights = 5, bldg_ratio=0.85, floor_height=0, door=True, has_hive=True,
+    input_file='seed.json' , output='dorm1_hive_floor0_roof1.epJSON'):
         
     ## Main function that creates the epJSON model.
     
@@ -45,7 +45,7 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=180,
     ## input_file - The name of the seed file. The seed files contains
     #  the information that do not depend on the input variables.
     ## output - The name of the generated epJSON model.
-    
+
     print(output)
     
     #### Values of components' transmittance and thermal capacity ------
@@ -645,7 +645,7 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=180,
             model["AirflowNetwork:MultiZone:WindPressureCoefficientValues"] = cp_calc(bldg_ratio, azimuth=azimuth, window_areas=window_areas, cp_eq=True)
         with open(SEED_DOOR_FILE, 'r') as file:
             seed_door = json.loads(file.read())
-        model.update(seed_door)
+        update(model, seed_door)
     else:
         model["AirflowNetwork:MultiZone:WindPressureCoefficientValues"] = cp_calc(bldg_ratio, azimuth=azimuth, window_areas=window_areas, cp_eq=False)
     
@@ -685,7 +685,6 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=180,
     
     with open(output, 'w') as file:
         file.write(json.dumps(model))
-
 
 '''     
 main(zone_area=21.4398, zone_ratio=0.6985559566, zone_height=2.5, azimuth=270,
