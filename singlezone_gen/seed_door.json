@@ -3,6 +3,7 @@
         "door": {
             "building_surface_name": "wall-2",
             "construction_name": "door_construction",
+            "outside_boundary_condition_object": "hive_door",
             "number_of_vertices": 4.0,
             "surface_type": "Door",
             "vertex_1_x_coordinate": 0.1,

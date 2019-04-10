@@ -326,13 +326,16 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
             if has_hive:
                 model["BuildingSurface:Detailed"]["wall-"+str(i)].update(hive_wall)
                 model["BuildingSurface:Detailed"]["wall-"+str(i)]["outside_boundary_condition_object"] = "hive_"+str(i)+"_wall-"+str((i+2)%4)
-                model["Zone"]["hive_" +str(i)], afn_zone, hive_carcks, hive_surfaces, hive_door = hive(i, zone_x, zone_y, zone_height,floor_height, ground, roof, door)
+                model["Zone"]["hive_" +str(i)], afn_zone, hive_carcks, hive_surfaces, door_return = hive(i, zone_x, zone_y, zone_height,floor_height, ground, roof, door)
                 model['AirflowNetwork:MultiZone:Zone'].update(afn_zone)
                 model["AirflowNetwork:MultiZone:Surface:Crack"].update(hive_carcks)
                 model["BuildingSurface:Detailed"].update(hive_surfaces)
+                if len(door_return) > 0:
+                    hive_door = door_return
+
             else:
                 model["BuildingSurface:Detailed"]["wall-"+str(i)].update(adiabatic_wall)
-
+    
     #### FENESTRATION --------------------------------------------------
     model["FenestrationSurface:Detailed"] = {}
     for i in range(4):
@@ -639,8 +642,9 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
             
     if door:
         if has_hive:
-            model["AirflowNetwork:MultiZone:WindPressureCoefficientValues"] = cp_calc(bldg_ratio, azimuth=azimuth, window_areas=window_areas, cp_eq=False)
-            model["FenestrationSurface:Detailed"].update(hive_door)
+            model["AirflowNetwork:MultiZone:WindPressureCoefficientValues"] = cp_calc(bldg_ratio, azimuth=azimuth, window_areas=window_areas, cp_eq=False)            
+            model["FenestrationSurface:Detailed"].update(hive_door)          
+            
         else:
             model["AirflowNetwork:MultiZone:WindPressureCoefficientValues"] = cp_calc(bldg_ratio, azimuth=azimuth, window_areas=window_areas, cp_eq=True)
         with open(SEED_DOOR_FILE, 'r') as file:
@@ -648,6 +652,8 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
         update(model, seed_door)
     else:
         model["AirflowNetwork:MultiZone:WindPressureCoefficientValues"] = cp_calc(bldg_ratio, azimuth=azimuth, window_areas=window_areas, cp_eq=False)
+        
+    # print(model["FenestrationSurface:Detailed"])      
     
     if eps:
         model["Construction"] = {
@@ -677,15 +683,16 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
                 "outside_layer": "concrete"
             }
         }
-        
+
+    
     with open(input_file, 'r') as file:
         seed = json.loads(file.read())
-        
+
     update(model, seed)
     
     with open(output, 'w') as file:
         file.write(json.dumps(model))
-
+    
 '''     
 main(zone_area=21.4398, zone_ratio=0.6985559566, zone_height=2.5, azimuth=270,
     absorptance=.5, wall_u=4.083, wall_ct=165.6,
