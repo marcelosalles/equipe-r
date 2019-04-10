@@ -43,6 +43,7 @@ def hive(wall_i=2, zone_x=5, zone_y=4, zone_height=3, floor_height=10, ground=1,
     
     hive_cracks = {}
     hive_surfaces = {}
+    hive_door = {}
     
     ceiling_obj = {
             "zone_name": "hive_" +str(wall_i),
@@ -266,31 +267,30 @@ def hive(wall_i=2, zone_x=5, zone_y=4, zone_height=3, floor_height=10, ground=1,
         }
     ]
     
+    
+    
     if wall_i == 2 and door:
-        hive_door = {
-            "hive_door": {
-                "building_surface_name": "hive_2_wall-0",
-                "construction_name": "door_construction",
-                "number_of_vertices": 4.0,
-                "surface_type": "Door",
-                "vertex_1_x_coordinate": 1,
-                "vertex_1_y_coordinate": 0,
-                "vertex_1_z_coordinate": 2.1,
-                "vertex_2_x_coordinate": 1,
-                "vertex_2_y_coordinate": 0,
-                "vertex_2_z_coordinate": 0,
-                "vertex_3_x_coordinate": .1,
-                "vertex_3_y_coordinate": 0,
-                "vertex_3_z_coordinate": 0,
-                "vertex_4_x_coordinate": .1,
-                "vertex_4_y_coordinate": 0,
-                "vertex_4_z_coordinate": 2.1,
-                "idf_max_extensible_fields": 0,
-                "idf_max_fields": 22
-            }
+        hive_door["hive_door"] = {
+            "building_surface_name": "hive_2_wall-0",
+            "outside_boundary_condition_object": 'door',
+            "construction_name": "door_construction",
+            "number_of_vertices": 4.0,
+            "surface_type": "Door",
+            "vertex_1_x_coordinate": 1,
+            "vertex_1_y_coordinate": 0,
+            "vertex_1_z_coordinate": 2.1,
+            "vertex_2_x_coordinate": 1,
+            "vertex_2_y_coordinate": 0,
+            "vertex_2_z_coordinate": 0,
+            "vertex_3_x_coordinate": .1,
+            "vertex_3_y_coordinate": 0,
+            "vertex_3_z_coordinate": 0,
+            "vertex_4_x_coordinate": .1,
+            "vertex_4_y_coordinate": 0,
+            "vertex_4_z_coordinate": 2.1,
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 22
         }
-    else:
-        hive_door = {}
     
     return(zone, afn_zone, hive_cracks, hive_surfaces, hive_door)
 

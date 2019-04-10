@@ -3,6 +3,7 @@
         "door": {
             "building_surface_name": "wall-2",
             "construction_name": "door_construction",
+            "outside_boundary_condition_object": "hive_door",
             "number_of_vertices": 4.0,
             "surface_type": "Door",
             "vertex_1_x_coordinate": 0.1,
@@ -22,7 +23,7 @@
         }
     },
     "AirflowNetwork:MultiZone:Surface": {
-        "AirflowNetwork:MultiZone:Surface 1": {
+        "AirflowNetwork:MultiZone:Surface 5": {
             "external_node_name": "door_Node",
             "indoor_and_outdoor_enthalpy_difference_upper_limit_for_minimum_venting_open_factor": 300000.0,
             "indoor_and_outdoor_temperature_difference_upper_limit_for_minimum_venting_open_factor": 100.0,
