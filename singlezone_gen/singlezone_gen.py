@@ -316,7 +316,16 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
     
     if sum(exp) < 4:
         model['AirflowNetwork:MultiZone:Zone'] = {}
-        model["AirflowNetwork:MultiZone:Surface:Crack"] = {}
+        model["AirflowNetwork:MultiZone:Surface:Crack"] = {    
+            'crack': {
+                "air_mass_flow_coefficient_at_reference_conditions": 0.01,
+                "air_mass_flow_exponent": 0.667,
+                "idf_max_extensible_fields": 0,
+                "idf_max_fields": 4
+            }
+        }
+        hive_cracks = {}
+        hive_externalnodes = {}
         
     for i in range(4):
         
@@ -326,10 +335,17 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
             if has_hive:
                 model["BuildingSurface:Detailed"]["wall-"+str(i)].update(hive_wall)
                 model["BuildingSurface:Detailed"]["wall-"+str(i)]["outside_boundary_condition_object"] = "hive_"+str(i)+"_wall-"+str((i+2)%4)
-                model["Zone"]["hive_" +str(i)], afn_zone, hive_carcks, hive_surfaces, door_return = hive(i, zone_x, zone_y, zone_height,floor_height, ground, roof, door)
+                model["Zone"]["hive_" +str(i)], hive_afn, hive_surfaces, door_return = hive(i, zone_x, zone_y, zone_height,floor_height, ground, roof, door)
+                
+                afn_zone = hive_afn['zone']
+                cracks_return = hive_afn['cracks']
+                externalnodes_return = hive_afn['nodes']
+                
                 model['AirflowNetwork:MultiZone:Zone'].update(afn_zone)
-                model["AirflowNetwork:MultiZone:Surface:Crack"].update(hive_carcks)
                 model["BuildingSurface:Detailed"].update(hive_surfaces)
+                hive_cracks.update(cracks_return)
+                hive_externalnodes.update(externalnodes_return)
+                
                 if len(door_return) > 0:
                     hive_door = door_return
 
@@ -600,8 +616,12 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
 
     # AFN Surface
 
-    model["AirflowNetwork:MultiZone:ExternalNode"] = {}
-    model["AirflowNetwork:MultiZone:Surface"] = {}
+    if has_hive:        
+        model["AirflowNetwork:MultiZone:ExternalNode"] = hive_externalnodes
+        model["AirflowNetwork:MultiZone:Surface"] = hive_cracks
+    else:
+        model["AirflowNetwork:MultiZone:ExternalNode"] = {}
+        model["AirflowNetwork:MultiZone:Surface"] = {}
     
     for i in range(4):
         if wwr[i] > 0:
@@ -641,15 +661,18 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
             window_areas.append(wwr[i] * open_fac[i] * zone_y)
             
     if door:
+        with open(SEED_DOOR_FILE, 'r') as file:
+            seed_door = json.loads(file.read())
+        model["FenestrationSurface:Detailed"]["door"] =seed_door["door"]
+        model["AirflowNetwork:MultiZone:Surface"]["AirflowNetwork:MultiZone:Surface 5"] = seed_door["AirflowNetwork:MultiZone:Surface 5"]
         if has_hive:
             model["AirflowNetwork:MultiZone:WindPressureCoefficientValues"] = cp_calc(bldg_ratio, azimuth=azimuth, window_areas=window_areas, cp_eq=False)            
-            model["FenestrationSurface:Detailed"].update(hive_door)          
+            model["FenestrationSurface:Detailed"].update(hive_door)   
             
         else:
             model["AirflowNetwork:MultiZone:WindPressureCoefficientValues"] = cp_calc(bldg_ratio, azimuth=azimuth, window_areas=window_areas, cp_eq=True)
-        with open(SEED_DOOR_FILE, 'r') as file:
-            seed_door = json.loads(file.read())
-        update(model, seed_door)
+            model["AirflowNetwork:MultiZone:Surface"]["AirflowNetwork:MultiZone:Surface 5"]["external_node_name"] = "door_Node"
+            model["AirflowNetwork:MultiZone:ExternalNode"]["door_Node"] = seed_door["door_Node"]
     else:
         model["AirflowNetwork:MultiZone:WindPressureCoefficientValues"] = cp_calc(bldg_ratio, azimuth=azimuth, window_areas=window_areas, cp_eq=False)
         
@@ -692,14 +715,15 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
     
     with open(output, 'w') as file:
         file.write(json.dumps(model))
-    
-'''     
+   
 main(zone_area=21.4398, zone_ratio=0.6985559566, zone_height=2.5, azimuth=270,
     absorptance=.5, wall_u=4.083, wall_ct=165.6,
     ground=1, roof=1, shading=[.5,0,0,0.5], living_room = True,
     exp=[1,0,0,1], wwr=[0.0866425992,0,0,0.15503875], open_fac=[.45,0,0,.45], glass_fs=.87, 
-    bldg_ratio=0.85, floor_height=0, door=False,
-    input_file='seed.json' , output='hive_proto.epJSON')  #   3.87 x 5.54
+    bldg_ratio=0.85, floor_height=0, door=True, has_hive=True,
+    input_file='seed.json' , output='test.epJSON')  #   3.87 x 5.54 
+
+'''     
 
 main(exp=[0,0,0,0], shading=[0,0,0,0], wwr=[0,0,0,0], open_fac=[0,0,0,0], output= "hive_test.epJSON")  # (input_file='seed_single_U-conc-eps.json')
 main(exp=[1,1,1,1], shading=[0,0,0,0], wwr=[1,0,0,0], open_fac=[.5,0,0,0], output= "ela_test.epJSON")  # (input_file='seed_single_U-conc-eps.json')

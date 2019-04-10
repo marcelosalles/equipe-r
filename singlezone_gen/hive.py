@@ -13,13 +13,6 @@ def hive(wall_i=2, zone_x=5, zone_y=4, zone_height=3, floor_height=10, ground=1,
         "zone_name": "hive_"+str(wall_i)
     }
     
-    crack = {
-        "air_mass_flow_coefficient_at_reference_conditions": 0.01,
-        "air_mass_flow_exponent": 0.667,
-        "idf_max_extensible_fields": 0,
-        "idf_max_fields": 4
-    }
-    
     afn_zone = {
         "AirflowNetwork:MultiZone:Zone "+str(wall_i+1): {
             "idf_max_extensible_fields": 0,
@@ -41,6 +34,7 @@ def hive(wall_i=2, zone_x=5, zone_y=4, zone_height=3, floor_height=10, ground=1,
         "z_origin": floor_height
     }
     
+    hive_externalnodes = {}
     hive_cracks = {}
     hive_surfaces = {}
     hive_door = {}
@@ -97,7 +91,20 @@ def hive(wall_i=2, zone_x=5, zone_y=4, zone_height=3, floor_height=10, ground=1,
             hive_surfaces["hive_"+str(wall_i)+"_wall-"+str(j)]["outside_boundary_condition"] = "Outdoors"
             hive_surfaces["hive_"+str(wall_i)+"_wall-"+str(j)]["sun_exposure"] = "SunExposed"
             hive_surfaces["hive_"+str(wall_i)+"_wall-"+str(j)]["wind_exposure"] = "WindExposed"
-            hive_cracks["hive_"+str(wall_i)+"_wall-"+str(j)] = crack
+            hive_cracks["Surface_hive_"+str(wall_i)+"_wall-"+str(j)] = {
+                "external_node_name": "Node_hive_"+str(wall_i)+"_wall-"+str(j),
+                "indoor_and_outdoor_enthalpy_difference_upper_limit_for_minimum_venting_open_factor": 300000.0,
+                "indoor_and_outdoor_temperature_difference_upper_limit_for_minimum_venting_open_factor": 100.0,
+                "leakage_component_name": "crack",
+                "surface_name": "hive_"+str(wall_i)+"_wall-"+str(j)                
+            }
+            hive_externalnodes["Node_hive_"+str(wall_i)+"_wall-"+str(j)] = {
+                "idf_max_extensible_fields": 0,
+                "idf_max_fields": 5,
+                "symmetric_wind_pressure_coefficient_curve": "No",
+                "wind_angle_type": "Absolute",
+                "wind_pressure_coefficient_curve_name": "side_"+str(j)+"_coef"
+            }
             
         hive_surfaces["hive_"+str(wall_i)+"_wall-"+str(j)].update(wall_blank)
         
@@ -292,7 +299,8 @@ def hive(wall_i=2, zone_x=5, zone_y=4, zone_height=3, floor_height=10, ground=1,
             "idf_max_fields": 22
         }
     
-    return(zone, afn_zone, hive_cracks, hive_surfaces, hive_door)
+    afn = {'cracks':hive_cracks,'zone':afn_zone, 'nodes': hive_externalnodes}
+    return(zone, afn, hive_surfaces, hive_door)
 
 '''
 print(hive(wall_i=0, zone_x=5, zone_y=4, zone_height=3, floor_height=10, ground=1, roof=1))
