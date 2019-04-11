@@ -6,7 +6,6 @@ def hive(wall_i=2, zone_x=5, zone_y=4, zone_height=3, floor_height=10, ground=1,
     
     wall_blank = {
         "surface_type": "Wall",
-        "construction_name": "wall_construction_inverse",
         "idf_max_extensible_fields": 12,
         "idf_max_fields": 22,
         "number_of_vertices": 4.0,
@@ -87,10 +86,12 @@ def hive(wall_i=2, zone_x=5, zone_y=4, zone_height=3, floor_height=10, ground=1,
             hive_surfaces["hive_"+str(wall_i)+"_wall-"+str(j)]["outside_boundary_condition_object"] = "wall-"+str((j+2)%4)
             hive_surfaces["hive_"+str(wall_i)+"_wall-"+str(j)]["sun_exposure"] = "NoSun"
             hive_surfaces["hive_"+str(wall_i)+"_wall-"+str(j)]["wind_exposure"] = "NoWind"
+            hive_surfaces["hive_"+str(wall_i)+"_wall-"+str(j)]["construction_name"] = "wall_construction_inverse"
         else:
             hive_surfaces["hive_"+str(wall_i)+"_wall-"+str(j)]["outside_boundary_condition"] = "Outdoors"
             hive_surfaces["hive_"+str(wall_i)+"_wall-"+str(j)]["sun_exposure"] = "SunExposed"
             hive_surfaces["hive_"+str(wall_i)+"_wall-"+str(j)]["wind_exposure"] = "WindExposed"
+            hive_surfaces["hive_"+str(wall_i)+"_wall-"+str(j)]["construction_name"] = "wall_construction"
             hive_cracks["Surface_hive_"+str(wall_i)+"_wall-"+str(j)] = {
                 "external_node_name": "Node_hive_"+str(wall_i)+"_wall-"+str(j),
                 "indoor_and_outdoor_enthalpy_difference_upper_limit_for_minimum_venting_open_factor": 300000.0,
