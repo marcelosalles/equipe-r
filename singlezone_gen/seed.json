@@ -409,7 +409,7 @@
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
             "idf_order": 166,
-            "key_value": "Sala1",
+            "key_value": "room",
             "reporting_frequency": "Timestep",
             "variable_name": "People Occupant Count"
         },
