@@ -211,6 +211,7 @@
             "roughness": "Rough",
             "specific_heat": 1000.0,
             "thermal_absorptance": 0.9,
+            "solar_absorptance": 0.7,
             "thickness": 0.025,
             "visible_absorptance": 0.7
         },
@@ -232,14 +233,15 @@
             "solar_absorptance": 0.7,
             "specific_heat": 1000.0,
             "thermal_absorptance": 0.9,
-            "visible_absorptance": 0.7
+            "visible_absorptance": 0.7,
+            "conductivity": 2.75,
+            "thickness": 0.1
         },
         "Concreto 10 cm": {
             "conductivity": 1.75,
             "density": 2200,
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 9,
-            "idf_order": 33,
             "roughness": "Rough",
             "solar_absorptance": 0.5,
             "specific_heat": 1000,
@@ -252,7 +254,6 @@
             "density": 2200,
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 9,
-            "idf_order": 30,
             "roughness": "Rough",
             "solar_absorptance": 0.5,
             "specific_heat": 1000,
@@ -265,7 +266,6 @@
             "density": 400,
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 9,
-            "idf_order": 34,
             "roughness": "Smooth",
             "solar_absorptance": 0.5,
             "specific_heat": 2300,
@@ -278,7 +278,6 @@
             "density": 2000,
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 9,
-            "idf_order": 31,
             "roughness": "Smooth",
             "solar_absorptance": 0.5,
             "specific_heat": 920,
@@ -291,7 +290,6 @@
             "density": 650,
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 9,
-            "idf_order": 32,
             "roughness": "MediumSmooth",
             "solar_absorptance": 0.5,
             "specific_heat": 2300,
@@ -299,25 +297,11 @@
             "thickness": 0.03,
             "visible_absorptance": 0.5
         },
-        "Tijolo_macico": {
-            "conductivity": 1.05,
-            "density": 1800,
-            "idf_max_extensible_fields": 0,
-            "idf_max_fields": 9,
-            "idf_order": 35,
-            "roughness": "Rough",
-            "solar_absorptance": 0.5,
-            "specific_heat": 920,
-            "thermal_absorptance": 0.9,
-            "thickness": 0.1,
-            "visible_absorptance": 0.5
-        },
         "fibrocimento telha": {
             "conductivity": 0.65,
             "density": 1700,
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 9,
-            "idf_order": 29,
             "roughness": "Rough",
             "solar_absorptance": 0.5,
             "specific_heat": 840,
@@ -332,14 +316,15 @@
             "idf_max_fields": 6,
             "roughness": "Smooth",
             "thermal_absorptance": 0.9,
-            "visible_absorptance": 0.7
+            "visible_absorptance": 0.7,
+            "thermal_resistance": 0.17,
+            "solar_absorptance": 0.5
         }
     },
     "Material:AirGap": {
         "Camara_ar_atico_telhado": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 2,
-            "idf_order": 36,
             "thermal_resistance": 0.21
         },
         "CavidadeBloco:CamaradeAr(20-50mm)": {
@@ -352,7 +337,6 @@
         "Output:Diagnostics 1": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 2,
-            "idf_order": 183,
             "key_1": "DisplayAllWarnings",
             "key_2": "DisplayExtraWarnings"
         }
@@ -363,7 +347,6 @@
             "ems_runtime_language_debug_output_level": "ErrorsOnly",
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
-            "idf_order": 158,
             "internal_variable_availability_dictionary_reporting": "NotByUniqueKeyNames"
         }
     },
@@ -371,7 +354,6 @@
         "Output:Surfaces:Drawing 1": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 2,
-            "idf_order": 157,
             "report_specifications_1": "ThickPolyline",
             "report_type": "DXF"
         }
@@ -380,7 +362,6 @@
         "Output:Table:SummaryReports 1": {
             "idf_max_extensible_fields": 1,
             "idf_max_fields": 1,
-            "idf_order": 159,
             "reports": [
                 {
                     "report_name": "AllSummary"
@@ -392,7 +373,6 @@
         "Output:Variable 1": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
-            "idf_order": 161,
             "key_value": "*",
             "reporting_frequency": "Timestep",
             "variable_name": "Site Outdoor Air Drybulb Temperature"
@@ -400,7 +380,6 @@
         "Output:Variable 2": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
-            "idf_order": 162,
             "key_value": "room",
             "reporting_frequency": "Timestep",
             "variable_name": "Zone Operative Temperature"
@@ -408,15 +387,13 @@
         "Output:Variable 6": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
-            "idf_order": 166,
-            "key_value": "room",
+            "key_value": "people",
             "reporting_frequency": "Timestep",
             "variable_name": "People Occupant Count"
         },
         "Output:Variable 8": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
-            "idf_order": 168,
             "key_value": "*",
             "reporting_frequency": "Timestep",
             "variable_name": "Zone Ideal Loads Zone Total Heating Energy"
@@ -424,7 +401,6 @@
         "Output:Variable 9": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
-            "idf_order": 169,
             "key_value": "*",
             "reporting_frequency": "Timestep",
             "variable_name": "Zone Ideal Loads Zone Total Cooling Energy"
@@ -432,7 +408,6 @@
         "Output:Variable 10": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
-            "idf_order": 170,
             "key_value": "*",
             "reporting_frequency": "Timestep",
             "variable_name": "AFN Surface Venting Window or Door Opening Factor"
@@ -440,7 +415,6 @@
         "Output:Variable 11": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
-            "idf_order": 171,
             "key_value": "*",
             "reporting_frequency": "Timestep",
             "variable_name": "Zone Mean Air Temperature"
@@ -448,7 +422,6 @@
         "Output:Variable 12": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
-            "idf_order": 172,
             "key_value": "*",
             "reporting_frequency": "Timestep",
             "variable_name": "AFN Zone Infiltration Air Change Rate"
@@ -456,7 +429,6 @@
         "Output:Variable 13": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
-            "idf_order": 173,
             "key_value": "room",
             "reporting_frequency": "Timestep",
             "variable_name": "Zone Mean Air Temperature"
@@ -464,23 +436,20 @@
         "Output:Variable 16": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
-            "idf_order": 176,
-            "key_value": "VN_Sala",
+            "key_value": "VN",
             "reporting_frequency": "Timestep",
             "variable_name": "Schedule Value"
         },
         "Output:Variable 19": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
-            "idf_order": 179,
-            "key_value": "HVAC_Sala",
+            "key_value": "HVAC",
             "reporting_frequency": "Timestep",
             "variable_name": "Schedule Value"
         },
         "Output:Variable 22": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
-            "idf_order": 182,
             "key_value": "*",
             "reporting_frequency": "Timestep",
             "variable_name": "Zone Ideal Loads Zone Total Cooling Energy"
@@ -488,7 +457,6 @@
         "Output:Variable 23": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
-            "idf_order": 171,
             "key_value": "*",
             "reporting_frequency": "Timestep",
             "variable_name": "Zone Air Heat Balance Internal Convective Heat Gain Rate"
@@ -496,7 +464,6 @@
         "Output:Variable 24": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
-            "idf_order": 172,
             "key_value": "*",
             "reporting_frequency": "Timestep",
             "variable_name": "Zone Air Heat Balance Surface Convection Rate"
@@ -504,7 +471,6 @@
         "Output:Variable 25": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
-            "idf_order": 173,
             "key_value": "*",
             "reporting_frequency": "Timestep",
             "variable_name": "Zone Air Heat Balance Interzone Air Transfer Rate"
@@ -512,7 +478,6 @@
         "Output:Variable 26": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
-            "idf_order": 174,
             "key_value": "*",
             "reporting_frequency": "Timestep",
             "variable_name": "Zone Air Heat Balance Outdoor Air Transfer Rate"
@@ -520,7 +485,6 @@
         "Output:Variable 27": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
-            "idf_order": 175,
             "key_value": "*",
             "reporting_frequency": "Timestep",
             "variable_name": "Zone Air Heat Balance System Air Transfer Rate"
@@ -528,7 +492,6 @@
         "Output:Variable 28": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
-            "idf_order": 176,
             "key_value": "*",
             "reporting_frequency": "Timestep",
             "variable_name": "Zone Air Heat Balance System Convective Heat Gain Rate"
@@ -536,7 +499,6 @@
         "Output:Variable 29": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
-            "idf_order": 177,
             "key_value": "*",
             "reporting_frequency": "Timestep",
             "variable_name": "Zone Air Heat Balance Air Energy Storage Rate"
@@ -637,13 +599,11 @@
         "Output:VariableDictionary 1": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 1,
-            "idf_order": 155,
             "key_field": "IDF"
         },
         "Output:VariableDictionary 2": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 1,
-            "idf_order": 156,
             "key_field": "regular"
         }
     },
@@ -652,7 +612,6 @@
             "column_separator": "Comma",
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 2,
-            "idf_order": 160,
             "unit_conversion": "JtoKWH"
         }
     },
@@ -666,7 +625,6 @@
             "end_month": 12,
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 13,
-            "idf_order": 6,
             "use_weather_file_daylight_saving_period": "No",
             "use_weather_file_holidays_and_special_days": "No",
             "use_weather_file_rain_indicators": "No",
@@ -954,76 +912,26 @@
             "idf_max_extensible_fields": 4,
             "idf_max_fields": 6,
             "schedule_type_limits_name": "TEMPERATURE"
-        },
-        "Sch_Infiltration": {
-            "data": [
-                {
-                    "field": "Through: 12/31"
-                },
-                {
-                    "field": "For: AllDays"
-                },
-                {
-                    "field": "Until: 24:00"
-                },
-                {
-                    "field": 1
-                }
-            ],
-            "idf_max_extensible_fields": 4,
-            "idf_max_fields": 6,
-            "schedule_type_limits_name": "fracao"
         }
     },
     "Schedule:Constant": {
-        "HVAC_Dorm1": {
+        "HVAC": {
             "hourly_value": 0,
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
-            "idf_order": 25,
             "schedule_type_limits_name": "On_Off"
         },
-        "HVAC_Dorm2": {
-            "hourly_value": 0,
-            "idf_max_extensible_fields": 0,
-            "idf_max_fields": 3,
-            "idf_order": 27,
-            "schedule_type_limits_name": "On_Off"
-        },
-        "HVAC_Sala": {
-            "hourly_value": 0,
-            "idf_max_extensible_fields": 0,
-            "idf_max_fields": 3,
-            "idf_order": 23,
-            "schedule_type_limits_name": "On_Off"
-        },
-        "VN_Dorm1": {
+        "VN": {
             "hourly_value": 1,
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 3,
-            "idf_order": 26,
-            "schedule_type_limits_name": "On_Off"
-        },
-        "VN_Dorm2": {
-            "hourly_value": 1,
-            "idf_max_extensible_fields": 0,
-            "idf_max_fields": 3,
-            "idf_order": 28,
-            "schedule_type_limits_name": "On_Off"
-        },
-        "VN_Sala": {
-            "hourly_value": 1,
-            "idf_max_extensible_fields": 0,
-            "idf_max_fields": 3,
-            "idf_order": 24,
             "schedule_type_limits_name": "On_Off"
         }
     },
     "ScheduleTypeLimits": {
         "HVACTemplate Any Number": {
             "idf_max_extensible_fields": 0,
-            "idf_max_fields": 1,
-            "idf_order": 180
+            "idf_max_fields": 1
         },
         "On_Off": {
             "idf_max_extensible_fields": 0,
@@ -1062,10 +970,9 @@
         "SimulationControl 1": {
             "do_plant_sizing_calculation": "No",
             "do_system_sizing_calculation": "No",
-            "do_zone_sizing_calculation": "No",
+            "do_zone_sizing_calculation": "Yes",
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 5,
-            "idf_order": 2,
             "run_simulation_for_sizing_periods": "No",
             "run_simulation_for_weather_file_run_periods": "Yes"
         }
@@ -1080,7 +987,6 @@
             "horizontal_insulation_extents": "Full",
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 25,
-            "idf_order": 8,
             "mesh_density_parameter": 6,
             "perimeter_offset": 5,
             "simulation_timestep": "Timestep",
@@ -1101,7 +1007,6 @@
             "evapotranspiration_ground_cover_parameter": 0.4,
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 7,
-            "idf_order": 7,
             "soil_density": 1250,
             "soil_moisture_content_volume_fraction": 30,
             "soil_moisture_content_volume_fraction_at_saturation": 50,
@@ -1118,7 +1023,6 @@
             "end_month": 12,
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 8,
-            "idf_order": 5,
             "use_weather_file_daylight_saving_period": "No",
             "use_weather_file_rain_and_snow_indicators": "No"
         }
@@ -1127,7 +1031,6 @@
         "GroundCoupledOSCM": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 2,
-            "idf_order": 102,
             "type_of_modeling": "GroundCoupledSurface"
         }
     },
@@ -1135,7 +1038,6 @@
         "Timestep 1": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 1,
-            "idf_order": 4,
             "number_of_timesteps_per_hour": 12
         }
     },
@@ -1143,7 +1045,6 @@
         "Version 1": {
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 1,
-            "idf_order": 1,
             "version_identifier": "9.0"
         }
     },
@@ -1153,5 +1054,169 @@
             "idf_max_fields": 3,
             "u_factor": 5.7
         }
-    }  
+    },
+    "DesignSpecification:OutdoorAir": {
+        "SZ_room": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 5,
+            "outdoor_air_flow_per_person": 0.0075,
+            "outdoor_air_flow_per_zone": 0,
+            "outdoor_air_flow_per_zone_floor_area": 0,
+            "outdoor_air_method": "Flow/Person"
+        }
+    },
+    "EnergyManagementSystem:Actuator": {
+        "Control_HVAC": {
+            "actuated_component_control_type": "Schedule Value",
+            "actuated_component_type": "Schedule:Constant",
+            "actuated_component_unique_name": "HVAC",
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 4
+        },
+        "Control_NV": {
+            "actuated_component_control_type": "Schedule Value",
+            "actuated_component_type": "Schedule:Constant",
+            "actuated_component_unique_name": "VN",
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 4
+        }
+    },
+    "EnergyManagementSystem:ProgramCallingManager": {
+        "My HVAC Control": {
+            "energyplus_model_calling_point": "BeginTimestepBeforePredictor",
+            "idf_max_extensible_fields": 3,
+            "idf_max_fields": 5,
+            "programs": [
+                {
+                    "program_name": "ems_program"
+                }
+            ]
+        }
+    },
+    "EnergyManagementSystem:Sensor": {
+        "occup_room": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 3,
+            "output_variable_or_output_meter_index_key_name": "people",
+            "output_variable_or_output_meter_name": "People Occupant Count"
+        },
+        "occup_livingroom_sensor": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 3,
+            "output_variable_or_output_meter_index_key_name": "livingroom_occup",
+            "output_variable_or_output_meter_name": "Schedule Value"
+        },
+        "Sensor_HVAC": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 3,
+            "output_variable_or_output_meter_index_key_name": "HVAC",
+            "output_variable_or_output_meter_name": "Schedule Value"
+        },
+        "T_air": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 3,
+            "output_variable_or_output_meter_index_key_name": "room",
+            "output_variable_or_output_meter_name": "Zone Mean Air Temperature"
+        },
+        "T_op": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 3,
+            "output_variable_or_output_meter_index_key_name": "room",
+            "output_variable_or_output_meter_name": "Zone Operative Temperature"
+        },
+        "T_out": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 3,
+            "output_variable_or_output_meter_index_key_name": "Environment",
+            "output_variable_or_output_meter_name": "Site Outdoor Air Drybulb Temperature"
+        }
+    },
+    "Sizing:Zone": {
+        "Sizing:Zone 1": {
+            "cooling_design_air_flow_method": "DesignDay",
+            "cooling_design_air_flow_rate": 0,
+            "cooling_minimum_air_flow_fraction": 0,
+            "design_specification_outdoor_air_object_name": "SZ_room",
+            "heating_design_air_flow_method": "DesignDay",
+            "heating_design_air_flow_rate": 0,
+            "heating_maximum_air_flow_fraction": 0,
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 23,
+            "zone_cooling_design_supply_air_humidity_ratio": 0.0077,
+            "zone_cooling_design_supply_air_temperature": 13,
+            "zone_cooling_design_supply_air_temperature_input_method": "SupplyAirTemperature",
+            "zone_heating_design_supply_air_humidity_ratio": 0.0156,
+            "zone_heating_design_supply_air_temperature": 50,
+            "zone_heating_design_supply_air_temperature_input_method": "SupplyAirTemperature",
+            "zone_or_zonelist_name": "room"
+        }
+    },
+    "ThermostatSetpoint:DualSetpoint": {
+        "Termostato Dual Control": {
+            "cooling_setpoint_temperature_schedule_name": "HVACTemplate-Always 23",
+            "heating_setpoint_temperature_schedule_name": "HVACTemplate-Always 18",
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 3
+        }
+    },
+    "ZoneControl:Thermostat": {
+        "room Thermostat": {
+            "control_1_name": "Termostato Dual Control",
+            "control_1_object_type": "ThermostatSetpoint:DualSetpoint",
+            "control_type_schedule_name": "HVACTemplate-Always 4",
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 5,
+            "zone_or_zonelist_name": "room"
+        }
+    },
+    "ZoneHVAC:EquipmentConnections": {
+        "ZoneHVAC:EquipmentConnections 1": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 6,
+            "zone_air_inlet_node_or_nodelist_name": "room Ideal Loads Supply Inlet",
+            "zone_air_node_name": "room Zone Air Node",
+            "zone_conditioning_equipment_list_name": "room Equipment",
+            "zone_name": "room",
+            "zone_return_air_node_or_nodelist_name": "room Return Outlet"
+        }
+    },
+    "ZoneHVAC:EquipmentList": {
+        "room Equipment": {
+            "equipment": [
+                {
+                    "zone_equipment_cooling_sequence": 1,
+                    "zone_equipment_heating_or_no_load_sequence": 1,
+                    "zone_equipment_name": "room Ideal Loads Air System",
+                    "zone_equipment_object_type": "ZoneHVAC:IdealLoadsAirSystem"
+                }
+            ],
+            "idf_max_extensible_fields": 4,
+            "idf_max_fields": 6,
+            "load_distribution_scheme": "SequentialLoad"
+        }
+    },
+    "ZoneHVAC:IdealLoadsAirSystem": {
+        "room Ideal Loads Air System": {
+            "availability_schedule_name": "HVAC",
+            "cooling_limit": "NoLimit",
+            "cooling_sensible_heat_ratio": 0.7,
+            "dehumidification_control_type": "ConstantSensibleHeatRatio",
+            "demand_controlled_ventilation_type": "None",
+            "design_specification_outdoor_air_object_name": "SZ_room",
+            "heat_recovery_type": "None",
+            "heating_limit": "NoLimit",
+            "humidification_control_type": "None",
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 27,
+            "latent_heat_recovery_effectiveness": 0.65,
+            "maximum_heating_supply_air_humidity_ratio": 0.0156,
+            "maximum_heating_supply_air_temperature": 50,
+            "minimum_cooling_supply_air_humidity_ratio": 0.0077,
+            "minimum_cooling_supply_air_temperature": 13,
+            "outdoor_air_economizer_type": "NoEconomizer",
+            "outdoor_air_inlet_node_name": "room Ideal Loads Outdoor Air Inlet",
+            "sensible_heat_recovery_effectiveness": 0.7,
+            "zone_supply_air_node_name": "room Ideal Loads Supply Inlet"
+        }
+    }
 }

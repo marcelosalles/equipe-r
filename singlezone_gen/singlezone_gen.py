@@ -3,21 +3,41 @@
 #
 # Notice that the names given to the surfaces go from 0 to 3 clockwise,
 # being: 0 up, 1 right, 2 down, and 3 left. 
+'''
+					side 0
+		 _______________________________
+		|								|
+		|								|
+		|								|
+		|								|
+		|								|
+  side3	|		  floor plan			|	side 1
+		|								|
+		|								|
+		|								|
+		|_______________________________|
+​
+					side 2
+'''
 
 from cp_calc_res import cp_calc
+from concrete_eps import concrete_wall
 from dict_update import update
 import json
 from hive import hive
+import os
 
 SEED_DOOR_FILE = 'seed_door.json'
+EMS_PROGRAM_FILE = 'ems_program.json'
     
 def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
     absorptance=.5, wall_u=4.083, wall_ct=165.6, ground=0, roof=1, 
     shading=[0,0.5,0,0], living_room = False, exp=[1,1,0,0],
     wwr=[0,0.219,0,0], open_fac=[0,0.45,0,0], glass_fs=.87, equipment=0,
-    lights = 5, bldg_ratio=0.85, floor_height=0, door=True, has_hive=True,
-    input_file='seed.json' , output='dorm1_hive_floor0_roof1.epJSON'):
-        
+    lights = 5, bldg_ratio=0.85, floor_height=0, door=True, bound='hive',
+    input_file='seed.json' , output='teste_model.epJSON',
+    construction="", convert=False):
+    
     ## Main function that creates the epJSON model.
     
     ## INPUTS:
@@ -26,6 +46,11 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
     #  (walls 0 and 2). Or: Ratio = zone_y/zone_x.
     ## zone_height - Distance from floor to ceiling in meters.
     ## azimuth - Angle from north.
+    ## absorptance - The value of the absorptace of walls and roof.
+    ## wall_u - The value of transmittance of the walls (concrete+eps 
+    # approach only).
+    ## wall_ct - The value of thermal capacity of the walls (concrete+eps 
+    # approach only).
     ## ground - Condition of exposure: 0 = Adiabatic, 1 = Outdoors.
     ## roof - Condition of exposure: 0 = Adiabatic, 1 = Outdoors.
     ## shading - the length of horizontal shading in meters.
@@ -41,30 +66,18 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
     ## bldg_ratio - The ratio of the reference building.
     ## floor_height - Distance from zone's floor to the ground in meters.
     ## door - Condition to create or not a door in the zone.
-    ## has_hive - Condition to use or not the hive model approach.
+    ## bound - String that defines the boundary condition of internal 
+    #  walls. May be "hive", "double", or "adiabatic".
     ## input_file - The name of the seed file. The seed files contains
     #  the information that do not depend on the input variables.
     ## output - The name of the generated epJSON model.
+    ## construction - The name of a json file with a construction object
+    # called "wall_construction" and the materials objects.
+    ## convert - Condition to generate a .idf model. energyplus has to 
+    # be an environment variable for it to work!
 
     print(output)
     
-    #### Values of components' transmittance and thermal capacity ------
-    #### CONCRETE+EPS wall approach
-    
-    c_concrete = 1.75    # concrete's condutivity {W/m-K}
-    specific_heat = 1    # concrete's specific heat {kJ/kg-K}
-    density = 2200       # concrete's density {kg/m3}
-    e_concrete = wall_ct/(specific_heat*density)
-    R_concrete = e_concrete/c_concrete
-    R_eps = (1-(.17+R_concrete)*wall_u)/wall_u
-    eps = True
-    if R_eps < 0.0001:
-        # Condition to ignore EPS with insignificant R values.
-        eps = False
-        c_concrete = (wall_u*e_concrete)/(1-.17*wall_u)
-        print('EPS not used!')
-        print('wall_u: ', wall_u, '\n', 'wall_ct: ', wall_ct)
-        
     #### Defining zone's x and y length --------------------------------
     zone_x = (zone_area/zone_ratio)**(1/2)
     zone_y = (zone_area /zone_x)
@@ -91,7 +104,7 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
             "north_axis": azimuth,
             "loads_convergence_tolerance_value": 0.04,
             "maximum_number_of_warmup_days": 25,
-            "solar_distribution": "FullInteriorAndExterior",
+            "solar_distribution": "FullInteriorAndExteriorWithReflections",
             "temperature_convergence_tolerance_value": 0.4,
             "idf_max_extensible_fields": 0,
             "idf_max_fields": 8,
@@ -332,7 +345,7 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
         if exp[i] > 0:
             model["BuildingSurface:Detailed"]["wall-"+str(i)].update(exposed_wall)
         else:
-            if has_hive:
+            if bound == 'hive':
                 model["BuildingSurface:Detailed"]["wall-"+str(i)].update(hive_wall)
                 model["BuildingSurface:Detailed"]["wall-"+str(i)]["outside_boundary_condition_object"] = "hive_"+str(i)+"_wall-"+str((i+2)%4)
                 model["Zone"]["hive_" +str(i)], hive_afn, hive_surfaces, door_return = hive(i, zone_x, zone_y, zone_height,floor_height, ground, roof, door)
@@ -349,6 +362,8 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
                 if len(door_return) > 0:
                     hive_door = door_return
 
+            elif bound == 'double' or bound == 'doublewall':
+                model["BuildingSurface:Detailed"]["wall-"+str(i)].update(exposed_wall)
             else:
                 model["BuildingSurface:Detailed"]["wall-"+str(i)].update(adiabatic_wall)
     
@@ -574,23 +589,6 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
 
     #### MATERIALS -----------------------------------------------------
 
-    model["Material"] = {
-        "ArgamassaReboco(25mm)": {
-            "solar_absorptance": absorptance
-        },
-        "concrete": {
-            "conductivity": c_concrete,
-            "thickness": e_concrete
-        }
-    }
-    
-    if eps:
-        model['Material:NoMass'] = {
-            'EPS': {
-                'thermal_resistance': R_eps,
-                'solar_absorptance': absorptance
-            }
-        }
 
     model["WindowMaterial:SimpleGlazingSystem"] = {
         "glass_material": {
@@ -616,7 +614,7 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
 
     # AFN Surface
 
-    if has_hive:        
+    if bound == 'hive':        
         model["AirflowNetwork:MultiZone:ExternalNode"] = hive_externalnodes
         model["AirflowNetwork:MultiZone:Surface"] = hive_cracks
     else:
@@ -665,7 +663,7 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
             seed_door = json.loads(file.read())
         model["FenestrationSurface:Detailed"]["door"] =seed_door["door"]
         model["AirflowNetwork:MultiZone:Surface"]["AirflowNetwork:MultiZone:Surface 5"] = seed_door["AirflowNetwork:MultiZone:Surface 5"]
-        if has_hive:
+        if bound == 'hive':
             model["AirflowNetwork:MultiZone:WindPressureCoefficientValues"] = cp_calc(bldg_ratio, azimuth=azimuth, window_areas=window_areas, cp_eq=False)            
             model["FenestrationSurface:Detailed"].update(hive_door)   
             
@@ -675,38 +673,30 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
             model["AirflowNetwork:MultiZone:ExternalNode"]["door_Node"] = seed_door["door_Node"]
     else:
         model["AirflowNetwork:MultiZone:WindPressureCoefficientValues"] = cp_calc(bldg_ratio, azimuth=azimuth, window_areas=window_areas, cp_eq=False)
-        
-    # print(model["FenestrationSurface:Detailed"])      
     
-    if eps:
-        model["Construction"] = {
-            "wall_construction": {
-                "idf_max_extensible_fields": 0,
-                "idf_max_fields": 3,
-                "layer_2": "concrete",
-                "outside_layer": "EPS"
-            },
-            "wall_construction_inverse": {
-                "idf_max_extensible_fields": 0,
-                "idf_max_fields": 3,
-                "outside_layer": "concrete",
-                "layer_2": "EPS"
-            }
-        }
+    #### DEFINING CONSTRUCTION AND MATERIALS ---------------------------
+        
+    if len(construction) > 0:
+        with open(construction, 'r') as file:
+            construction_wall = json.loads(file.read())
+        update(model, construction_wall)
     else:
-        model["Construction"] = {
-            "wall_construction": {
-                "idf_max_extensible_fields": 0,
-                "idf_max_fields": 2,
-                "outside_layer": "concrete"
-            },
-            "wall_construction_inverse": {
-                "idf_max_extensible_fields": 0,
-                "idf_max_fields": 3,
-                "outside_layer": "concrete"
-            }
-        }
-
+        construction_wall = concrete_wall(wall_u, wall_ct, absorptance)
+        update(model, construction_wall)
+        
+    #### EMS PROGRAM ---------------------------------------------------
+    
+    model["EnergyManagementSystem:Program"] = {}
+    
+    with open(EMS_PROGRAM_FILE, 'r') as file:
+        ems_program = json.loads(file.read())
+        
+    if living_room:
+        model["EnergyManagementSystem:Program"]["ems_program"] = ems_program["living_room"]
+    else:
+        model["EnergyManagementSystem:Program"]["ems_program"] = ems_program["bedroom"]
+    
+    #### BRING SEED TO MODEL -------------------------------------------
     
     with open(input_file, 'r') as file:
         seed = json.loads(file.read())
@@ -715,43 +705,56 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
     
     with open(output, 'w') as file:
         file.write(json.dumps(model))
-   
+    
+    #### CONVERT TO IDF ------------------------------------------------
+    
+    if convert:
+        os.system('energyplus -x -c '+output)
+        if os.name == 'posix':
+            os.system('rm eplusout*')
+            os.system('rm sqlite.err')
+        else:
+            os.system('del eplusout*')
+            os.system('del sqlite.err')
+
+main(construction="construction_tijolomacico_double.json")
+ 
+'''   
 main(zone_area=21.4398, zone_ratio=0.6985559566, zone_height=2.5, azimuth=0,
     absorptance=.5, wall_u=4.083, wall_ct=165.6,
     ground=1, roof=1, shading=[0,0,0,0], living_room = True,
     exp=[1,0,0,0], wwr=[0.0866425992,0,0,0], open_fac=[.45,0,0,0], glass_fs=.87, 
-    bldg_ratio=0.85, floor_height=0, door=True, has_hive=True,
+    bldg_ratio=0.85, floor_height=0, door=True, bound='hive',
     input_file='seed.json' , output='hive_12-04_floor1_roof1.epJSON')  #   3.87 x 5.54 
    
 main(zone_area=21.4398, zone_ratio=0.6985559566, zone_height=2.5, azimuth=0,
     absorptance=.5, wall_u=4.083, wall_ct=165.6,
     ground=1, roof=0, shading=[0,0,0,0], living_room = True,
     exp=[1,0,0,0], wwr=[0.0866425992,0,0,0], open_fac=[.45,0,0,0], glass_fs=.87, 
-    bldg_ratio=0.85, floor_height=0, door=True, has_hive=True,
+    bldg_ratio=0.85, floor_height=0, door=True, bound='hive',
     input_file='seed.json' , output='hive_12-04_floor1_roof0.epJSON')  #   3.87 x 5.54 
    
 main(zone_area=21.4398, zone_ratio=0.6985559566, zone_height=2.5, azimuth=0,
     absorptance=.5, wall_u=4.083, wall_ct=165.6,
     ground=0, roof=1, shading=[0,0,0,0], living_room = True,
     exp=[1,0,0,0], wwr=[0.0866425992,0,0,0], open_fac=[.45,0,0,0], glass_fs=.87, 
-    bldg_ratio=0.85, floor_height=0, door=True, has_hive=True,
+    bldg_ratio=0.85, floor_height=0, door=True, bound='hive',
     input_file='seed.json' , output='hive_12-04_floor0_roof1.epJSON')  #   3.87 x 5.54 
    
 main(zone_area=21.4398, zone_ratio=0.6985559566, zone_height=2.5, azimuth=0,
     absorptance=.5, wall_u=4.083, wall_ct=165.6,
     ground=0, roof=0, shading=[0,0,0,0], living_room = True,
     exp=[1,0,0,0], wwr=[0.0866425992,0,0,0], open_fac=[.45,0,0,0], glass_fs=.87, 
-    bldg_ratio=0.85, floor_height=0, door=True, has_hive=True,
+    bldg_ratio=0.85, floor_height=0, door=True, bound='hive',
     input_file='seed.json' , output='hive_12-04_floor0_roof0.epJSON')  #   3.87 x 5.54 
    
 # main(zone_area=21.4398, zone_ratio=0.6985559566, zone_height=2.5, azimuth=0,
     # absorptance=.5, wall_u=4.083, wall_ct=165.6,
     # ground=1, roof=1, shading=[0,0,0,0], living_room = True,
     # exp=[1,0,0,0], wwr=[0.0866425992,0,0,0], open_fac=[.45,0,0,0], glass_fs=.87, 
-    # bldg_ratio=0.85, floor_height=0, door=True, has_hive=True,
+    # bldg_ratio=0.85, floor_height=0, door=True, bound='hive',
     # input_file='seed.json' , output='hive_12-04_floor1_roof1.epJSON')  #   3.87 x 5.54 
-
-'''     
+    
 
 main(exp=[0,0,0,0], shading=[0,0,0,0], wwr=[0,0,0,0], open_fac=[0,0,0,0], output= "hive_test.epJSON")  # (input_file='seed_single_U-conc-eps.json')
 main(exp=[1,1,1,1], shading=[0,0,0,0], wwr=[1,0,0,0], open_fac=[.5,0,0,0], output= "ela_test.epJSON")  # (input_file='seed_single_U-conc-eps.json')
@@ -760,6 +763,6 @@ main(zone_area=21.4398, zone_ratio=0.6985559566, zone_height=2.5, azimuth=270,
     absorptance=.5, wall_u=4.083, wall_ct=165.6,
     ground=1, roof=1, shading=[.5,0,0,0.5], living_room = True,
     exp=[1,0,0,1], wwr=[0.0866425992,0,0,0.15503875], open_fac=[.45,0,0,.45], glass_fs=.87, 
-    bldg_ratio=0.85, floor_height=0, door=True, has_hive=True,
+    bldg_ratio=0.85, floor_height=0, door=True, bound='hive',
     input_file='seed.json' , output='test.epJSON')  #   3.87 x 5.54 
 ''' 

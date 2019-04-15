@@ -1,0 +1,140 @@
+{
+    "bedroom": {
+        "idf_max_extensible_fields": 20,
+        "idf_max_fields": 21,
+        "lines": [
+            {
+                "program_line": "SET T_Comf = ((T_op >= 26) || (T_op <= 16))"
+            },
+            {
+                "program_line": "IF (occup_room > 0) && (T_Comf == 1)"
+            },
+            {
+                "program_line": "Set Control_HVAC = 1"
+            },
+            {
+                "program_line": "Set Control_NV = 0"
+            },
+            {
+                "program_line": "ELSEIF ((occup_room > 0) && (Sensor_HVAC > 0))"
+            },
+            {
+                "program_line": "Set Control_HVAC = 1"
+            },
+            {
+                "program_line": "Set Control_NV = 0"
+            },
+            {
+                "program_line": "ELSEIF ((occup_livingroom_sensor > 0) || (occup_room > 0))"
+            },
+            {
+                "program_line": "Set Control_HVAC = 0"
+            },
+            {
+                "program_line": "IF ((T_out<T_air) && (T_out>19))"
+            },
+            {
+                "program_line": "Set Control_NV = 1"
+            },
+            {
+                "program_line": "ELSEIF ((T_out>T_air) && (T_out>19))"
+            },
+            {
+                "program_line": "Set Control_NV = 0"
+            },
+            {
+                "program_line": "ELSEIF (T_out<19)"
+            },
+            {
+                "program_line": "Set Control_NV = 0"
+            },
+            {
+                "program_line": "ENDIF"
+            },
+            {
+                "program_line": "ELSEIF (occup_room == 0) && (occup_livingroom_sensor == 0)"
+            },
+            {
+                "program_line": "Set Control_HVAC = 0"
+            },
+            {
+                "program_line": "Set Control_NV = 0"
+            },
+            {
+                "program_line": "ENDIF"
+            }
+        ]
+    },
+    "living_room": {
+        "idf_max_extensible_fields": 22,
+        "idf_max_fields": 23,
+        "lines": [
+            {
+                "program_line": "SET T_Comf = ((T_op >= 26) || (T_op <= 16))"
+            },
+            {
+                "program_line": "IF ((occup_room > 0) && (T_Comf == 1))"
+            },
+            {
+                "program_line": "Set Control_HVAC = 1"
+            },
+            {
+                "program_line": "Set Control_NV = 0"
+            },
+            {
+                "program_line": "ELSEIF ((occup_room > 0) && (Sensor_HVAC > 0))"
+            },
+            {
+                "program_line": "Set Control_HVAC = 1"
+            },
+            {
+                "program_line": "Set Control_NV = 0"
+            },
+            {
+                "program_line": "ELSEIF (occup_room > 0)"
+            },
+            {
+                "program_line": "IF ((T_out<T_air) && (T_out>19))"
+            },
+            {
+                "program_line": "Set Control_HVAC = 0"
+            },
+            {
+                "program_line": "Set Control_NV = 1"
+            },
+            {
+                "program_line": "ELSEIF ((T_out>T_air) && (T_out>19))"
+            },
+            {
+                "program_line": "Set Control_HVAC = 0"
+            },
+            {
+                "program_line": "Set Control_NV = 0"
+            },
+            {
+                "program_line": "ELSEIF (T_out<19)"
+            },
+            {
+                "program_line": "Set Control_HVAC = 0"
+            },
+            {
+                "program_line": "Set Control_NV = 0"
+            },
+            {
+                "program_line": "ENDIF"
+            },
+            {
+                "program_line": "ELSEIF (occup_room == 0)"
+            },
+            {
+                "program_line": "Set Control_HVAC = 0"
+            },
+            {
+                "program_line": "Set Control_NV = 0"
+            },
+            {
+                "program_line": "ENDIF"
+            }
+        ]
+    }
+}
