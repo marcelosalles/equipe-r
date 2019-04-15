@@ -4,20 +4,20 @@
 # Notice that the names given to the surfaces go from 0 to 3 clockwise,
 # being: 0 up, 1 right, 2 down, and 3 left. 
 '''
-					side 0
-		 _______________________________
-		|								|
-		|								|
-		|								|
-		|								|
-		|								|
-  side3	|		  floor plan			|	side 1
-		|								|
-		|								|
-		|								|
-		|_______________________________|
-​
-					side 2
+                    side 0
+         _______________________________
+        |                               |
+        |                               |
+        |                               |
+        |                               |
+        |                               |
+  side3 |         floor plan            |   side 1
+        |                               |
+        |                               |
+        |                               |
+        |_______________________________|
+
+                    side 2
 '''
 
 from cp_calc_res import cp_calc
