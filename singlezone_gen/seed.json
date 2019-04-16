@@ -45,10 +45,6 @@
             "surface_type": "Floor",
             "zone_name": "room",
             "construction_name": "floor_construction",
-            "outside_boundary_condition": "OtherSideConditionsModel",
-            "outside_boundary_condition_object": "GroundCoupledOSCM",
-            "sun_exposure": "NoSun",
-            "wind_exposure": "NoWind",
             "idf_max_extensible_fields": 12,
             "idf_max_fields": 22,
             "number_of_vertices": 4.0

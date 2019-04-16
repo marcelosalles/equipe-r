@@ -296,19 +296,30 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
     if ground == 0:
         ground_bound = {
             "outside_boundary_condition": "Adiabatic",
+            "outside_boundary_condition_object": "",
             "sun_exposure": "NoSun",
             "wind_exposure": "NoWind"
         }
 
     else:
-        ground_bound = {
-            "outside_boundary_condition": "Ground",
-            "sun_exposure": "NoSun",
-            "wind_exposure": "NoWind"
-        }
+        if floor_height == 0:
+            ground_bound = {
+                "outside_boundary_condition": "OtherSideConditionsModel",
+                "outside_boundary_condition_object": "GroundCoupledOSCM",
+                "sun_exposure": "NoSun",
+                "wind_exposure": "NoWind"
+            }
+        else:
+            ground_bound = {
+                "outside_boundary_condition": "Outdoors",
+                "outside_boundary_condition_object": "",
+                "sun_exposure": "NoSun",
+                "wind_exposure": "WindExposed"
+            }
 
-    model["BuildingSurface:Detailed"]["floor"].update(ground_bound)
-
+    #model["BuildingSurface:Detailed"]["floor"].update(ground_bound)
+    update(model["BuildingSurface:Detailed"]["floor"],ground_bound)
+    
     # Wall exposition condition
     exposed_wall = {
         "outside_boundary_condition": "Outdoors",
@@ -631,7 +642,7 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
                 "surface_name": "window_"+str(i),
                 "ventilation_control_mode": "Temperature",
                 "ventilation_control_zone_temperature_setpoint_schedule_name": "Temp_setpoint",
-                "venting_availability_schedule_name": occupation_sch,
+                "venting_availability_schedule_name": "VN",  # occupation_sch,
                 "window_door_opening_factor_or_crack_factor": open_fac[i]
             }
             
@@ -701,10 +712,11 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
     with open(input_file, 'r') as file:
         seed = json.loads(file.read())
 
-    update(model, seed)
+    # update(model, seed)
+    complete_model = update(seed, model)
     
     with open(output, 'w') as file:
-        file.write(json.dumps(model))
+        file.write(json.dumps(complete_model))
     
     #### CONVERT TO IDF ------------------------------------------------
     
@@ -717,7 +729,6 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
             os.system('del eplusout*')
             os.system('del sqlite.err')
 
-main(construction="construction_tijolomacico_double.json")
  
 '''   
 main(zone_area=21.4398, zone_ratio=0.6985559566, zone_height=2.5, azimuth=0,
