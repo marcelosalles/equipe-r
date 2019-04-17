@@ -63,19 +63,26 @@ def hive(wall_i=2, zone_x=5, zone_y=4, zone_height=3, floor_height=10, ground=1,
             "zone_name": "hive_" +str(wall_i),
             "surface_type": "Floor",
             "construction_name": "floor_construction",
-            "sun_exposure": "NoSun",
-            "wind_exposure": "NoWind",
             "idf_max_extensible_fields": 12,
             "idf_max_fields": 22,
             "number_of_vertices": 4.0
         }
         
-    if ground > 0:
-        ground_obj["outside_boundary_condition"] = "OtherSideConditionsModel"
-        ground_obj["outside_boundary_condition_object"] = "GroundCoupledOSCM"
+    if ground == 0:
+            ground_obj["outside_boundary_condition"] = "Adiabatic"
+            ground_obj["sun_exposure"] = "NoSun"
+            ground_obj["wind_exposure"] = "NoWind"
 
     else:
-        ground_obj["outside_boundary_condition"] = "Adiabatic"
+        if floor_height == 0:
+                ground_obj["outside_boundary_condition"] = "OtherSideConditionsModel"
+                ground_obj["outside_boundary_condition_object"] = "GroundCoupledOSCM"
+                ground_obj["sun_exposure"] = "NoSun"
+                ground_obj["wind_exposure"] = "NoWind"
+        else:
+                ground_obj["outside_boundary_condition"] =  "Outdoors"
+                ground_obj["sun_exposure"] = "NoSun"
+                ground_obj["wind_exposure"] = "WindExposed"
     
     hive_surfaces['hive_'+str(wall_i)+'_floor'] = ground_obj
     

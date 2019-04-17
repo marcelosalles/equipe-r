@@ -296,19 +296,74 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
     if ground == 0:
         ground_bound = {
             "outside_boundary_condition": "Adiabatic",
+            "outside_boundary_condition_object": "",
             "sun_exposure": "NoSun",
             "wind_exposure": "NoWind"
         }
 
     else:
-        ground_bound = {
-            "outside_boundary_condition": "Ground",
-            "sun_exposure": "NoSun",
-            "wind_exposure": "NoWind"
-        }
+        if floor_height == 0:
+            ground_bound = {
+                "outside_boundary_condition": "OtherSideConditionsModel",
+                "outside_boundary_condition_object": "GroundCoupledOSCM",
+                "sun_exposure": "NoSun",
+                "wind_exposure": "NoWind"
+            }
+            model["SurfaceProperty:OtherSideConditionsModel"] = {
+                "GroundCoupledOSCM": {
+                    "idf_max_extensible_fields": 0,
+                    "idf_max_fields": 2,
+                    "type_of_modeling": "GroundCoupledSurface"
+                }
+            }
+            model["Site:GroundDomain:Slab"] = {
+                "GroundDomain": {
+                    "aspect_ratio": 1,
+                    "evapotranspiration_ground_cover_parameter": 0.4,
+                    "geometric_mesh_coefficient": 1.6,
+                    "ground_domain_depth": 10,
+                    "horizontal_insulation": "No",
+                    "horizontal_insulation_extents": "Full",
+                    "idf_max_extensible_fields": 0,
+                    "idf_max_fields": 25,
+                    "mesh_density_parameter": 6,
+                    "perimeter_offset": 5,
+                    "simulation_timestep": "Timestep",
+                    "slab_boundary_condition_model_name": "GroundCoupledOSCM",
+                    "slab_location": "OnGrade",
+                    "soil_density": 1250,
+                    "soil_moisture_content_volume_fraction": 30,
+                    "soil_moisture_content_volume_fraction_at_saturation": 50,
+                    "soil_specific_heat": 1500,
+                    "soil_thermal_conductivity": 1.5,
+                    "undisturbed_ground_temperature_model_name": "FiniteDiff",
+                    "undisturbed_ground_temperature_model_type": "Site:GroundTemperature:Undisturbed:FiniteDifference",
+                    "vertical_insulation": "No"
+                }
+            }
+            model["Site:GroundTemperature:Undisturbed:FiniteDifference"] = {
+                "FiniteDiff": {
+                    "evapotranspiration_ground_cover_parameter": 0.4,
+                    "idf_max_extensible_fields": 0,
+                    "idf_max_fields": 7,
+                    "soil_density": 1250,
+                    "soil_moisture_content_volume_fraction": 30,
+                    "soil_moisture_content_volume_fraction_at_saturation": 50,
+                    "soil_specific_heat": 1500,
+                    "soil_thermal_conductivity": 1.5
+                }
+            }
+        else:
+            ground_bound = {
+                "outside_boundary_condition": "Outdoors",
+                "outside_boundary_condition_object": "",
+                "sun_exposure": "NoSun",
+                "wind_exposure": "WindExposed"
+            }
 
-    model["BuildingSurface:Detailed"]["floor"].update(ground_bound)
-
+    #model["BuildingSurface:Detailed"]["floor"].update(ground_bound)
+    update(model["BuildingSurface:Detailed"]["floor"],ground_bound)
+    
     # Wall exposition condition
     exposed_wall = {
         "outside_boundary_condition": "Outdoors",
@@ -631,7 +686,7 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
                 "surface_name": "window_"+str(i),
                 "ventilation_control_mode": "Temperature",
                 "ventilation_control_zone_temperature_setpoint_schedule_name": "Temp_setpoint",
-                "venting_availability_schedule_name": occupation_sch,
+                "venting_availability_schedule_name": "VN",  # occupation_sch,
                 "window_door_opening_factor_or_crack_factor": open_fac[i]
             }
             
@@ -701,10 +756,11 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
     with open(input_file, 'r') as file:
         seed = json.loads(file.read())
 
-    update(model, seed)
+    # update(model, seed)
+    complete_model = update(seed, model)
     
     with open(output, 'w') as file:
-        file.write(json.dumps(model))
+        file.write(json.dumps(complete_model))
     
     #### CONVERT TO IDF ------------------------------------------------
     
@@ -717,7 +773,6 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
             os.system('del eplusout*')
             os.system('del sqlite.err')
 
-main(construction="construction_tijolomacico_double.json")
  
 '''   
 main(zone_area=21.4398, zone_ratio=0.6985559566, zone_height=2.5, azimuth=0,
