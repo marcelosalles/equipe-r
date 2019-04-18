@@ -23,6 +23,11 @@
     "Construction": {
         "wall_construction": {
             "idf_max_extensible_fields": 0,
+            "idf_max_fields": 2,
+            "outside_layer": "Tijolo_macico"
+        },
+        "wall_construction_double": {
+            "idf_max_extensible_fields": 0,
             "idf_max_fields": 4,
             "layer_2": "air_doublewall",
             "layer_3": "Tijolo_macico",
@@ -30,9 +35,7 @@
         },
         "wall_construction_inverse": {
             "idf_max_extensible_fields": 0,
-            "idf_max_fields": 4,
-            "layer_2": "air_doublewall",
-            "layer_3": "Tijolo_macico",
+            "idf_max_fields": 2,
             "outside_layer": "Tijolo_macico"
         }
     }
