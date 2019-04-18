@@ -419,6 +419,7 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
 
             elif bound == 'double' or bound == 'doublewall':
                 model["BuildingSurface:Detailed"]["wall-"+str(i)].update(exposed_wall)
+                model["BuildingSurface:Detailed"]["wall-"+str(i)]["construction_name"] = "wall_construction_double"
             else:
                 model["BuildingSurface:Detailed"]["wall-"+str(i)].update(adiabatic_wall)
     
@@ -774,7 +775,6 @@ def main(zone_area=8.85, zone_ratio=1.179, zone_height=2.5, azimuth=90,
             os.system('del sqlite.err')
 
  
-'''   
 main(zone_area=21.4398, zone_ratio=0.6985559566, zone_height=2.5, azimuth=0,
     absorptance=.5, wall_u=4.083, wall_ct=165.6,
     ground=1, roof=1, shading=[0,0,0,0], living_room = True,
@@ -800,17 +800,55 @@ main(zone_area=21.4398, zone_ratio=0.6985559566, zone_height=2.5, azimuth=0,
     absorptance=.5, wall_u=4.083, wall_ct=165.6,
     ground=0, roof=0, shading=[0,0,0,0], living_room = True,
     exp=[1,0,0,0], wwr=[0.0866425992,0,0,0], open_fac=[.45,0,0,0], glass_fs=.87, 
-    bldg_ratio=0.85, floor_height=0, door=True, bound='hive',
+    bldg_ratio=0.85, floor_height=3, door=True, bound='hive',
     input_file='seed.json' , output='hive_12-04_floor0_roof0.epJSON')  #   3.87 x 5.54 
    
-# main(zone_area=21.4398, zone_ratio=0.6985559566, zone_height=2.5, azimuth=0,
-    # absorptance=.5, wall_u=4.083, wall_ct=165.6,
-    # ground=1, roof=1, shading=[0,0,0,0], living_room = True,
-    # exp=[1,0,0,0], wwr=[0.0866425992,0,0,0], open_fac=[.45,0,0,0], glass_fs=.87, 
-    # bldg_ratio=0.85, floor_height=0, door=True, bound='hive',
-    # input_file='seed.json' , output='hive_12-04_floor1_roof1.epJSON')  #   3.87 x 5.54 
+main(zone_area=21.4398, zone_ratio=0.6985559566, zone_height=2.5, azimuth=0,
+    absorptance=.5, wall_u=4.083, wall_ct=165.6,
+    ground=1, roof=1, shading=[0,0,0,0], living_room = True,
+    exp=[1,0,0,0], wwr=[0.0866425992,0,0,0], open_fac=[.45,0,0,0], glass_fs=.87, 
+    bldg_ratio=0.85, floor_height=3, door=True, bound='hive',
+    input_file='seed.json' , output='hive_12-04_pilotis.epJSON')  #   3.87 x 5.54 
     
 
+ 
+main(zone_area=21.4398, zone_ratio=0.6985559566, zone_height=2.5, azimuth=0,
+    absorptance=.5, wall_u=4.083, wall_ct=165.6,
+    ground=1, roof=1, shading=[0,0,0,0], living_room = True,
+    exp=[1,0,0,0], wwr=[0.0866425992,0,0,0], open_fac=[.45,0,0,0], glass_fs=.87, 
+    bldg_ratio=0.85, floor_height=0, door=True, bound='double',
+    input_file='seed.json' , output='double_12-04_floor1_roof1.epJSON', construction='construction_tijolomacico_double.json')  #   3.87 x 5.54 
+   
+main(zone_area=21.4398, zone_ratio=0.6985559566, zone_height=2.5, azimuth=0,
+    absorptance=.5, wall_u=4.083, wall_ct=165.6,
+    ground=1, roof=0, shading=[0,0,0,0], living_room = True,
+    exp=[1,0,0,0], wwr=[0.0866425992,0,0,0], open_fac=[.45,0,0,0], glass_fs=.87, 
+    bldg_ratio=0.85, floor_height=0, door=True, bound='double',
+    input_file='seed.json' , output='double_12-04_floor1_roof0.epJSON', construction='construction_tijolomacico_double.json')  #   3.87 x 5.54 
+   
+main(zone_area=21.4398, zone_ratio=0.6985559566, zone_height=2.5, azimuth=0,
+    absorptance=.5, wall_u=4.083, wall_ct=165.6,
+    ground=0, roof=1, shading=[0,0,0,0], living_room = True,
+    exp=[1,0,0,0], wwr=[0.0866425992,0,0,0], open_fac=[.45,0,0,0], glass_fs=.87, 
+    bldg_ratio=0.85, floor_height=0, door=True, bound='double',
+    input_file='seed.json' , output='double_12-04_floor0_roof1.epJSON', construction='construction_tijolomacico_double.json')  #   3.87 x 5.54 
+   
+main(zone_area=21.4398, zone_ratio=0.6985559566, zone_height=2.5, azimuth=0,
+    absorptance=.5, wall_u=4.083, wall_ct=165.6,
+    ground=0, roof=0, shading=[0,0,0,0], living_room = True,
+    exp=[1,0,0,0], wwr=[0.0866425992,0,0,0], open_fac=[.45,0,0,0], glass_fs=.87, 
+    bldg_ratio=0.85, floor_height=3, door=True, bound='double',
+    input_file='seed.json' , output='double_12-04_floor0_roof0.epJSON', construction='construction_tijolomacico_double.json')  #   3.87 x 5.54 
+   
+main(zone_area=21.4398, zone_ratio=0.6985559566, zone_height=2.5, azimuth=0,
+    absorptance=.5, wall_u=4.083, wall_ct=165.6,
+    ground=1, roof=1, shading=[0,0,0,0], living_room = True,
+    exp=[1,0,0,0], wwr=[0.0866425992,0,0,0], open_fac=[.45,0,0,0], glass_fs=.87, 
+    bldg_ratio=0.85, floor_height=3, door=True, bound='double',
+    input_file='seed.json' , output='double_12-04_pilotis.epJSON', construction='construction_tijolomacico_double.json')  #   3.87 x 5.54 
+    
+
+'''   
 main(exp=[0,0,0,0], shading=[0,0,0,0], wwr=[0,0,0,0], open_fac=[0,0,0,0], output= "hive_test.epJSON")  # (input_file='seed_single_U-conc-eps.json')
 main(exp=[1,1,1,1], shading=[0,0,0,0], wwr=[1,0,0,0], open_fac=[.5,0,0,0], output= "ela_test.epJSON")  # (input_file='seed_single_U-conc-eps.json')
 
