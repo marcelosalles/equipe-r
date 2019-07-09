@@ -8,8 +8,8 @@ epws = glob.glob("*.epw")
 
 conteudo = ""
 for i in listIDF:
-  for epw in epws:
-      conteudo = conteudo + os.getcwd()+"\\"+i+","+os.getcwd()+"\\"+epw+","+os.getcwd()+"\\"+i[:-4]+",1\n"
+    for epw in epws:
+        conteudo = conteudo + os.getcwd()+"\\"+i+","+os.getcwd()+"\\"+epw+","+os.getcwd()+"\\"+i[:-4]+",1\n"
 
 posicao = os.getcwd().rfind("\\")+1
 nome = os.getcwd()[posicao:]
