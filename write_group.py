@@ -1,4 +1,4 @@
-  # creates a e+ group file with all the idf models and epw files in folder.
+# creates a e+ group file with all the idf models and epw files in folder.
 
 import glob
 import os
