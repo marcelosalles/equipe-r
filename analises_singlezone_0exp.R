@@ -1,0 +1,564 @@
+# baixar a biblioteca do ggplot para desenhar os gráficos
+library(ggplot2)
+
+# defina aqui o seu diretório de trabalho!!!
+# setwd('/home/marcelo/Documents/equipe-r/analise_climas/')
+setwd('/home/marcelo/12-04/')
+
+# os data frames são baixados a partir daqui
+# REF ----
+#00
+df_ref_PA_00 <- read.csv('PA/ref_floor0_roof0_PAout.csv')
+df_ref_SM_00 <- read.csv('SM/ref_floor0_roof0_SMout.csv')
+df_ref_SP_00 <- read.csv('SP/ref_floor0_roof0_SPout.csv')
+df_ref_RJ_00 <- read.csv('RJ/ref_floor0_roof0_RJout.csv')
+
+#11
+df_ref_PA_11 <- read.csv('PA/ref_floor1_roof1_PAout.csv')
+df_ref_SM_11 <- read.csv('SM/ref_floor1_roof1_SMout.csv')
+df_ref_SP_11 <- read.csv('SP/ref_floor1_roof1_SPout.csv')
+df_ref_RJ_11 <- read.csv('RJ/ref_floor1_roof1_RJout.csv')
+
+#10
+df_ref_PA_10 <- read.csv('PA/ref_floor0_roof1_PAout.csv')
+df_ref_SM_10 <- read.csv('SM/ref_floor0_roof1_SMout.csv')
+df_ref_SP_10 <- read.csv('SP/ref_floor0_roof1_SPout.csv')
+df_ref_RJ_10 <- read.csv('RJ/ref_floor0_roof1_RJout.csv')
+
+#01
+df_ref_PA_01 <- read.csv('PA/ref_floor1_roof0_PAout.csv')
+df_ref_SM_01 <- read.csv('SM/ref_floor1_roof0_SMout.csv')
+df_ref_SP_01 <- read.csv('SP/ref_floor1_roof0_SPout.csv')
+df_ref_RJ_01 <- read.csv('RJ/ref_floor1_roof0_RJout.csv')
+
+#pilotis
+df_ref_PA_pil <- read.csv('PA/ref_pilotis_roof0_PAout.csv')
+df_ref_SM_pil <- read.csv('SM/ref_pilotis_roof0_SMout.csv')
+df_ref_SP_pil <- read.csv('SP/ref_pilotis_roof0_SPout.csv')
+df_ref_RJ_pil <- read.csv('RJ/ref_pilotis_roof0_RJout.csv')
+
+# ADAPTED ----
+#00
+df_adap_PA_00 <- read.csv('PA/adapted_floor0_roof0_PAout.csv')
+df_adap_SM_00 <- read.csv('SM/adapted_floor0_roof0_SMout.csv')
+df_adap_SP_00 <- read.csv('SP/adapted_floor0_roof0_SPout.csv')
+df_adap_RJ_00 <- read.csv('RJ/adapted_floor0_roof0_RJout.csv')
+#11
+df_adap_PA_11 <- read.csv('PA/adapted_floor1_roof1_PAout.csv')
+df_adap_SM_11 <- read.csv('SM/adapted_floor1_roof1_SMout.csv')
+df_adap_SP_11 <- read.csv('SP/adapted_floor1_roof1_SPout.csv')
+df_adap_RJ_11 <- read.csv('RJ/adapted_floor1_roof1_RJout.csv')
+#10
+df_adap_PA_10 <- read.csv('PA/adapted_floor0_roof1_PAout.csv')
+df_adap_SM_10 <- read.csv('SM/adapted_floor0_roof1_SMout.csv')
+df_adap_SP_10 <- read.csv('SP/adapted_floor0_roof1_SPout.csv')
+df_adap_RJ_10 <- read.csv('RJ/adapted_floor0_roof1_RJout.csv')
+#01
+df_adap_PA_01 <- read.csv('PA/adapted_floor1_roof0_PAout.csv')
+df_adap_SM_01 <- read.csv('SM/adapted_floor1_roof0_SMout.csv')
+df_adap_SP_01 <- read.csv('SP/adapted_floor1_roof0_SPout.csv')
+df_adap_RJ_01 <- read.csv('RJ/adapted_floor1_roof0_RJout.csv')
+#pil
+df_adap_PA_pil <- read.csv('PA/adapted_pilotis_roof0_PAout.csv')
+df_adap_SM_pil <- read.csv('SM/adapted_pilotis_roof0_SMout.csv')
+df_adap_SP_pil <- read.csv('SP/adapted_pilotis_roof0_SPout.csv')
+df_adap_RJ_pil <- read.csv('RJ/adapted_pilotis_roof0_RJout.csv')
+
+# ADAPTED 0 exp ----
+#00
+df_adap_PA_00 <- read.csv('PA/adapted_floor0_roof0_0exp_PAout.csv')
+df_adap_SM_00 <- read.csv('SM/adapted_floor0_roof0_0exp_SMout.csv')
+df_adap_SP_00 <- read.csv('SP/adapted_floor0_roof0_0exp_SPout.csv')
+df_adap_RJ_00 <- read.csv('RJ/adapted_floor0_roof0_0exp_RJout.csv')
+#11
+df_adap_PA_11 <- read.csv('PA/adapted_floor1_roof1_0exp_PAout.csv')
+df_adap_SM_11 <- read.csv('SM/adapted_floor1_roof1_0exp_SMout.csv')
+df_adap_SP_11 <- read.csv('SP/adapted_floor1_roof1_0exp_SPout.csv')
+df_adap_RJ_11 <- read.csv('RJ/adapted_floor1_roof1_0exp_RJout.csv')
+#10
+df_adap_PA_10 <- read.csv('PA/adapted_floor0_roof1_0exp_PAout.csv')
+df_adap_SM_10 <- read.csv('SM/adapted_floor0_roof1_0exp_SMout.csv')
+df_adap_SP_10 <- read.csv('SP/adapted_floor0_roof1_0exp_SPout.csv')
+df_adap_RJ_10 <- read.csv('RJ/adapted_floor0_roof1_0exp_RJout.csv')
+#01
+df_adap_PA_01 <- read.csv('PA/adapted_floor1_roof0_0exp_PAout.csv')
+df_adap_SM_01 <- read.csv('SM/adapted_floor1_roof0_0exp_SMout.csv')
+df_adap_SP_01 <- read.csv('SP/adapted_floor1_roof0_0exp_SPout.csv')
+df_adap_RJ_01 <- read.csv('RJ/adapted_floor1_roof0_0exp_RJout.csv')
+#pil
+df_adap_PA_pil <- read.csv('PA/adapted_pilotis_roof1_0exp_PAout.csv')
+df_adap_SM_pil <- read.csv('SM/adapted_pilotis_roof1_0exp_SMout.csv')
+df_adap_SP_pil <- read.csv('SP/adapted_pilotis_roof0_0exp_SPout.csv')
+df_adap_RJ_pil <- read.csv('RJ/adapted_pilotis_roof1_0exp_RJout.csv')
+
+# DOUBLE ----
+#00
+df_doub_PA_00 <- read.csv('PA/double_12-04_floor0_roof0_PAout.csv')
+df_doub_SM_00 <- read.csv('SM/double_12-04_floor0_roof0_SMout.csv')
+df_doub_SP_00 <- read.csv('SP/double_12-04_floor0_roof0_SPout.csv')
+df_doub_RJ_00 <- read.csv('RJ/double_12-04_floor0_roof0_RJout.csv')
+#11
+df_doub_PA_11 <- read.csv('PA/double_12-04_floor1_roof1_PAout.csv')
+df_doub_SM_11 <- read.csv('SM/double_12-04_floor1_roof1_SMout.csv')
+df_doub_SP_11 <- read.csv('SP/double_12-04_floor1_roof1_SPout.csv')
+df_doub_RJ_11 <- read.csv('RJ/double_12-04_floor1_roof1_RJout.csv')
+#10
+df_doub_PA_10 <- read.csv('PA/double_12-04_floor0_roof1_PAout.csv')
+df_doub_SM_10 <- read.csv('SM/double_12-04_floor0_roof1_SMout.csv')
+df_doub_SP_10 <- read.csv('SP/double_12-04_floor0_roof1_SPout.csv')
+df_doub_RJ_10 <- read.csv('RJ/double_12-04_floor0_roof1_RJout.csv')
+#01
+df_doub_PA_01 <- read.csv('PA/double_12-04_floor1_roof0_PAout.csv')
+df_doub_SM_01 <- read.csv('SM/double_12-04_floor1_roof0_SMout.csv')
+df_doub_SP_01 <- read.csv('SP/double_12-04_floor1_roof0_SPout.csv')
+df_doub_RJ_01 <- read.csv('RJ/double_12-04_floor1_roof0_RJout.csv')
+#pil
+df_doub_PA_pil <- read.csv('PA/double_12-04_pilotis_PAout.csv')
+df_doub_SM_pil <- read.csv('SM/double_12-04_pilotis_SMout.csv')
+df_doub_SP_pil <- read.csv('SP/double_12-04_pilotis_SPout.csv')
+df_doub_RJ_pil <- read.csv('RJ/double_12-04_pilotis_RJout.csv')
+# HIVE ----
+#00
+df_hive_PA_00 <- read.csv('PA/hive_12-04_floor0_roof0_PAout.csv')
+df_hive_SM_00 <- read.csv('SM/hive_12-04_floor0_roof0_SMout.csv')
+df_hive_SP_00 <- read.csv('SP/hive_12-04_floor0_roof0_SPout.csv')
+df_hive_RJ_00 <- read.csv('RJ/hive_12-04_floor0_roof0_RJout.csv')
+#11
+df_hive_PA_11 <- read.csv('PA/hive_12-04_floor1_roof1_PAout.csv')
+df_hive_SM_11 <- read.csv('SM/hive_12-04_floor1_roof1_SMout.csv')
+df_hive_SP_11 <- read.csv('SP/hive_12-04_floor1_roof1_SPout.csv')
+df_hive_RJ_11 <- read.csv('RJ/hive_12-04_floor1_roof1_RJout.csv')
+#10
+df_hive_PA_10 <- read.csv('PA/hive_12-04_floor0_roof1_PAout.csv')
+df_hive_SM_10 <- read.csv('SM/hive_12-04_floor0_roof1_SMout.csv')
+df_hive_SP_10 <- read.csv('SP/hive_12-04_floor0_roof1_SPout.csv')
+df_hive_RJ_10 <- read.csv('RJ/hive_12-04_floor0_roof1_RJout.csv')
+#01
+df_hive_PA_01 <- read.csv('PA/hive_12-04_floor1_roof0_PAout.csv')
+df_hive_SM_01 <- read.csv('SM/hive_12-04_floor1_roof0_SMout.csv')
+df_hive_SP_01 <- read.csv('SP/hive_12-04_floor1_roof0_SPout.csv')
+df_hive_RJ_01 <- read.csv('RJ/hive_12-04_floor1_roof0_RJout.csv')
+#pil
+df_hive_PA_pil <- read.csv('PA/hive_12-04_pilotis_PAout.csv')
+df_hive_SM_pil <- read.csv('SM/hive_12-04_pilotis_SMout.csv')
+df_hive_SP_pil <- read.csv('SP/hive_12-04_pilotis_SPout.csv')
+df_hive_RJ_pil <- read.csv('RJ/hive_12-04_pilotis_RJout.csv')
+
+# DOUBLE ----
+#00
+df_sin_PA_00 <- read.csv('PA/double_floor0_roof0_PAout.csv')
+df_sin_SM_00 <- read.csv('SM/double_floor0_roof0_SMout.csv')
+df_sin_SP_00 <- read.csv('SP/double_floor0_roof0_SPout.csv')
+df_sin_RJ_00 <- read.csv('RJ/double_floor0_roof0_RJout.csv')
+#11
+df_sin_PA_11 <- read.csv('PA/double_floor1_roof1_PAout.csv')
+df_sin_SM_11 <- read.csv('SM/double_floor1_roof1_SMout.csv')
+df_sin_SP_11 <- read.csv('SP/double_floor1_roof1_SPout.csv')
+df_sin_RJ_11 <- read.csv('RJ/double_floor1_roof1_RJout.csv')
+#10
+df_sin_PA_10 <- read.csv('PA/double_floor0_roof1_PAout.csv')
+df_sin_SM_10 <- read.csv('SM/double_floor0_roof1_SMout.csv')
+df_sin_SP_10 <- read.csv('SP/double_floor0_roof1_SPout.csv')
+df_sin_RJ_10 <- read.csv('RJ/double_floor0_roof1_RJout.csv')
+#01
+df_sin_PA_01 <- read.csv('PA/double_floor1_roof0_PAout.csv')
+df_sin_SM_01 <- read.csv('SM/double_floor1_roof0_SMout.csv')
+df_sin_SP_01 <- read.csv('SP/double_floor1_roof0_SPout.csv')
+df_sin_RJ_01 <- read.csv('RJ/double_floor1_roof0_RJout.csv')
+#pil
+df_sin_PA_pil <- read.csv('PA/double_pilotis_roof0_PAout.csv')
+df_sin_SM_pil <- read.csv('SM/double_pilotis_roof0_SMout.csv')
+df_sin_SP_pil <- read.csv('SP/double_pilotis_roof0_SPout.csv')
+df_sin_RJ_pil <- read.csv('RJ/double_pilotis_roof0_RJout.csv')
+# HIVE ----
+#00
+df_sin_PA_00 <- read.csv('PA/hive_floor0_roof0_PAout.csv')
+df_sin_SM_00 <- read.csv('SM/hive_floor0_roof0_SMout.csv')
+df_sin_SP_00 <- read.csv('SP/hive_floor0_roof0_SPout.csv')
+df_sin_RJ_00 <- read.csv('RJ/hive_floor0_roof0_RJout.csv')
+#11
+df_sin_PA_11 <- read.csv('PA/hive_floor1_roof1_PAout.csv')
+df_sin_SM_11 <- read.csv('SM/hive_floor1_roof1_SMout.csv')
+df_sin_SP_11 <- read.csv('SP/hive_floor1_roof1_SPout.csv')
+df_sin_RJ_11 <- read.csv('RJ/hive_floor1_roof1_RJout.csv')
+#10
+df_sin_PA_10 <- read.csv('PA/hive_floor0_roof1_PAout.csv')
+df_sin_SM_10 <- read.csv('SM/hive_floor0_roof1_SMout.csv')
+df_sin_SP_10 <- read.csv('SP/hive_floor0_roof1_SPout.csv')
+df_sin_RJ_10 <- read.csv('RJ/hive_floor0_roof1_RJout.csv')
+#01
+df_sin_PA_01 <- read.csv('PA/hive_floor1_roof0_PAout.csv')
+df_sin_SM_01 <- read.csv('SM/hive_floor1_roof0_SMout.csv')
+df_sin_SP_01 <- read.csv('SP/hive_floor1_roof0_SPout.csv')
+df_sin_RJ_01 <- read.csv('RJ/hive_floor1_roof0_RJout.csv')
+#pil
+df_sin_PA_pil <- read.csv('PA/hive_pilotis_roof0_PAout.csv')
+df_sin_SM_pil <- read.csv('SM/hive_pilotis_roof0_SMout.csv')
+df_sin_SP_pil <- read.csv('SP/hive_pilotis_roof0_SPout.csv')
+df_sin_RJ_pil <- read.csv('RJ/hive_pilotis_roof0_RJout.csv')
+
+# DOUOBLE TIJOLO ----
+#11
+df_doub_PA_11 <- read.csv('PA/double_floor1_roof1_tijolo_PAout.csv')
+df_doub_SM_11 <- read.csv('SM/double_floor1_roof1_tijolo_SMout.csv')
+df_doub_SP_11 <- read.csv('SP/double_floor1_roof1_tijolo_SPout.csv')
+df_doub_RJ_11 <- read.csv('RJ/double_floor1_roof1_tijolo_RJout.csv')
+#00
+df_doub_PA_00 <- read.csv('PA/double_floor0_roof0_tijolo_PAout.csv')
+df_doub_SM_00 <- read.csv('SM/double_floor0_roof0_tijolo_SMout.csv')
+df_doub_SP_00 <- read.csv('SP/double_floor0_roof0_tijolo_SPout.csv')
+df_doub_RJ_00 <- read.csv('RJ/double_floor0_roof0_tijolo_RJout.csv')
+#10
+df_doub_PA_10 <- read.csv('PA/double_floor0_roof1_tijolo_PAout.csv')
+df_doub_SM_10 <- read.csv('SM/double_floor0_roof1_tijolo_SMout.csv')
+df_doub_SP_10 <- read.csv('SP/double_floor0_roof1_tijolo_SPout.csv')
+df_doub_RJ_10 <- read.csv('RJ/double_floor0_roof1_tijolo_RJout.csv')
+#01
+df_doub_PA_01 <- read.csv('PA/double_floor1_roof0_tijolo_PAout.csv')
+df_doub_SM_01 <- read.csv('SM/double_floor1_roof0_tijolo_SMout.csv')
+df_doub_SP_01 <- read.csv('SP/double_floor1_roof0_tijolo_SPout.csv')
+df_doub_RJ_01 <- read.csv('RJ/double_floor1_roof0_tijolo_RJout.csv')
+#pil
+df_doub_PA_pil <- read.csv('PA/double_pilotis_roof0_tijolo_PAout.csv')
+df_doub_SM_pil <- read.csv('SM/double_pilotis_roof0_tijolo_SMout.csv')
+df_doub_SP_pil <- read.csv('SP/double_pilotis_roof0_tijolo_SPout.csv')
+df_doub_RJ_pil <- read.csv('RJ/double_pilotis_roof0_tijolo_RJout.csv')
+# HIVE TIJOLO ----
+#11
+df_hive_PA_11 <- read.csv('PA/hive_floor1_roof1_tijolo_PAout.csv')
+df_hive_SM_11 <- read.csv('SM/hive_floor1_roof1_tijolo_SMout.csv')
+df_hive_SP_11 <- read.csv('SP/hive_floor1_roof1_tijolo_SPout.csv')
+df_hive_RJ_11 <- read.csv('RJ/hive_floor1_roof1_tijolo_RJout.csv')
+#00
+df_hive_PA_00 <- read.csv('PA/hive_floor0_roof0_tijolo_PAout.csv')
+df_hive_SM_00 <- read.csv('SM/hive_floor0_roof0_tijolo_SMout.csv')
+df_hive_SP_00 <- read.csv('SP/hive_floor0_roof0_tijolo_SPout.csv')
+df_hive_RJ_00 <- read.csv('RJ/hive_floor0_roof0_tijolo_RJout.csv')
+#10
+df_hive_PA_10 <- read.csv('PA/hive_floor0_roof1_tijolo_PAout.csv')
+df_hive_SM_10 <- read.csv('SM/hive_floor0_roof1_tijolo_SMout.csv')
+df_hive_SP_10 <- read.csv('SP/hive_floor0_roof1_tijolo_SPout.csv')
+df_hive_RJ_10 <- read.csv('RJ/hive_floor0_roof1_tijolo_RJout.csv')
+#01
+df_hive_PA_01 <- read.csv('PA/hive_floor1_roof0_tijolo_PAout.csv')
+df_hive_SM_01 <- read.csv('SM/hive_floor1_roof0_tijolo_SMout.csv')
+df_hive_SP_01 <- read.csv('SP/hive_floor1_roof0_tijolo_SPout.csv')
+df_hive_RJ_01 <- read.csv('RJ/hive_floor1_roof0_tijolo_RJout.csv')
+#pil
+df_hive_PA_pil <- read.csv('PA/hive_pilotis_roof0_tijolo_PAout.csv')
+df_hive_SM_pil <- read.csv('SM/hive_pilotis_roof0_tijolo_SMout.csv')
+df_hive_SP_pil <- read.csv('SP/hive_pilotis_roof0_tijolo_SPout.csv')
+df_hive_RJ_pil <- read.csv('RJ/hive_pilotis_roof0_tijolo_RJout.csv')
+
+# começo das analises: ---- 
+# analise local ----
+
+# ajuste o nome dos df de acordo com o caso que voce esta analisando
+df_sin_PA <- df_doub_PA_00
+df_sin_SM <- df_doub_SM_00
+df_sin_SP <- df_doub_SP_00
+df_sin_RJ <- df_doub_RJ_00
+df_ref_PA <- df_ref_PA_00
+df_ref_SM <- df_ref_SM_00
+df_ref_SP <- df_ref_SP_00
+df_ref_RJ <- df_ref_RJ_00
+# ----- #
+
+# cria um vetor com as diferencas de temperatura operativa entre o caso 
+# referencia e o single zone, para cada timestep (apenas quando a zona esta ocupada)
+diff_temp_PA <- df_ref_PA[df_ref_PA$SALA1.People.Occupant.Count....TimeStep. > 0,'SALA.Zone.Operative.Temperature..C..TimeStep.'] - df_sin_PA$SINGLEZONE.Zone.Operative.Temperature..C..TimeStep.[df_sin_PA$SALA1.People.Occupant.Count....TimeStep. > 0]
+diff_temp_SM <- df_ref_SM[df_ref_SM$SALA1.People.Occupant.Count....TimeStep. > 0,'SALA.Zone.Operative.Temperature..C..TimeStep.'] - df_sin_SM$SINGLEZONE.Zone.Operative.Temperature..C..TimeStep.[df_sin_SM$SALA1.People.Occupant.Count....TimeStep. > 0]
+diff_temp_SP <- df_ref_SP[df_ref_SP$SALA1.People.Occupant.Count....TimeStep. > 0,'SALA.Zone.Operative.Temperature..C..TimeStep.'] - df_sin_SP$SINGLEZONE.Zone.Operative.Temperature..C..TimeSte[df_sin_SP$SALA1.People.Occupant.Count....TimeStep. > 0]
+diff_temp_RJ <- df_ref_RJ[df_ref_RJ$SALA1.People.Occupant.Count....TimeStep. > 0,'SALA.Zone.Operative.Temperature..C..TimeStep.'] - df_sin_RJ$SINGLEZONE.Zone.Operative.Temperature..C..TimeStep[df_sin_RJ$SALA1.People.Occupant.Count....TimeStep. > 0]
+
+# calcula media, medianas, min, max, percentis para cada clima
+meandif_PA <- mean(diff_temp_PA)
+mediandif_PA <- median(diff_temp_PA)
+mindif_PA <- min(diff_temp_PA)
+maxdif_PA <- max(diff_temp_PA)
+maxabs_PA <- max(abs(mindif_PA),abs(maxdif_PA))
+tile5dif_PA <- quantile(diff_temp_PA,.05)
+tile95dif_PA <- quantile(diff_temp_PA,.95)
+
+meandif_SM <- mean(diff_temp_SM)
+mediandif_SM <- median(diff_temp_SM)
+mindif_SM <- min(diff_temp_SM)
+maxdif_SM <- max(diff_temp_SM)
+maxabs_SM <- max(abs(mindif_SM),abs(maxdif_SM))
+tile5dif_SM <- quantile(diff_temp_SM,.05)
+tile95dif_SM <- quantile(diff_temp_SM,.95)
+
+meandif_SP <- mean(diff_temp_SP)
+mediandif_SP <- median(diff_temp_SP)
+mindif_SP <- min(diff_temp_SP)
+maxdif_SP <- max(diff_temp_SP)
+maxabs_SP <- max(abs(mindif_SP),abs(maxdif_SP))
+tile5dif_SP <- quantile(diff_temp_SP,.05)
+tile95dif_SP <- quantile(diff_temp_SP,.95)
+
+meandif_RJ <- mean(diff_temp_RJ)
+mediandif_RJ <- median(diff_temp_RJ)
+mindif_RJ <- min(diff_temp_RJ)
+maxdif_RJ <- max(diff_temp_RJ)
+maxabs_RJ <- max(abs(mindif_RJ),abs(maxdif_RJ))
+tile5dif_RJ <- quantile(diff_temp_RJ,.05)
+tile95dif_RJ <- quantile(diff_temp_RJ,.95)
+
+# desenha um histograma com todos os clima simultaneamente,
+# diferenciados por cores.
+# os labels e anotacoes ainda podem ser adicionados...
+ggplot() +
+  geom_histogram(aes(diff_temp_PA),fill='red',alpha=.3,binwidth = .005) +
+  geom_histogram(aes(diff_temp_SM),fill='blue',alpha=.3,binwidth = .005) +
+  geom_histogram(aes(diff_temp_SP),fill='darkgreen',alpha=.3,binwidth = .005) +
+  geom_histogram(aes(diff_temp_RJ),fill='orange',alpha=.3,binwidth = .005)  # +
+  #ggtitle("") +
+  # ylab('Timesteps') +
+  # xlab('Diferença de Temperatura Opertativa (°C)') +
+  # annotate("text", x = 0, y = texty, label = paste("Média =",round(meandif,2),'°C')) +
+  # annotate("text", x = .98, y = .95, label = paste("Mediana =",round(mediandif,2),'°C')) +
+  # annotate("text", x = .93, y = .9, label = paste("Maior dif. abs =",round(maxabs,2),'°C')) +
+  # annotate("text", x = .92, y = 85, label = paste("Percentil 5% =",round(tile5dif,2),'°C')) +
+  # annotate("text", x = .92, y = .8, label = paste("Percentil 95% =",round(tile95dif,2),'°C'))
+
+# cria um vetor com as diferencas de carga de cooling entre o caso 
+# referencia e o single zone, para cada timestep (apenas quando a zona esta ocupada)
+
+# Belem
+diff_loads_PA <- (df_ref_PA$SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.[
+  df_ref_PA$SALA1.People.Occupant.Count....TimeStep. > 0
+  ] - df_sin_PA$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.[
+    df_sin_PA$SALA1.People.Occupant.Count....TimeStep. > 0
+    ])/(area*3600)
+
+sum(df_sin_PA$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)/sum(df_ref_PA$SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)
+
+meandif_PA <- mean(diff_loads_PA)
+mediandif_PA <- median(diff_loads_PA)
+mindif_PA <- min(diff_loads_PA)
+maxdif_PA <- max(diff_loads_PA)
+maxabs_PA <- max(abs(mindif_PA),abs(maxdif_PA))
+tile5dif_PA <- quantile(diff_loads_PA,.05)
+tile95dif_PA <- quantile(diff_loads_PA,.9)
+cooling_ref_PA <- sum(df_ref_PA[,loads_zone])/(area*3600000)
+cooling_sin_PA <- sum(df_sin_PA$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)/(area*3600000)
+
+# Santa Maria
+diff_loads_SM <- (df_ref_SM$SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.[
+  df_ref_SM$SALA1.People.Occupant.Count....TimeStep. > 0
+  ] - df_sin_SM$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.[
+    df_sin_SM$SALA1.People.Occupant.Count....TimeStep. > 0
+    ])/(area*3600)
+
+sum(df_sin_SM$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)/sum(df_ref_SM$SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)
+
+meandif_SM <- mean(diff_loads_SM)
+mediandif_SM <- median(diff_loads_SM)
+mindif_SM <- min(diff_loads_SM)
+maxdif_SM <- max(diff_loads_SM)
+maxabs_SM <- max(abs(mindif_SM),abs(maxdif_SM))
+tile5dif_SM <- quantile(diff_loads_SM,.05)
+tile95dif_SM <- quantile(diff_loads_SM,.9)
+cooling_ref_SM <- sum(df_ref_SM[,loads_zone])/(area*3600000)
+cooling_sin_SM <- sum(df_sin_SM$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)/(area*3600000)
+
+# Sao Paulo
+diff_loads_SP <- (df_ref_SP$SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.[
+  df_ref_SP$SALA1.People.Occupant.Count....TimeStep. > 0
+  ] - df_sin_SP$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.[
+    df_sin_SP$SALA1.People.Occupant.Count....TimeStep. > 0
+    ])/(area*3600)
+
+sum(df_sin_SP$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)/sum(df_ref_SP$SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)
+
+meandif_SP <- mean(diff_loads_SP)
+mediandif_SP <- median(diff_loads_SP)
+mindif_SP <- min(diff_loads_SP)
+maxdif_SP <- max(diff_loads_SP)
+maxabs_SP <- max(abs(mindif_SP),abs(maxdif_SP))
+tile5dif_SP <- quantile(diff_loads_SP,.05)
+tile95dif_SP <- quantile(diff_loads_SP,.9)
+cooling_ref_SP <- sum(df_ref_SP[,loads_zone])/(area*3600000)
+cooling_sin_SP <- sum(df_sin_SP$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)/(area*3600000)
+
+# Rio de Janeiro
+diff_loads_RJ <- (df_ref_RJ$SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.[
+  df_ref_RJ$SALA1.People.Occupant.Count....TimeStep. > 0
+  ] - df_sin_RJ$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.[
+    df_sin_RJ$SALA1.People.Occupant.Count....TimeStep. > 0
+    ])/(area*3600)
+
+sum(df_sin_RJ$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)/sum(df_ref_RJ$SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)
+
+meandif_RJ <- mean(diff_loads_RJ)
+mediandif_RJ <- median(diff_loads_RJ)
+mindif_RJ <- min(diff_loads_RJ)
+maxdif_RJ <- max(diff_loads_RJ)
+maxabs_RJ <- max(abs(mindif_RJ),abs(maxdif_RJ))
+tile5dif_RJ <- quantile(diff_loads_RJ,.05)
+tile95dif_RJ <- quantile(diff_loads_RJ,.9)
+cooling_ref_RJ <- sum(df_ref_RJ[,loads_zone])/(area*3600000)
+cooling_sin_RJ <- sum(df_sin_RJ$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)/(area*3600000)
+
+# DIF RELATIVA ----
+
+comfcount <- function(df, case, t_low=18, t_upp=26){
+  # essa funcao cria um vetor que retorna o valor "1", se
+  # a temperatura operativa da zona estiver dentro da faixa 
+  # de conforto, e "0", caso esteja fora da faixa de conforto.
+  # apenas horas com ocupacao sem idealloads sao consideradas.
+  #
+  # df - data frame analisado (output do eplus)
+  # case - determina se eh um caso single, ou referencia
+  # t_low - limite inferior de conforto
+  # t_upp - limite superior de conforto
+  
+  if(case=="ref"){
+    zone_name <- "SALA"
+    zone_occup <- "SALA1"
+    zone_hvac <- "HVAC_SALA"
+  }else{
+    zone_name <- "ROOM"
+    zone_occup <- "PEOPLE"
+    zone_hvac <- "HVAC"
+  }
+  comf_vec <- ifelse(df[,paste(zone_occup,'.People.Occupant.Count....TimeStep.',sep="")] > 0 & 
+                       df[,paste(zone_name,'.Zone.Operative.Temperature..C..TimeStep.',sep="")] < t_upp & 
+                       df[,paste(zone_name,'.Zone.Operative.Temperature..C..TimeStep.',sep="")] > t_low & 
+                       df[,paste(zone_hvac,'.Schedule.Value....TimeStep.',sep="")] == 0, 
+                     1,0)
+  return(comf_vec)
+}
+
+# lista de data frames para simplificar as iteracoes.
+# altenando os "#" entre "ref" e "adap", ou entre "doub"
+# e "hive", eh possivel analisar diferentes casos
+dfs <- list(
+  # df_ref_PA_00,  df_ref_SM_00,  df_ref_SP_00,  df_ref_RJ_00,  df_ref_PA_11,  df_ref_SM_11,  df_ref_SP_11,  df_ref_RJ_11,  # ref
+  #         df_ref_PA_10,  df_ref_SM_10,  df_ref_SP_10,  df_ref_RJ_10,  df_ref_PA_01,  df_ref_SM_01,  df_ref_SP_01,  df_ref_RJ_01,
+  #         df_ref_PA_pil,  df_ref_SM_pil,  df_ref_SP_pil,   df_ref_RJ_pil,
+  df_adap_PA_00,  df_adap_SM_00,  df_adap_SP_00,  df_adap_RJ_00,  df_adap_PA_11,  df_adap_SM_11,  df_adap_SP_11,  df_adap_RJ_11,  # adap
+  df_adap_PA_10,  df_adap_SM_10,  df_adap_SP_10,  df_adap_RJ_10,  df_adap_PA_01,  df_adap_SM_01,  df_adap_SP_01,  df_adap_RJ_01,
+  df_adap_PA_pil,  df_adap_SM_pil,  df_adap_SP_pil,   df_adap_RJ_pil,
+  # df_doub_PA_00,   df_doub_SM_00,   df_doub_SP_00,  df_doub_RJ_00,  df_doub_PA_11,  df_doub_SM_11,  df_doub_SP_11,  df_doub_RJ_11,  # doub
+  # df_doub_PA_10,  df_doub_SM_10,  df_doub_SP_10,  df_doub_RJ_10,  df_doub_PA_01,  df_doub_SM_01,  df_doub_SP_01,  df_doub_RJ_01,
+  # df_doub_PA_pil,  df_doub_SM_pil,  df_doub_SP_pil,  df_doub_RJ_pil #,
+  df_hive_PA_00,   df_hive_SM_00,   df_hive_SP_00,  df_hive_RJ_00,  df_hive_PA_11,  df_hive_SM_11,  df_hive_SP_11,  df_hive_RJ_11,  # hive
+             df_hive_PA_10,  df_hive_SM_10,  df_hive_SP_10,  df_hive_RJ_10,  df_hive_PA_01,  df_hive_SM_01,  df_hive_SP_01,  df_hive_RJ_01,
+             df_hive_PA_pil,  df_hive_SM_pil,  df_hive_SP_pil,  df_hive_RJ_pil
+)
+
+# Data Frame de diferencas relativas
+
+# inicialmente, cria-se vetores com os nomes das cidades e as condicoes de exposicao
+climas <- c('Belém-PA','Santa Maria-RS','São Paulo-SP','Rio de Janeiro-RJ')
+exp <- c('Intermediário','Unifamiliar','Cobertura','Térreo','Pilotis')
+
+# data frame em branco, preenchido com "NA"
+df <- data.frame("clima"=rep(NA,length(exp)*length(climas)),
+                 "exp"=rep(NA,length(exp)*length(climas)),
+                 "conforto"=rep(NA,length(exp)*length(climas)),
+                 "carga.termica"=rep(NA,length(exp)*length(climas))
+                 )
+
+# aqui comeca a iteracao que preenche o dataframe com as diferencas
+# relativas de temperatura operativa e cargas de cooling/heating
+for(i in 1:length(exp)){
+  # print(i)
+  for(j in 1:length(climas)){
+    # print(j)
+    print(paste(exp[i],climas[j],as.character((i-1)*4+j)))
+    df[(i-1)*4+j,'clima'] <- climas[j]
+    df[(i-1)*4+j,'exp'] <- exp[i]
+    
+    comf_sin <- sum(comfcount(dfs[[20+(i-1)*4+j]],case="sin"))
+    comf_ref <- sum(comfcount(dfs[[(i-1)*4+j]],case="ref"))
+    diff_temp <- comf_sin/comf_ref
+    df[(i-1)*4+j,'conforto'] <- diff_temp
+    
+    loads_sin <- sum(dfs[[20+(i-1)*4+j]][,'ROOM.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.'])
+    loads_ref <- sum(dfs[[(i-1)*4+j]][,'SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.'])
+    # loads_sin <- sum(dfs[[20+(i-1)*4+j]][,'SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Heating.Energy..J..TimeStep.'])
+    # loads_ref <- sum(dfs[[(i-1)*4+j]][,'SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Heating.Energy..J..TimeStep.'])
+    diff_loads <- loads_sin/loads_ref
+    df[(i-1)*4+j,'carga.termica'] <- diff_loads
+  }
+}
+
+# soh para analise do heating!!!
+# df <- df[df$clima =='Santa Maria-RS' | df$clima =='São Paulo-SP',]
+
+##### PLOTS 
+
+# Para definir o titulo da legenda
+Cidade <- df$clima
+
+# titulo do grafico
+# plottitle <- 'Double Wall'
+plottitle <- 'Hive'
+
+# grafico de barra das diferencas relativas de Temp. Operativa (anual)
+ggplot(df,aes(df$exp,df$conforto,fill=Cidade)) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  ylab('Diferença Temp Operativa') +
+  xlab('Exposição') +
+  ylim(c(0,1.1)) +
+  ggtitle(plottitle) +
+  geom_hline(yintercept = 1)
+
+# grafico de barra das diferencas relativas de Carga Termica (anual)  
+ggplot(df,aes(df$exp,df$carga.termica,fill=Cidade)) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  ylab('Diferença Cargas Térmicas') +
+  xlab('Exposição') +
+  # ylim(c(0,1.3)) +
+  ggtitle(plottitle) +
+  geom_hline(yintercept = 1) #+
+  geom_hline(yintercept = .75, linetype="dotted")
+  
+# grafico similar ao da analise do bloco anterior, apenas pra SP
+# hive ou doub
+# diff_temp <- df_hive_SP_00$SINGLEZONE.Zone.Operative.Temperature..C..TimeStep.[df_hive_SP_00$SALA1.People.Occupant.Count....TimeStep. > 0 & df_adap_SP_00$HVAC_SALA.Schedule.Value....TimeStep. == 0] -
+  # df_adap_SP_00$SALA.Zone.Operative.Temperature..C..TimeStep.[df_adap_SP_00$SALA1.People.Occupant.Count....TimeStep. > 0 & df_adap_SP_00$HVAC_SALA.Schedule.Value....TimeStep. == 0]
+diff_temp <- df_doub_SP_00$SINGLEZONE.Zone.Operative.Temperature..C..TimeStep.[df_doub_SP_00$SALA1.People.Occupant.Count....TimeStep. > 0 & df_adap_SP_00$HVAC_SALA.Schedule.Value....TimeStep. == 0] -
+  df_adap_SP_00$SALA.Zone.Operative.Temperature..C..TimeStep.[df_adap_SP_00$SALA1.People.Occupant.Count....TimeStep. > 0 & df_adap_SP_00$HVAC_SALA.Schedule.Value....TimeStep. == 0]
+
+ggplot() +
+  geom_histogram(aes(diff_temp), binwidth = .1)+
+  ylab('Número de timesteps') +
+  xlab('Temp_op - Single menos Ref (°C)') +
+  # ggtitle('Hive')
+  ggtitle('Double Wall')
+  
+# RESTO ----
+# algumas linhas escritas durante o processo que podem ser uteis...
+
+sum(df_hive_SP_00$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Heating.Energy..J..TimeStep.)/(3600000*21.43)
+sum(df_hive_SP_11$SINGLEZONE.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Heating.Energy..J..TimeStep.)/(3600000*21.43)
+
+# PA
+df_sin_PA$comfort <- comfcount(df_sin_PA,case="sin")
+df_ref_PA$comfort <- comfcount(df_ref_PA,case="ref")
+# SM
+df_sin_SM$comfort <- comfcount(df_sin_SM,case="sin")
+df_ref_SM$comfort <- comfcount(df_ref_SM,case="ref")
+# SP
+df_sin_SP$comfort <- comfcount(df_sin_SP,case="sin")
+df_ref_SP$comfort <- comfcount(df_ref_SP,case="ref")
+# SM
+df_sin_RJ$comfort <- comfcount(df_sin_RJ,case="sin")
+df_ref_RJ$comfort <- comfcount(df_ref_RJ,case="ref")
+
+diff_temp_PA <- sum(df_sin_PA$comfort)/sum(df_ref_PA$comfort)
+diff_temp_SM <- sum(df_sin_SM$comfort)/sum(df_ref_SM$comfort)
+diff_temp_SP <- sum(df_sin_SP$comfort)/sum(df_ref_SP$comfort)
+diff_temp_RJ <- sum(df_sin_RJ$comfort)/sum(df_ref_RJ$comfort)
+
+area <- 21.43
+sum(df_adap_SP_pil$SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Cooling.Energy..J..TimeStep.)/(3600000*area)
+
+sum(df_ref_SM_00$SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Heating.Energy..J..TimeStep.)/(3600000*area)
+sum(df_ref_SM_11$SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Heating.Energy..J..TimeStep.)/(3600000*area)
+sum(df_ref_SM_10$SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Heating.Energy..J..TimeStep.)/(3600000*area)
+sum(df_ref_SM_01$SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Heating.Energy..J..TimeStep.)/(3600000*area)
+sum(df_ref_SM_pil$SALA.IDEAL.LOADS.AIR.SYSTEM.Zone.Ideal.Loads.Zone.Total.Heating.Energy..J..TimeStep.)/(3600000*area)

@@ -1,0 +1,39 @@
+
+
+
+!-   ===========  ALL OBJECTS IN CLASS: CONSTRUCTION ===========
+
+Construction,
+    cob,                     !- Name
+    fibrocimento telha,      !- Outside Layer
+    aluminio,                !- Layer 2
+    camara_rad_cobertura,    !- Layer 3
+    la_vidro_cob_5cm,        !- Layer 4
+    gesso_forro;             !- Layer 5
+
+Construction,
+    par_int,                 !- Name
+    gesso,                   !- Outside Layer
+    la_vidro_5cm,            !- Layer 2
+    gesso;                   !- Layer 3
+
+Construction,
+    piso,                    !- Name
+    impermeabilizacao,       !- Outside Layer
+    concreto_piso,           !- Layer 2
+    contrapiso,              !- Layer 3
+    piso_ceramico;           !- Layer 4
+
+Construction,
+    Porta_3_cm,              !- Name
+    PortaMadInt3cm;          !- Outside Layer
+
+Construction,
+    Vid87,                   !- Name
+    VidFS0.87;               !- Outside Layer
+
+Construction,
+    par_ext,                 !- Name
+    placa_cimenticia,        !- Outside Layer
+    la_vidro_5cm,            !- Layer 2
+    gesso;                   !- Layer 3

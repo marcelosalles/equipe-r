@@ -1,0 +1,73 @@
+{
+    "Construction": {
+        "Parede_REF": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 4,
+            "layer_2": "la_rocha_7_5cm",
+            "layer_3": "gesso_int_parede",
+            "outside_layer": "placa_ext_parede"
+        },
+        "ParedeInterna_REF": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 4,
+            "layer_2": "la_rocha_7_5cm",
+            "layer_3": "gesso_int_parede",
+            "outside_layer": "gesso_int_parede"
+        },
+        "wall_construction_inverse": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 4,
+            "layer_2": "la_rocha_7_5cm",
+            "layer_3": "placa_ext_parede",
+            "outside_layer": "gesso_int_parede"
+        },
+        "glass_construction": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 8,
+            "layer_2": "la_rocha_7_5cm",
+            "layer_3": "gesso_int_parede",
+            "layer_4": "room_air",
+            "layer_5": "placa_ext_parede",
+            "layer_6": "la_rocha_7_5cm",
+            "layer_7": "gesso_int_parede",
+            "outside_layer": "placa_ext_parede"
+        }
+    },
+    "Material": {
+        "gesso_int_parede": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 9,
+            "conductivity": 0.35,  
+            "density": 900.0,
+            "roughness": "Smooth",
+            "specific_heat": 870.0,
+            "thermal_absorptance": 0.9,
+            "solar_absorptance": 0.5,
+            "thickness":  0.0125, 
+            "visible_absorptance": 0.5
+        },
+        "placa_ext_parede": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 9,
+            "conductivity": 1.15,
+            "density": 2000.0,
+            "roughness": "MediumSmooth",
+            "specific_heat": 1000.0,
+            "thermal_absorptance": 0.9,
+            "solar_absorptance": 0.5,
+            "thickness": 0.01, 
+            "visible_absorptance": 0.5
+        }
+    },
+    "Material:NoMass": {
+        "la_rocha_7_5cm": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 6,
+            "roughness": "Smooth",
+            "thermal_absorptance": 0.9,
+            "visible_absorptance": 0.5,
+            "thermal_resistance": 1.667,
+            "solar_absorptance": 0.5
+        }
+    }
+}

@@ -1,0 +1,126 @@
+
+
+
+!-   ===========  ALL OBJECTS IN CLASS: SITE:GROUNDTEMPERATURE:UNDISTURBED:FINITEDIFFERENCE ===========
+
+Site:GroundTemperature:Undisturbed:FiniteDifference,
+    FiniteDiff,              !- Name
+    1.5,                     !- Soil Thermal Conductivity {W/m-K}
+    1250,                    !- Soil Density {kg/m3}
+    1500,                    !- Soil Specific Heat {J/kg-K}
+    30,                      !- Soil Moisture Content Volume Fraction {percent}
+    50,                      !- Soil Moisture Content Volume Fraction at Saturation {percent}
+    0.4;                     !- Evapotranspiration Ground Cover Parameter {dimensionless}
+
+
+!-   ===========  ALL OBJECTS IN CLASS: SITE:GROUNDDOMAIN:SLAB ===========
+
+Site:GroundDomain:Slab,
+    GroundDomain,            !- Name
+    10,                      !- Ground Domain Depth {m}
+    1,                       !- Aspect Ratio
+    5,                       !- Perimeter Offset {m}
+    1.5,                     !- Soil Thermal Conductivity {W/m-K}
+    1250,                    !- Soil Density {kg/m3}
+    1500,                    !- Soil Specific Heat {J/kg-K}
+    30,                      !- Soil Moisture Content Volume Fraction {percent}
+    50,                      !- Soil Moisture Content Volume Fraction at Saturation {percent}
+    Site:GroundTemperature:Undisturbed:FiniteDifference,  !- Undisturbed Ground Temperature Model Type
+    FiniteDiff,              !- Undisturbed Ground Temperature Model Name
+    0.4,                     !- Evapotranspiration Ground Cover Parameter
+    GroundCoupledOSCM,       !- Slab Boundary Condition Model Name
+    OnGrade,                 !- Slab Location
+    ,                        !- Slab Material Name
+    No,                      !- Horizontal Insulation
+    ,                        !- Horizontal Insulation Material Name
+    Full,                    !- Horizontal Insulation Extents
+    ,                        !- Perimeter Insulation Width {m}
+    No,                      !- Vertical Insulation
+    ,                        !- Vertical Insulation Material Name
+    ,                        !- Vertical Insulation Depth {m}
+    Timestep,                !- Simulation Timestep
+    1.6,                     !- Geometric Mesh Coefficient
+    6;                       !- Mesh Density Parameter
+
+
+!-   ===========  ALL OBJECTS IN CLASS: BUILDINGSURFACE:DETAILED ===========
+
+BuildingSurface:Detailed,
+    Piso_Q1_C,               !- Name
+    Floor,                   !- Surface Type
+    piso,                    !- Construction Name
+    Q1_C,                    !- Zone Name
+    OtherSideConditionsModel,!- Outside Boundary Condition
+    GroundCoupledOSCM,       !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                     !- View Factor to Ground
+    4,                       !- Number of Vertices
+    3.240000000000,          !- Vertex 1 X-coordinate {m}
+    2.910000000000,          !- Vertex 1 Y-coordinate {m}
+    0.000000000000,          !- Vertex 1 Z-coordinate {m}
+    3.240000000000,          !- Vertex 2 X-coordinate {m}
+    0.000000000000,          !- Vertex 2 Y-coordinate {m}
+    0.000000000000,          !- Vertex 2 Z-coordinate {m}
+    0.000000000000,          !- Vertex 3 X-coordinate {m}
+    0.000000000000,          !- Vertex 3 Y-coordinate {m}
+    0.000000000000,          !- Vertex 3 Z-coordinate {m}
+    0.000000000000,          !- Vertex 4 X-coordinate {m}
+    2.910000000000,          !- Vertex 4 Y-coordinate {m}
+    0.000000000000;          !- Vertex 4 Z-coordinate {m}
+
+BuildingSurface:Detailed,
+    Piso_Q2_C,               !- Name
+    Floor,                   !- Surface Type
+    piso,                    !- Construction Name
+    Q2_C,                    !- Zone Name
+    OtherSideConditionsModel,!- Outside Boundary Condition
+    GroundCoupledOSCM,       !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                     !- View Factor to Ground
+    4,                       !- Number of Vertices
+    3.240000000000,          !- Vertex 1 X-coordinate {m}
+    2.530000000000,          !- Vertex 1 Y-coordinate {m}
+    0.000000000000,          !- Vertex 1 Z-coordinate {m}
+    3.240000000000,          !- Vertex 2 X-coordinate {m}
+    0.000000000000,          !- Vertex 2 Y-coordinate {m}
+    0.000000000000,          !- Vertex 2 Z-coordinate {m}
+    0.000000000000,          !- Vertex 3 X-coordinate {m}
+    0.000000000000,          !- Vertex 3 Y-coordinate {m}
+    0.000000000000,          !- Vertex 3 Z-coordinate {m}
+    0.000000000000,          !- Vertex 4 X-coordinate {m}
+    2.530000000000,          !- Vertex 4 Y-coordinate {m}
+    0.000000000000;          !- Vertex 4 Z-coordinate {m}
+
+BuildingSurface:Detailed,
+    Piso_SalaCoz_C,          !- Name
+    Floor,                   !- Surface Type
+    piso,                    !- Construction Name
+    Sala_Coz_C,              !- Zone Name
+    OtherSideConditionsModel,!- Outside Boundary Condition
+    GroundCoupledOSCM,       !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                     !- View Factor to Ground
+    4,                       !- Number of Vertices
+    4.200000000000,          !- Vertex 1 X-coordinate {m}
+    4.070000000000,          !- Vertex 1 Y-coordinate {m}
+    0.000000000000,          !- Vertex 1 Z-coordinate {m}
+    4.200000000000,          !- Vertex 2 X-coordinate {m}
+    0.000000000000,          !- Vertex 2 Y-coordinate {m}
+    0.000000000000,          !- Vertex 2 Z-coordinate {m}
+    0.000000000000,          !- Vertex 3 X-coordinate {m}
+    0.000000000000,          !- Vertex 3 Y-coordinate {m}
+    0.000000000000,          !- Vertex 3 Z-coordinate {m}
+    0.000000000000,          !- Vertex 4 X-coordinate {m}
+    4.070000000000,          !- Vertex 4 Y-coordinate {m}
+    0.000000000000;          !- Vertex 4 Z-coordinate {m}
+
+
+!-   ===========  ALL OBJECTS IN CLASS: SURFACEPROPERTY:OTHERSIDECONDITIONSMODEL ===========
+
+SurfaceProperty:OtherSideConditionsModel,
+    GroundCoupledOSCM,       !- Name
+    GroundCoupledSurface;    !- Type of Modeling
+
