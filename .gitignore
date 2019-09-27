@@ -1,3 +1,8 @@
 __pycache__/
 singlezone_gen/__pycache__/
 idf_bundler/old_stuff/
+idf_bundler/*.eio
+idf_bundler/*.rdd
+idf_bundler/*.audit
+idf_bundler/*.eso
+idf_bundler/*.mdd
