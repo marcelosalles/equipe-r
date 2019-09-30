@@ -130,7 +130,7 @@ Schedule:Compact,
 !-   ===========  ALL OBJECTS IN CLASS: AIRFLOWNETWORK:SIMULATIONCONTROL ===========
 
 AirflowNetwork:SimulationControl,
-    Vent_APCANTO,            !- Name
+    Vent_APMEIO,             !- Name
     MultizoneWithoutDistribution,  !- AirflowNetwork Control
     SurfaceAverageCalculation,  !- Wind Pressure Coefficient Type
     OpeningHeight,           !- Height Selection for Local Wind Pressure Calculation
@@ -147,7 +147,7 @@ AirflowNetwork:SimulationControl,
 !-   ===========  ALL OBJECTS IN CLASS: AIRFLOWNETWORK:MULTIZONE:ZONE ===========
 
 AirflowNetwork:MultiZone:Zone,
-    Q1_C,                    !- Zone Name
+    Q1_M,                    !- Zone Name
     ,                        !- Ventilation Control Mode
     ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
     ,                        !- Minimum Venting Open Factor {dimensionless}
@@ -157,7 +157,7 @@ AirflowNetwork:MultiZone:Zone,
     ;                        !- Indoor and Outdoor Enthalpy Difference Upper Limit for Minimum Venting Open Factor {deltaJ/kg}
 
 AirflowNetwork:MultiZone:Zone,
-    Q2_C,                    !- Zone Name
+    Q2_M,                    !- Zone Name
     ,                        !- Ventilation Control Mode
     ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
     ,                        !- Minimum Venting Open Factor {dimensionless}
@@ -167,7 +167,17 @@ AirflowNetwork:MultiZone:Zone,
     ;                        !- Indoor and Outdoor Enthalpy Difference Upper Limit for Minimum Venting Open Factor {deltaJ/kg}
 
 AirflowNetwork:MultiZone:Zone,
-    Sala_Coz_C,              !- Zone Name
+    SalaCoz_M,               !- Zone Name
+    ,                        !- Ventilation Control Mode
+    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    ,                        !- Minimum Venting Open Factor {dimensionless}
+    ,                        !- Indoor and Outdoor Temperature Difference Lower Limit For Maximum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Temperature Difference Upper Limit for Minimum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Enthalpy Difference Lower Limit For Maximum Venting Open Factor {deltaJ/kg}
+    ;                        !- Indoor and Outdoor Enthalpy Difference Upper Limit for Minimum Venting Open Factor {deltaJ/kg}
+
+AirflowNetwork:MultiZone:Zone,
+    Cor_M,                   !- Zone Name
     ,                        !- Ventilation Control Mode
     ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
     ,                        !- Minimum Venting Open Factor {dimensionless}
@@ -180,7 +190,42 @@ AirflowNetwork:MultiZone:Zone,
 !-   ===========  ALL OBJECTS IN CLASS: AIRFLOWNETWORK:MULTIZONE:SURFACE ===========
 
 AirflowNetwork:MultiZone:Surface,
-    Jan_Q1_C,                !- Surface Name
+    Por_Cor_Sala_M,          !- Surface Name
+    Abertura_porta,          !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    NoVent;                  !- Ventilation Control Mode
+
+AirflowNetwork:MultiZone:Surface,
+    Por_Cor_Q1_M,            !- Surface Name
+    Abertura_porta,          !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    NoVent;                  !- Ventilation Control Mode
+
+AirflowNetwork:MultiZone:Surface,
+    Por_Cor_Q2_M,            !- Surface Name
+    Abertura_porta,          !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    NoVent;                  !- Ventilation Control Mode
+
+AirflowNetwork:MultiZone:Surface,
+    Jan_Sala_M,              !- Surface Name
+    Abertura_janela_APP_APT, !- Leakage Component Name
+    ,                        !- External Node Name
+    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
+    Temperature,             !- Ventilation Control Mode
+    Fechar_janela,           !- Ventilation Control Zone Temperature Setpoint Schedule Name
+    0,                       !- Minimum Venting Open Factor {dimensionless}
+    ,                        !- Indoor and Outdoor Temperature Difference Lower Limit For Maximum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Temperature Difference Upper Limit for Minimum Venting Open Factor {deltaC}
+    ,                        !- Indoor and Outdoor Enthalpy Difference Lower Limit For Maximum Venting Open Factor {deltaJ/kg}
+    ,                        !- Indoor and Outdoor Enthalpy Difference Upper Limit for Minimum Venting Open Factor {deltaJ/kg}
+    VN_Sala;                !- Venting Availability Schedule Name
+
+AirflowNetwork:MultiZone:Surface,
+    Jan_Q1_M,                !- Surface Name
     Abertura_janela_APP_APT, !- Leakage Component Name
     ,                        !- External Node Name
     1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
@@ -194,7 +239,7 @@ AirflowNetwork:MultiZone:Surface,
     VN_Dorm1;                !- Venting Availability Schedule Name
 
 AirflowNetwork:MultiZone:Surface,
-    Jan_Q2_C,                !- Surface Name
+    Jan_Q2_M,                !- Surface Name
     Abertura_janela_APP_APT, !- Leakage Component Name
     ,                        !- External Node Name
     1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
@@ -205,24 +250,10 @@ AirflowNetwork:MultiZone:Surface,
     ,                        !- Indoor and Outdoor Temperature Difference Upper Limit for Minimum Venting Open Factor {deltaC}
     ,                        !- Indoor and Outdoor Enthalpy Difference Lower Limit For Maximum Venting Open Factor {deltaJ/kg}
     ,                        !- Indoor and Outdoor Enthalpy Difference Upper Limit for Minimum Venting Open Factor {deltaJ/kg}
-    VN_Dorm2;                !- Venting Availability Schedule Name
+    VN_Dorm2;                 !- Venting Availability Schedule Name
 
 AirflowNetwork:MultiZone:Surface,
-    Jan_Sala_C,              !- Surface Name
-    Abertura_janela_APP_APT, !- Leakage Component Name
-    ,                        !- External Node Name
-    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
-    Temperature,             !- Ventilation Control Mode
-    Fechar_janela,           !- Ventilation Control Zone Temperature Setpoint Schedule Name
-    0,                       !- Minimum Venting Open Factor {dimensionless}
-    ,                        !- Indoor and Outdoor Temperature Difference Lower Limit For Maximum Venting Open Factor {deltaC}
-    ,                        !- Indoor and Outdoor Temperature Difference Upper Limit for Minimum Venting Open Factor {deltaC}
-    ,                        !- Indoor and Outdoor Enthalpy Difference Lower Limit For Maximum Venting Open Factor {deltaJ/kg}
-    ,                        !- Indoor and Outdoor Enthalpy Difference Upper Limit for Minimum Venting Open Factor {deltaJ/kg}
-    VN_Sala;                 !- Venting Availability Schedule Name
-
-AirflowNetwork:MultiZone:Surface,
-    Jan_Coz_C,               !- Surface Name
+    Jan_Coz_M,               !- Surface Name
     Abertura_janela_APP_APT, !- Leakage Component Name
     ,                        !- External Node Name
     1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
@@ -234,24 +265,6 @@ AirflowNetwork:MultiZone:Surface,
     ,                        !- Indoor and Outdoor Enthalpy Difference Lower Limit For Maximum Venting Open Factor {deltaJ/kg}
     ,                        !- Indoor and Outdoor Enthalpy Difference Upper Limit for Minimum Venting Open Factor {deltaJ/kg}
     VN_Sala;                 !- Venting Availability Schedule Name
-
-AirflowNetwork:MultiZone:Surface,
-    Por_Sala_Q1_C,           !- Surface Name
-    Abertura_porta,          !- Leakage Component Name
-    ,                        !- External Node Name
-    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
-    NoVent,                  !- Ventilation Control Mode
-    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
-    0;                       !- Minimum Venting Open Factor {dimensionless}
-
-AirflowNetwork:MultiZone:Surface,
-    Por_Sala_Q2_C,           !- Surface Name
-    Abertura_porta,          !- Leakage Component Name
-    ,                        !- External Node Name
-    1,                       !- Window/Door Opening Factor, or Crack Factor {dimensionless}
-    NoVent,                  !- Ventilation Control Mode
-    ,                        !- Ventilation Control Zone Temperature Setpoint Schedule Name
-    0;                       !- Minimum Venting Open Factor {dimensionless}
 
 
 !-   ===========  ALL OBJECTS IN CLASS: AIRFLOWNETWORK:MULTIZONE:COMPONENT:DETAILEDOPENING ===========
@@ -291,3 +304,31 @@ AirflowNetwork:MultiZone:Component:DetailedOpening,
     0.45,                    !- Width Factor for Opening Factor 2 {dimensionless}
     1,                       !- Height Factor for Opening Factor 2 {dimensionless}
     0;                       !- Start Height Factor for Opening Factor 2 {dimensionless}
+
+
+!-   ===========  ALL OBJECTS IN CLASS: OUTPUT:VARIABLE ===========
+
+Output:Variable,
+    *,                       !- Key Value
+    Zone Outdoor Air Drybulb Temperature ,  !- Variable Name
+    Hourly;                  !- Reporting Frequency
+
+Output:Variable,
+    *,                       !- Key Value
+    Zone Operative Temperature ,  !- Variable Name
+    Hourly;                  !- Reporting Frequency
+
+Output:Variable,
+    *,                       !- Key Value
+    Zone People Occupant Count,  !- Variable Name
+    Hourly;                  !- Reporting Frequency
+
+Output:Variable,
+    ,                        !- Key Value
+    Zone Operative Temperature,  !- Variable Name
+    Hourly;                  !- Reporting Frequency
+
+Output:Variable,
+    ,                        !- Key Value
+    Zone Mean Air Temperature,  !- Variable Name
+    Hourly;                  !- Reporting Frequency

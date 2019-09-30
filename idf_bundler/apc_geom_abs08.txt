@@ -165,7 +165,7 @@ Material,
     1700,                    !- Density {kg/m3}
     840,                     !- Specific Heat {J/kg-K}
     0.9,                     !- Thermal Absorptance
-    0.5,                     !- Solar Absorptance
+    0.8,                     !- Solar Absorptance
     0.5;                     !- Visible Absorptance
 
 Material,
@@ -286,7 +286,7 @@ Material,
     2000,                    !- Density {kg/m3}
     840,                     !- Specific Heat {J/kg-K}
     0.9,                     !- Thermal Absorptance
-    0.5,                     !- Solar Absorptance
+    0.8,                     !- Solar Absorptance
     0.7;                     !- Visible Absorptance
 
 
@@ -349,37 +349,28 @@ GlobalGeometryRules,
 !-   ===========  ALL OBJECTS IN CLASS: ZONE ===========
 
 Zone,
-    SalaCoz_M,               !- Name
+    Q1_C,                    !- Name
     0.0,                     !- Direction of Relative North {deg}
-    7.44,                    !- X Origin {m}
+    0.0,                     !- X Origin {m}
     0.0,                     !- Y Origin {m}
     15,                     !- Z Origin {m}
     ,                        !- Type
     1;                       !- Multiplier
 
 Zone,
-    Cor_M,                   !- Name
+    Q2_C,                    !- Name
     0.0,                     !- Direction of Relative North {deg}
-    11.55,                   !- X Origin {m}
-    2.22,                    !- Y Origin {m}
+    0.0,                     !- X Origin {m}
+    2.91,                    !- Y Origin {m}
     15,                     !- Z Origin {m}
     ,                        !- Type
     1;                       !- Multiplier
 
 Zone,
-    Q1_M,                    !- Name
+    Sala_Coz_C,              !- Name
     0.0,                     !- Direction of Relative North {deg}
-    11.55,                   !- X Origin {m}
-    1.22,                    !- Y Origin {m}
-    15,                     !- Z Origin {m}
-    ,                        !- Type
-    1;                       !- Multiplier
-
-Zone,
-    Q2_M,                    !- Name
-    0.0,                     !- Direction of Relative North {deg}
-    14.66,                   !- X Origin {m}
-    2.22,                    !- Y Origin {m}
+    3.24,                    !- X Origin {m}
+    0.0,                     !- Y Origin {m}
     15,                     !- Z Origin {m}
     ,                        !- Type
     1;                       !- Multiplier
@@ -388,58 +379,106 @@ Zone,
 !-   ===========  ALL OBJECTS IN CLASS: BUILDINGSURFACE:DETAILED ===========
 
 BuildingSurface:Detailed,
-    ParL3_SalaCoz_M,         !- Name
+    ParN_Q2_C,               !- Name
     Wall,                    !- Surface Type
     par_int,                 !- Construction Name
-    SalaCoz_M,               !- Zone Name
+    Q2_C,                    !- Zone Name
     Adiabatic,               !- Outside Boundary Condition
     ,                        !- Outside Boundary Condition Object
     NoSun,                   !- Sun Exposure
     NoWind,                  !- Wind Exposure
     ,                        !- View Factor to Ground
     4,                       !- Number of Vertices
-    4.110000000000,          !- Vertex 1 X-coordinate {m}
-    2.220000000000,          !- Vertex 1 Y-coordinate {m}
+    3.240000000000,          !- Vertex 1 X-coordinate {m}
+    2.530000000000,          !- Vertex 1 Y-coordinate {m}
     2.700000000000,          !- Vertex 1 Z-coordinate {m}
-    4.110000000000,          !- Vertex 2 X-coordinate {m}
-    2.220000000000,          !- Vertex 2 Y-coordinate {m}
-    0.000000000000,          !- Vertex 2 Z-coordinate {m}
-    4.110000000000,          !- Vertex 3 X-coordinate {m}
-    4.290000000000,          !- Vertex 3 Y-coordinate {m}
-    0.000000000000,          !- Vertex 3 Z-coordinate {m}
-    4.110000000000,          !- Vertex 4 X-coordinate {m}
-    4.290000000000,          !- Vertex 4 Y-coordinate {m}
-    2.700000000000;          !- Vertex 4 Z-coordinate {m}
-
-BuildingSurface:Detailed,
-    ParN_SalaCoz_M,          !- Name
-    Wall,                    !- Surface Type
-    par_int,                 !- Construction Name
-    SalaCoz_M,               !- Zone Name
-    Adiabatic,               !- Outside Boundary Condition
-    ,                        !- Outside Boundary Condition Object
-    NoSun,                   !- Sun Exposure
-    NoWind,                  !- Wind Exposure
-    ,                        !- View Factor to Ground
-    4,                       !- Number of Vertices
-    4.110000000000,          !- Vertex 1 X-coordinate {m}
-    4.290000000000,          !- Vertex 1 Y-coordinate {m}
-    2.700000000000,          !- Vertex 1 Z-coordinate {m}
-    4.110000000000,          !- Vertex 2 X-coordinate {m}
-    4.290000000000,          !- Vertex 2 Y-coordinate {m}
+    3.240000000000,          !- Vertex 2 X-coordinate {m}
+    2.530000000000,          !- Vertex 2 Y-coordinate {m}
     0.000000000000,          !- Vertex 2 Z-coordinate {m}
     0.000000000000,          !- Vertex 3 X-coordinate {m}
-    4.290000000000,          !- Vertex 3 Y-coordinate {m}
+    2.530000000000,          !- Vertex 3 Y-coordinate {m}
     0.000000000000,          !- Vertex 3 Z-coordinate {m}
     0.000000000000,          !- Vertex 4 X-coordinate {m}
-    4.290000000000,          !- Vertex 4 Y-coordinate {m}
+    2.530000000000,          !- Vertex 4 Y-coordinate {m}
     2.700000000000;          !- Vertex 4 Z-coordinate {m}
 
 BuildingSurface:Detailed,
-    ParS_SalaCoz_M,          !- Name
+    ParS_Q2_C,               !- Name
+    Wall,                    !- Surface Type
+    par_int,                 !- Construction Name
+    Q2_C,                    !- Zone Name
+    Surface,                 !- Outside Boundary Condition
+    ParN_Q1_C,               !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    4,                       !- Number of Vertices
+    0.000000000000,          !- Vertex 1 X-coordinate {m}
+    0.000000000000,          !- Vertex 1 Y-coordinate {m}
+    2.700000000000,          !- Vertex 1 Z-coordinate {m}
+    0.000000000000,          !- Vertex 2 X-coordinate {m}
+    0.000000000000,          !- Vertex 2 Y-coordinate {m}
+    0.000000000000,          !- Vertex 2 Z-coordinate {m}
+    3.240000000000,          !- Vertex 3 X-coordinate {m}
+    0.000000000000,          !- Vertex 3 Y-coordinate {m}
+    0.000000000000,          !- Vertex 3 Z-coordinate {m}
+    3.240000000000,          !- Vertex 4 X-coordinate {m}
+    0.000000000000,          !- Vertex 4 Y-coordinate {m}
+    2.700000000000;          !- Vertex 4 Z-coordinate {m}
+
+BuildingSurface:Detailed,
+    ParL1_Q2,                !- Name
+    Wall,                    !- Surface Type
+    par_int,                 !- Construction Name
+    Q2_C,                    !- Zone Name
+    Surface,                 !- Outside Boundary Condition
+    ParO2_SalaCoz_C,         !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    4,                       !- Number of Vertices
+    3.240000000000,          !- Vertex 1 X-coordinate {m}
+    0.000000000000,          !- Vertex 1 Y-coordinate {m}
+    2.700000000000,          !- Vertex 1 Z-coordinate {m}
+    3.240000000000,          !- Vertex 2 X-coordinate {m}
+    0.000000000000,          !- Vertex 2 Y-coordinate {m}
+    0.000000000000,          !- Vertex 2 Z-coordinate {m}
+    3.240000000000,          !- Vertex 3 X-coordinate {m}
+    1.160000000000,          !- Vertex 3 Y-coordinate {m}
+    0.000000000000,          !- Vertex 3 Z-coordinate {m}
+    3.240000000000,          !- Vertex 4 X-coordinate {m}
+    1.160000000000,          !- Vertex 4 Y-coordinate {m}
+    2.700000000000;          !- Vertex 4 Z-coordinate {m}
+
+BuildingSurface:Detailed,
+    ParO_Q2_C,               !- Name
     Wall,                    !- Surface Type
     par_ext,                 !- Construction Name
-    SalaCoz_M,               !- Zone Name
+    Q2_C,                    !- Zone Name
+    Outdoors,                !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    SunExposed,              !- Sun Exposure
+    WindExposed,             !- Wind Exposure
+    ,                        !- View Factor to Ground
+    4,                       !- Number of Vertices
+    0.000000000000,          !- Vertex 1 X-coordinate {m}
+    2.530000000000,          !- Vertex 1 Y-coordinate {m}
+    2.700000000000,          !- Vertex 1 Z-coordinate {m}
+    0.000000000000,          !- Vertex 2 X-coordinate {m}
+    2.530000000000,          !- Vertex 2 Y-coordinate {m}
+    0.000000000000,          !- Vertex 2 Z-coordinate {m}
+    0.000000000000,          !- Vertex 3 X-coordinate {m}
+    0.000000000000,          !- Vertex 3 Y-coordinate {m}
+    0.000000000000,          !- Vertex 3 Z-coordinate {m}
+    0.000000000000,          !- Vertex 4 X-coordinate {m}
+    0.000000000000,          !- Vertex 4 Y-coordinate {m}
+    2.700000000000;          !- Vertex 4 Z-coordinate {m}
+
+BuildingSurface:Detailed,
+    ParS_Q1_C,               !- Name
+    Wall,                    !- Surface Type
+    par_ext,                 !- Construction Name
+    Q1_C,                    !- Zone Name
     Outdoors,                !- Outside Boundary Condition
     ,                        !- Outside Boundary Condition Object
     SunExposed,              !- Sun Exposure
@@ -452,162 +491,42 @@ BuildingSurface:Detailed,
     0.000000000000,          !- Vertex 2 X-coordinate {m}
     0.000000000000,          !- Vertex 2 Y-coordinate {m}
     0.000000000000,          !- Vertex 2 Z-coordinate {m}
-    4.110000000000,          !- Vertex 3 X-coordinate {m}
+    3.240000000000,          !- Vertex 3 X-coordinate {m}
     0.000000000000,          !- Vertex 3 Y-coordinate {m}
     0.000000000000,          !- Vertex 3 Z-coordinate {m}
-    4.110000000000,          !- Vertex 4 X-coordinate {m}
+    3.240000000000,          !- Vertex 4 X-coordinate {m}
     0.000000000000,          !- Vertex 4 Y-coordinate {m}
     2.700000000000;          !- Vertex 4 Z-coordinate {m}
 
 BuildingSurface:Detailed,
-    ParN_Cor_M,              !- Name
+    ParL_Q1_C,               !- Name
     Wall,                    !- Surface Type
     par_int,                 !- Construction Name
-    Cor_M,                   !- Zone Name
-    Adiabatic,               !- Outside Boundary Condition
-    ,                        !- Outside Boundary Condition Object
+    Q1_C,                    !- Zone Name
+    Surface,                 !- Outside Boundary Condition
+    ParO1_SalaCoz_C,         !- Outside Boundary Condition Object
     NoSun,                   !- Sun Exposure
     NoWind,                  !- Wind Exposure
     ,                        !- View Factor to Ground
     4,                       !- Number of Vertices
-    3.110000000000,          !- Vertex 1 X-coordinate {m}
+    3.240000000000,          !- Vertex 1 X-coordinate {m}
     0.000000000000,          !- Vertex 1 Y-coordinate {m}
     2.700000000000,          !- Vertex 1 Z-coordinate {m}
-    3.110000000000,          !- Vertex 2 X-coordinate {m}
+    3.240000000000,          !- Vertex 2 X-coordinate {m}
     0.000000000000,          !- Vertex 2 Y-coordinate {m}
     0.000000000000,          !- Vertex 2 Z-coordinate {m}
-    0.000000000000,          !- Vertex 3 X-coordinate {m}
-    0.000000000000,          !- Vertex 3 Y-coordinate {m}
+    3.240000000000,          !- Vertex 3 X-coordinate {m}
+    2.910000000000,          !- Vertex 3 Y-coordinate {m}
     0.000000000000,          !- Vertex 3 Z-coordinate {m}
-    0.000000000000,          !- Vertex 4 X-coordinate {m}
-    0.000000000000,          !- Vertex 4 Y-coordinate {m}
+    3.240000000000,          !- Vertex 4 X-coordinate {m}
+    2.910000000000,          !- Vertex 4 Y-coordinate {m}
     2.700000000000;          !- Vertex 4 Z-coordinate {m}
 
 BuildingSurface:Detailed,
-    ParO_Cor_M,              !- Name
-    Wall,                    !- Surface Type
-    par_int,                 !- Construction Name
-    Cor_M,                   !- Zone Name
-    Surface,                 !- Outside Boundary Condition
-    ParL2_SalaCoz_M,         !- Outside Boundary Condition Object
-    NoSun,                   !- Sun Exposure
-    NoWind,                  !- Wind Exposure
-    ,                        !- View Factor to Ground
-    4,                       !- Number of Vertices
-    0.000000000000,          !- Vertex 1 X-coordinate {m}
-    0.000000000000,          !- Vertex 1 Y-coordinate {m}
-    2.700000000000,          !- Vertex 1 Z-coordinate {m}
-    0.000000000000,          !- Vertex 2 X-coordinate {m}
-    0.000000000000,          !- Vertex 2 Y-coordinate {m}
-    0.000000000000,          !- Vertex 2 Z-coordinate {m}
-    0.000000000000,          !- Vertex 3 X-coordinate {m}
-    -1.000000000000,         !- Vertex 3 Y-coordinate {m}
-    0.000000000000,          !- Vertex 3 Z-coordinate {m}
-    0.000000000000,          !- Vertex 4 X-coordinate {m}
-    -1.000000000000,         !- Vertex 4 Y-coordinate {m}
-    2.700000000000;          !- Vertex 4 Z-coordinate {m}
-
-BuildingSurface:Detailed,
-    ParS_Cor_M,              !- Name
-    Wall,                    !- Surface Type
-    par_int,                 !- Construction Name
-    Cor_M,                   !- Zone Name
-    Surface,                 !- Outside Boundary Condition
-    ParN_Q1_M,               !- Outside Boundary Condition Object
-    NoSun,                   !- Sun Exposure
-    NoWind,                  !- Wind Exposure
-    ,                        !- View Factor to Ground
-    4,                       !- Number of Vertices
-    0.000000000000,          !- Vertex 1 X-coordinate {m}
-    -1.000000000000,         !- Vertex 1 Y-coordinate {m}
-    2.700000000000,          !- Vertex 1 Z-coordinate {m}
-    0.000000000000,          !- Vertex 2 X-coordinate {m}
-    -1.000000000000,         !- Vertex 2 Y-coordinate {m}
-    0.000000000000,          !- Vertex 2 Z-coordinate {m}
-    3.110000000000,          !- Vertex 3 X-coordinate {m}
-    -1.000000000000,         !- Vertex 3 Y-coordinate {m}
-    0.000000000000,          !- Vertex 3 Z-coordinate {m}
-    3.110000000000,          !- Vertex 4 X-coordinate {m}
-    -1.000000000000,         !- Vertex 4 Y-coordinate {m}
-    2.700000000000;          !- Vertex 4 Z-coordinate {m}
-
-BuildingSurface:Detailed,
-    ParL_Cor_M,              !- Name
-    Wall,                    !- Surface Type
-    par_int,                 !- Construction Name
-    Cor_M,                   !- Zone Name
-    Surface,                 !- Outside Boundary Condition
-    ParO2_Q2_M,              !- Outside Boundary Condition Object
-    NoSun,                   !- Sun Exposure
-    NoWind,                  !- Wind Exposure
-    ,                        !- View Factor to Ground
-    4,                       !- Number of Vertices
-    3.110000000000,          !- Vertex 1 X-coordinate {m}
-    -1.000000000000,         !- Vertex 1 Y-coordinate {m}
-    2.700000000000,          !- Vertex 1 Z-coordinate {m}
-    3.110000000000,          !- Vertex 2 X-coordinate {m}
-    -1.000000000000,         !- Vertex 2 Y-coordinate {m}
-    0.000000000000,          !- Vertex 2 Z-coordinate {m}
-    3.110000000000,          !- Vertex 3 X-coordinate {m}
-    0.000000000000,          !- Vertex 3 Y-coordinate {m}
-    0.000000000000,          !- Vertex 3 Z-coordinate {m}
-    3.110000000000,          !- Vertex 4 X-coordinate {m}
-    0.000000000000,          !- Vertex 4 Y-coordinate {m}
-    2.700000000000;          !- Vertex 4 Z-coordinate {m}
-
-BuildingSurface:Detailed,
-    ParL_Q1_M,               !- Name
-    Wall,                    !- Surface Type
-    par_int,                 !- Construction Name
-    Q1_M,                    !- Zone Name
-    Surface,                 !- Outside Boundary Condition
-    ParO1_Q2_M,              !- Outside Boundary Condition Object
-    NoSun,                   !- Sun Exposure
-    NoWind,                  !- Wind Exposure
-    ,                        !- View Factor to Ground
-    4,                       !- Number of Vertices
-    3.110000000000,          !- Vertex 1 X-coordinate {m}
-    -2.410000000000,         !- Vertex 1 Y-coordinate {m}
-    2.700000000000,          !- Vertex 1 Z-coordinate {m}
-    3.110000000000,          !- Vertex 2 X-coordinate {m}
-    -2.410000000000,         !- Vertex 2 Y-coordinate {m}
-    0.000000000000,          !- Vertex 2 Z-coordinate {m}
-    3.110000000000,          !- Vertex 3 X-coordinate {m}
-    0.000000000000,          !- Vertex 3 Y-coordinate {m}
-    0.000000000000,          !- Vertex 3 Z-coordinate {m}
-    3.110000000000,          !- Vertex 4 X-coordinate {m}
-    0.000000000000,          !- Vertex 4 Y-coordinate {m}
-    2.700000000000;          !- Vertex 4 Z-coordinate {m}
-
-BuildingSurface:Detailed,
-    ParN_Q1_M,               !- Name
-    Wall,                    !- Surface Type
-    par_int,                 !- Construction Name
-    Q1_M,                    !- Zone Name
-    Surface,                 !- Outside Boundary Condition
-    ParS_Cor_M,              !- Outside Boundary Condition Object
-    NoSun,                   !- Sun Exposure
-    NoWind,                  !- Wind Exposure
-    ,                        !- View Factor to Ground
-    4,                       !- Number of Vertices
-    3.110000000000,          !- Vertex 1 X-coordinate {m}
-    0.000000000000,          !- Vertex 1 Y-coordinate {m}
-    2.700000000000,          !- Vertex 1 Z-coordinate {m}
-    3.110000000000,          !- Vertex 2 X-coordinate {m}
-    0.000000000000,          !- Vertex 2 Y-coordinate {m}
-    0.000000000000,          !- Vertex 2 Z-coordinate {m}
-    0.000000000000,          !- Vertex 3 X-coordinate {m}
-    0.000000000000,          !- Vertex 3 Y-coordinate {m}
-    0.000000000000,          !- Vertex 3 Z-coordinate {m}
-    0.000000000000,          !- Vertex 4 X-coordinate {m}
-    0.000000000000,          !- Vertex 4 Y-coordinate {m}
-    2.700000000000;          !- Vertex 4 Z-coordinate {m}
-
-BuildingSurface:Detailed,
-    ParS_Q1_M,               !- Name
+    ParO_Q1_C,               !- Name
     Wall,                    !- Surface Type
     par_ext,                 !- Construction Name
-    Q1_M,                    !- Zone Name
+    Q1_C,                    !- Zone Name
     Outdoors,                !- Outside Boundary Condition
     ,                        !- Outside Boundary Condition Object
     SunExposed,              !- Sun Exposure
@@ -615,82 +534,10 @@ BuildingSurface:Detailed,
     ,                        !- View Factor to Ground
     4,                       !- Number of Vertices
     0.000000000000,          !- Vertex 1 X-coordinate {m}
-    -2.410000000000,         !- Vertex 1 Y-coordinate {m}
+    2.910000000000,          !- Vertex 1 Y-coordinate {m}
     2.700000000000,          !- Vertex 1 Z-coordinate {m}
     0.000000000000,          !- Vertex 2 X-coordinate {m}
-    -2.410000000000,         !- Vertex 2 Y-coordinate {m}
-    0.000000000000,          !- Vertex 2 Z-coordinate {m}
-    3.110000000000,          !- Vertex 3 X-coordinate {m}
-    -2.410000000000,         !- Vertex 3 Y-coordinate {m}
-    0.000000000000,          !- Vertex 3 Z-coordinate {m}
-    3.110000000000,          !- Vertex 4 X-coordinate {m}
-    -2.410000000000,         !- Vertex 4 Y-coordinate {m}
-    2.700000000000;          !- Vertex 4 Z-coordinate {m}
-
-BuildingSurface:Detailed,
-    ParL_Q2_M,               !- Name
-    Wall,                    !- Surface Type
-    par_int,                 !- Construction Name
-    Q2_M,                    !- Zone Name
-    Adiabatic,               !- Outside Boundary Condition
-    ,                        !- Outside Boundary Condition Object
-    NoSun,                   !- Sun Exposure
-    NoWind,                  !- Wind Exposure
-    ,                        !- View Factor to Ground
-    4,                       !- Number of Vertices
-    2.530000000000,          !- Vertex 1 X-coordinate {m}
-    -3.420000000000,         !- Vertex 1 Y-coordinate {m}
-    2.700000000000,          !- Vertex 1 Z-coordinate {m}
-    2.530000000000,          !- Vertex 2 X-coordinate {m}
-    -3.420000000000,         !- Vertex 2 Y-coordinate {m}
-    0.000000000000,          !- Vertex 2 Z-coordinate {m}
-    2.530000000000,          !- Vertex 3 X-coordinate {m}
-    0.000000000000,          !- Vertex 3 Y-coordinate {m}
-    0.000000000000,          !- Vertex 3 Z-coordinate {m}
-    2.530000000000,          !- Vertex 4 X-coordinate {m}
-    0.000000000000,          !- Vertex 4 Y-coordinate {m}
-    2.700000000000;          !- Vertex 4 Z-coordinate {m}
-
-BuildingSurface:Detailed,
-    ParS_Q2_M,               !- Name
-    Wall,                    !- Surface Type
-    par_ext,                 !- Construction Name
-    Q2_M,                    !- Zone Name
-    Outdoors,                !- Outside Boundary Condition
-    ,                        !- Outside Boundary Condition Object
-    SunExposed,              !- Sun Exposure
-    WindExposed,             !- Wind Exposure
-    ,                        !- View Factor to Ground
-    4,                       !- Number of Vertices
-    0.000000000000,          !- Vertex 1 X-coordinate {m}
-    -3.420000000000,         !- Vertex 1 Y-coordinate {m}
-    2.700000000000,          !- Vertex 1 Z-coordinate {m}
-    0.000000000000,          !- Vertex 2 X-coordinate {m}
-    -3.420000000000,         !- Vertex 2 Y-coordinate {m}
-    0.000000000000,          !- Vertex 2 Z-coordinate {m}
-    2.530000000000,          !- Vertex 3 X-coordinate {m}
-    -3.420000000000,         !- Vertex 3 Y-coordinate {m}
-    0.000000000000,          !- Vertex 3 Z-coordinate {m}
-    2.530000000000,          !- Vertex 4 X-coordinate {m}
-    -3.420000000000,         !- Vertex 4 Y-coordinate {m}
-    2.700000000000;          !- Vertex 4 Z-coordinate {m}
-
-BuildingSurface:Detailed,
-    ParN_Q2_M,               !- Name
-    Wall,                    !- Surface Type
-    par_int,                 !- Construction Name
-    Q2_M,                    !- Zone Name
-    Adiabatic,               !- Outside Boundary Condition
-    ,                        !- Outside Boundary Condition Object
-    NoSun,                   !- Sun Exposure
-    NoWind,                  !- Wind Exposure
-    ,                        !- View Factor to Ground
-    4,                       !- Number of Vertices
-    2.530000000000,          !- Vertex 1 X-coordinate {m}
-    0.000000000000,          !- Vertex 1 Y-coordinate {m}
-    2.700000000000,          !- Vertex 1 Z-coordinate {m}
-    2.530000000000,          !- Vertex 2 X-coordinate {m}
-    0.000000000000,          !- Vertex 2 Y-coordinate {m}
+    2.910000000000,          !- Vertex 2 Y-coordinate {m}
     0.000000000000,          !- Vertex 2 Z-coordinate {m}
     0.000000000000,          !- Vertex 3 X-coordinate {m}
     0.000000000000,          !- Vertex 3 Y-coordinate {m}
@@ -700,106 +547,34 @@ BuildingSurface:Detailed,
     2.700000000000;          !- Vertex 4 Z-coordinate {m}
 
 BuildingSurface:Detailed,
-    ParO1_Q2_M,              !- Name
+    ParN_Q1_C,               !- Name
     Wall,                    !- Surface Type
     par_int,                 !- Construction Name
-    Q2_M,                    !- Zone Name
+    Q1_C,                    !- Zone Name
     Surface,                 !- Outside Boundary Condition
-    ParL_Q1_M,               !- Outside Boundary Condition Object
+    ParS_Q2_C,               !- Outside Boundary Condition Object
     NoSun,                   !- Sun Exposure
     NoWind,                  !- Wind Exposure
     ,                        !- View Factor to Ground
     4,                       !- Number of Vertices
-    0.000000000000,          !- Vertex 1 X-coordinate {m}
-    -1.000000000000,         !- Vertex 1 Y-coordinate {m}
+    3.240000000000,          !- Vertex 1 X-coordinate {m}
+    2.910000000000,          !- Vertex 1 Y-coordinate {m}
     2.700000000000,          !- Vertex 1 Z-coordinate {m}
-    0.000000000000,          !- Vertex 2 X-coordinate {m}
-    -1.000000000000,         !- Vertex 2 Y-coordinate {m}
+    3.240000000000,          !- Vertex 2 X-coordinate {m}
+    2.910000000000,          !- Vertex 2 Y-coordinate {m}
     0.000000000000,          !- Vertex 2 Z-coordinate {m}
     0.000000000000,          !- Vertex 3 X-coordinate {m}
-    -3.420000000000,         !- Vertex 3 Y-coordinate {m}
+    2.910000000000,          !- Vertex 3 Y-coordinate {m}
     0.000000000000,          !- Vertex 3 Z-coordinate {m}
     0.000000000000,          !- Vertex 4 X-coordinate {m}
-    -3.420000000000,         !- Vertex 4 Y-coordinate {m}
+    2.910000000000,          !- Vertex 4 Y-coordinate {m}
     2.700000000000;          !- Vertex 4 Z-coordinate {m}
 
 BuildingSurface:Detailed,
-    ParO2_Q2_M,              !- Name
-    Wall,                    !- Surface Type
-    par_int,                 !- Construction Name
-    Q2_M,                    !- Zone Name
-    Surface,                 !- Outside Boundary Condition
-    ParL_Cor_M,              !- Outside Boundary Condition Object
-    NoSun,                   !- Sun Exposure
-    NoWind,                  !- Wind Exposure
-    ,                        !- View Factor to Ground
-    4,                       !- Number of Vertices
-    0.000000000000,          !- Vertex 1 X-coordinate {m}
-    0.000000000000,          !- Vertex 1 Y-coordinate {m}
-    2.700000000000,          !- Vertex 1 Z-coordinate {m}
-    0.000000000000,          !- Vertex 2 X-coordinate {m}
-    0.000000000000,          !- Vertex 2 Y-coordinate {m}
-    0.000000000000,          !- Vertex 2 Z-coordinate {m}
-    0.000000000000,          !- Vertex 3 X-coordinate {m}
-    -1.000000000000,         !- Vertex 3 Y-coordinate {m}
-    0.000000000000,          !- Vertex 3 Z-coordinate {m}
-    0.000000000000,          !- Vertex 4 X-coordinate {m}
-    -1.000000000000,         !- Vertex 4 Y-coordinate {m}
-    2.700000000000;          !- Vertex 4 Z-coordinate {m}
-
-BuildingSurface:Detailed,
-    ParL2_SalaCoz_M,         !- Name
-    Wall,                    !- Surface Type
-    par_int,                 !- Construction Name
-    SalaCoz_M,               !- Zone Name
-    Surface,                 !- Outside Boundary Condition
-    ParO_Cor_M,              !- Outside Boundary Condition Object
-    NoSun,                   !- Sun Exposure
-    NoWind,                  !- Wind Exposure
-    ,                        !- View Factor to Ground
-    4,                       !- Number of Vertices
-    4.110000000000,          !- Vertex 1 X-coordinate {m}
-    1.220000000000,          !- Vertex 1 Y-coordinate {m}
-    2.700000000000,          !- Vertex 1 Z-coordinate {m}
-    4.110000000000,          !- Vertex 2 X-coordinate {m}
-    1.220000000000,          !- Vertex 2 Y-coordinate {m}
-    0.000000000000,          !- Vertex 2 Z-coordinate {m}
-    4.110000000000,          !- Vertex 3 X-coordinate {m}
-    2.220000000000,          !- Vertex 3 Y-coordinate {m}
-    0.000000000000,          !- Vertex 3 Z-coordinate {m}
-    4.110000000000,          !- Vertex 4 X-coordinate {m}
-    2.220000000000,          !- Vertex 4 Y-coordinate {m}
-    2.700000000000;          !- Vertex 4 Z-coordinate {m}
-
-BuildingSurface:Detailed,
-    ParL1_SalaCoz_M,         !- Name
-    Wall,                    !- Surface Type
-    par_int,                 !- Construction Name
-    SalaCoz_M,               !- Zone Name
-    Surface,                 !- Outside Boundary Condition
-    ParO2_Q1_M,              !- Outside Boundary Condition Object
-    NoSun,                   !- Sun Exposure
-    NoWind,                  !- Wind Exposure
-    ,                        !- View Factor to Ground
-    4,                       !- Number of Vertices
-    4.110000000000,          !- Vertex 1 X-coordinate {m}
-    0.000000000000,          !- Vertex 1 Y-coordinate {m}
-    2.700000000000,          !- Vertex 1 Z-coordinate {m}
-    4.110000000000,          !- Vertex 2 X-coordinate {m}
-    0.000000000000,          !- Vertex 2 Y-coordinate {m}
-    0.000000000000,          !- Vertex 2 Z-coordinate {m}
-    4.110000000000,          !- Vertex 3 X-coordinate {m}
-    1.220000000000,          !- Vertex 3 Y-coordinate {m}
-    0.000000000000,          !- Vertex 3 Z-coordinate {m}
-    4.110000000000,          !- Vertex 4 X-coordinate {m}
-    1.220000000000,          !- Vertex 4 Y-coordinate {m}
-    2.700000000000;          !- Vertex 4 Z-coordinate {m}
-
-BuildingSurface:Detailed,
-    ParO1_Q1_M,              !- Name
+    ParS_SalaCoz_C,          !- Name
     Wall,                    !- Surface Type
     par_ext,                 !- Construction Name
-    Q1_M,                    !- Zone Name
+    Sala_Coz_C,              !- Zone Name
     Outdoors,                !- Outside Boundary Condition
     ,                        !- Outside Boundary Condition Object
     SunExposed,              !- Sun Exposure
@@ -807,49 +582,49 @@ BuildingSurface:Detailed,
     ,                        !- View Factor to Ground
     4,                       !- Number of Vertices
     0.000000000000,          !- Vertex 1 X-coordinate {m}
-    -1.220000000000,         !- Vertex 1 Y-coordinate {m}
-    2.700000000000,          !- Vertex 1 Z-coordinate {m}
-    0.000000000000,          !- Vertex 2 X-coordinate {m}
-    -1.220000000000,         !- Vertex 2 Y-coordinate {m}
-    0.000000000000,          !- Vertex 2 Z-coordinate {m}
-    0.000000000000,          !- Vertex 3 X-coordinate {m}
-    -2.410000000000,         !- Vertex 3 Y-coordinate {m}
-    0.000000000000,          !- Vertex 3 Z-coordinate {m}
-    0.000000000000,          !- Vertex 4 X-coordinate {m}
-    -2.410000000000,         !- Vertex 4 Y-coordinate {m}
-    2.700000000000;          !- Vertex 4 Z-coordinate {m}
-
-BuildingSurface:Detailed,
-    ParO2_Q1_M,              !- Name
-    Wall,                    !- Surface Type
-    par_int,                 !- Construction Name
-    Q1_M,                    !- Zone Name
-    Surface,                 !- Outside Boundary Condition
-    ParL1_SalaCoz_M,         !- Outside Boundary Condition Object
-    NoSun,                   !- Sun Exposure
-    NoWind,                  !- Wind Exposure
-    ,                        !- View Factor to Ground
-    4,                       !- Number of Vertices
-    0.000000000000,          !- Vertex 1 X-coordinate {m}
     0.000000000000,          !- Vertex 1 Y-coordinate {m}
     2.700000000000,          !- Vertex 1 Z-coordinate {m}
     0.000000000000,          !- Vertex 2 X-coordinate {m}
     0.000000000000,          !- Vertex 2 Y-coordinate {m}
     0.000000000000,          !- Vertex 2 Z-coordinate {m}
-    0.000000000000,          !- Vertex 3 X-coordinate {m}
-    -1.220000000000,         !- Vertex 3 Y-coordinate {m}
+    4.200000000000,          !- Vertex 3 X-coordinate {m}
+    0.000000000000,          !- Vertex 3 Y-coordinate {m}
     0.000000000000,          !- Vertex 3 Z-coordinate {m}
-    0.000000000000,          !- Vertex 4 X-coordinate {m}
-    -1.220000000000,         !- Vertex 4 Y-coordinate {m}
+    4.200000000000,          !- Vertex 4 X-coordinate {m}
+    0.000000000000,          !- Vertex 4 Y-coordinate {m}
     2.700000000000;          !- Vertex 4 Z-coordinate {m}
 
 BuildingSurface:Detailed,
-    ParO1_SalaCoz_M,         !- Name
+    ParL_SalaCoz_C,          !- Name
     Wall,                    !- Surface Type
     par_int,                 !- Construction Name
-    SalaCoz_M,               !- Zone Name
+    Sala_Coz_C,              !- Zone Name
     Adiabatic,               !- Outside Boundary Condition
     ,                        !- Outside Boundary Condition Object
+    NoSun,              !- Sun Exposure
+    NoWind,             !- Wind Exposure
+    ,                        !- View Factor to Ground
+    4,                       !- Number of Vertices
+    4.200000000000,          !- Vertex 1 X-coordinate {m}
+    0.000000000000,          !- Vertex 1 Y-coordinate {m}
+    2.700000000000,          !- Vertex 1 Z-coordinate {m}
+    4.200000000000,          !- Vertex 2 X-coordinate {m}
+    0.000000000000,          !- Vertex 2 Y-coordinate {m}
+    0.000000000000,          !- Vertex 2 Z-coordinate {m}
+    4.200000000000,          !- Vertex 3 X-coordinate {m}
+    4.070000000000,          !- Vertex 3 Y-coordinate {m}
+    0.000000000000,          !- Vertex 3 Z-coordinate {m}
+    4.200000000000,          !- Vertex 4 X-coordinate {m}
+    4.070000000000,          !- Vertex 4 Y-coordinate {m}
+    2.700000000000;          !- Vertex 4 Z-coordinate {m}
+
+BuildingSurface:Detailed,
+    ParO2_SalaCoz_C,         !- Name
+    Wall,                    !- Surface Type
+    par_int,                 !- Construction Name
+    Sala_Coz_C,              !- Zone Name
+    Surface,                 !- Outside Boundary Condition
+    ParL1_Q2,                !- Outside Boundary Condition Object
     NoSun,                   !- Sun Exposure
     NoWind,                  !- Wind Exposure
     ,                        !- View Factor to Ground
@@ -861,28 +636,28 @@ BuildingSurface:Detailed,
     4.070000000000,          !- Vertex 2 Y-coordinate {m}
     0.000000000000,          !- Vertex 2 Z-coordinate {m}
     0.000000000000,          !- Vertex 3 X-coordinate {m}
-    0.000000000000,          !- Vertex 3 Y-coordinate {m}
+    2.910000000000,          !- Vertex 3 Y-coordinate {m}
     0.000000000000,          !- Vertex 3 Z-coordinate {m}
     0.000000000000,          !- Vertex 4 X-coordinate {m}
-    0.000000000000,          !- Vertex 4 Y-coordinate {m}
+    2.910000000000,          !- Vertex 4 Y-coordinate {m}
     2.700000000000;          !- Vertex 4 Z-coordinate {m}
 
 BuildingSurface:Detailed,
-    ParO2_SalaCoz_M,         !- Name
+    ParN_SalaCoz_C,          !- Name
     Wall,                    !- Surface Type
     par_int,                 !- Construction Name
-    SalaCoz_M,               !- Zone Name
+    Sala_Coz_C,              !- Zone Name
     Adiabatic,               !- Outside Boundary Condition
     ,                        !- Outside Boundary Condition Object
     NoSun,                   !- Sun Exposure
     NoWind,                  !- Wind Exposure
     ,                        !- View Factor to Ground
     4,                       !- Number of Vertices
-    0.000000000000,          !- Vertex 1 X-coordinate {m}
-    4.290000000000,          !- Vertex 1 Y-coordinate {m}
+    4.200000000000,          !- Vertex 1 X-coordinate {m}
+    4.070000000000,          !- Vertex 1 Y-coordinate {m}
     2.700000000000,          !- Vertex 1 Z-coordinate {m}
-    0.000000000000,          !- Vertex 2 X-coordinate {m}
-    4.290000000000,          !- Vertex 2 Y-coordinate {m}
+    4.200000000000,          !- Vertex 2 X-coordinate {m}
+    4.070000000000,          !- Vertex 2 Y-coordinate {m}
     0.000000000000,          !- Vertex 2 Z-coordinate {m}
     0.000000000000,          !- Vertex 3 X-coordinate {m}
     4.070000000000,          !- Vertex 3 Y-coordinate {m}
@@ -891,237 +666,239 @@ BuildingSurface:Detailed,
     4.070000000000,          !- Vertex 4 Y-coordinate {m}
     2.700000000000;          !- Vertex 4 Z-coordinate {m}
 
+BuildingSurface:Detailed,
+    ParO1_SalaCoz_C,         !- Name
+    Wall,                    !- Surface Type
+    par_int,                 !- Construction Name
+    Sala_Coz_C,              !- Zone Name
+    Surface,                 !- Outside Boundary Condition
+    ParL_Q1_C,               !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    4,                       !- Number of Vertices
+    0.000000000000,          !- Vertex 1 X-coordinate {m}
+    2.910000000000,          !- Vertex 1 Y-coordinate {m}
+    2.700000000000,          !- Vertex 1 Z-coordinate {m}
+    0.000000000000,          !- Vertex 2 X-coordinate {m}
+    2.910000000000,          !- Vertex 2 Y-coordinate {m}
+    0.000000000000,          !- Vertex 2 Z-coordinate {m}
+    0.000000000000,          !- Vertex 3 X-coordinate {m}
+    0.000000000000,          !- Vertex 3 Y-coordinate {m}
+    0.000000000000,          !- Vertex 3 Z-coordinate {m}
+    0.000000000000,          !- Vertex 4 X-coordinate {m}
+    0.000000000000,          !- Vertex 4 Y-coordinate {m}
+    2.700000000000;          !- Vertex 4 Z-coordinate {m}
+
+BuildingSurface:Detailed,
+    ParL2_Q2_C,              !- Name
+    Wall,                    !- Surface Type
+    par_int,                 !- Construction Name
+    Q2_C,                    !- Zone Name
+    Adiabatic,               !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    4,                       !- Number of Vertices
+    3.240000000000,          !- Vertex 1 X-coordinate {m}
+    1.160000000000,          !- Vertex 1 Y-coordinate {m}
+    2.700000000000,          !- Vertex 1 Z-coordinate {m}
+    3.240000000000,          !- Vertex 2 X-coordinate {m}
+    1.160000000000,          !- Vertex 2 Y-coordinate {m}
+    0.000000000000,          !- Vertex 2 Z-coordinate {m}
+    3.240000000000,          !- Vertex 3 X-coordinate {m}
+    2.530000000000,          !- Vertex 3 Y-coordinate {m}
+    0.000000000000,          !- Vertex 3 Z-coordinate {m}
+    3.240000000000,          !- Vertex 4 X-coordinate {m}
+    2.530000000000,          !- Vertex 4 Y-coordinate {m}
+    2.700000000000;          !- Vertex 4 Z-coordinate {m}
+
 
 !-   ===========  ALL OBJECTS IN CLASS: FENESTRATIONSURFACE:DETAILED ===========
 
 FenestrationSurface:Detailed,
-    Por_Sala_Cor_M,          !- Name
+    Por_Sala_Q2_C,           !- Name
     Door,                    !- Surface Type
     Porta_3_cm,              !- Construction Name
-    ParL2_SalaCoz_M,         !- Building Surface Name
-    Por_Cor_Sala_M,          !- Outside Boundary Condition Object
-    ,                        !- View Factor to Ground
-    ,                        !- Frame and Divider Name
-    ,                        !- Multiplier
-    4,                       !- Number of Vertices
-    4.110000000000,          !- Vertex 1 X-coordinate {m}
-    1.320000000000,          !- Vertex 1 Y-coordinate {m}
-    2.100000000000,          !- Vertex 1 Z-coordinate {m}
-    4.110000000000,          !- Vertex 2 X-coordinate {m}
-    1.320000000000,          !- Vertex 2 Y-coordinate {m}
-    0.000000000000,          !- Vertex 2 Z-coordinate {m}
-    4.110000000000,          !- Vertex 3 X-coordinate {m}
-    2.120000000000,          !- Vertex 3 Y-coordinate {m}
-    0.000000000000,          !- Vertex 3 Z-coordinate {m}
-    4.110000000000,          !- Vertex 4 X-coordinate {m}
-    2.120000000000,          !- Vertex 4 Y-coordinate {m}
-    2.100000000000;          !- Vertex 4 Z-coordinate {m}
-
-FenestrationSurface:Detailed,
-    Por_Cor_Sala_M,          !- Name
-    Door,                    !- Surface Type
-    Porta_3_cm,              !- Construction Name
-    ParO_Cor_M,              !- Building Surface Name
-    Por_Sala_Cor_M,          !- Outside Boundary Condition Object
+    ParO2_SalaCoz_C,         !- Building Surface Name
+    Por_Q2_Sala_C,           !- Outside Boundary Condition Object
     ,                        !- View Factor to Ground
     ,                        !- Frame and Divider Name
     ,                        !- Multiplier
     4,                       !- Number of Vertices
     0.000000000000,          !- Vertex 1 X-coordinate {m}
-    -0.100000000000,         !- Vertex 1 Y-coordinate {m}
+    3.890000000000,          !- Vertex 1 Y-coordinate {m}
     2.100000000000,          !- Vertex 1 Z-coordinate {m}
     0.000000000000,          !- Vertex 2 X-coordinate {m}
-    -0.100000000000,         !- Vertex 2 Y-coordinate {m}
+    3.890000000000,          !- Vertex 2 Y-coordinate {m}
     0.000000000000,          !- Vertex 2 Z-coordinate {m}
     0.000000000000,          !- Vertex 3 X-coordinate {m}
-    -0.900000000000,         !- Vertex 3 Y-coordinate {m}
+    3.090000000000,          !- Vertex 3 Y-coordinate {m}
     0.000000000000,          !- Vertex 3 Z-coordinate {m}
     0.000000000000,          !- Vertex 4 X-coordinate {m}
-    -0.900000000000,         !- Vertex 4 Y-coordinate {m}
+    3.090000000000,          !- Vertex 4 Y-coordinate {m}
     2.100000000000;          !- Vertex 4 Z-coordinate {m}
 
 FenestrationSurface:Detailed,
-    Por_Cor_Q2_M,            !- Name
+    Por_Sala_Q1_C,           !- Name
     Door,                    !- Surface Type
     Porta_3_cm,              !- Construction Name
-    ParL_Cor_M,              !- Building Surface Name
-    Por_Q2_Cor_M,            !- Outside Boundary Condition Object
-    ,                        !- View Factor to Ground
-    ,                        !- Frame and Divider Name
-    ,                        !- Multiplier
-    4,                       !- Number of Vertices
-    3.110000000000,          !- Vertex 1 X-coordinate {m}
-    -0.900000000000,         !- Vertex 1 Y-coordinate {m}
-    2.100000000000,          !- Vertex 1 Z-coordinate {m}
-    3.110000000000,          !- Vertex 2 X-coordinate {m}
-    -0.900000000000,         !- Vertex 2 Y-coordinate {m}
-    0.000000000000,          !- Vertex 2 Z-coordinate {m}
-    3.110000000000,          !- Vertex 3 X-coordinate {m}
-    -0.100000000000,         !- Vertex 3 Y-coordinate {m}
-    0.000000000000,          !- Vertex 3 Z-coordinate {m}
-    3.110000000000,          !- Vertex 4 X-coordinate {m}
-    -0.100000000000,         !- Vertex 4 Y-coordinate {m}
-    2.100000000000;          !- Vertex 4 Z-coordinate {m}
-
-FenestrationSurface:Detailed,
-    Por_Cor_Q1_M,            !- Name
-    Door,                    !- Surface Type
-    Porta_3_cm,              !- Construction Name
-    ParS_Cor_M,              !- Building Surface Name
-    Por_Q1_Cor_M,            !- Outside Boundary Condition Object
-    ,                        !- View Factor to Ground
-    ,                        !- Frame and Divider Name
-    ,                        !- Multiplier
-    4,                       !- Number of Vertices
-    0.180000000000,          !- Vertex 1 X-coordinate {m}
-    -1.000000000000,         !- Vertex 1 Y-coordinate {m}
-    2.100000000000,          !- Vertex 1 Z-coordinate {m}
-    0.180000000000,          !- Vertex 2 X-coordinate {m}
-    -1.000000000000,         !- Vertex 2 Y-coordinate {m}
-    0.000000000000,          !- Vertex 2 Z-coordinate {m}
-    0.980000000000,          !- Vertex 3 X-coordinate {m}
-    -1.000000000000,         !- Vertex 3 Y-coordinate {m}
-    0.000000000000,          !- Vertex 3 Z-coordinate {m}
-    0.980000000000,          !- Vertex 4 X-coordinate {m}
-    -1.000000000000,         !- Vertex 4 Y-coordinate {m}
-    2.100000000000;          !- Vertex 4 Z-coordinate {m}
-
-FenestrationSurface:Detailed,
-    Por_Q2_Cor_M,            !- Name
-    Door,                    !- Surface Type
-    Porta_3_cm,              !- Construction Name
-    ParO2_Q2_M,              !- Building Surface Name
-    Por_Cor_Q2_M,            !- Outside Boundary Condition Object
+    ParO1_SalaCoz_C,         !- Building Surface Name
+    Por_Q1_Sala_C,           !- Outside Boundary Condition Object
     ,                        !- View Factor to Ground
     ,                        !- Frame and Divider Name
     ,                        !- Multiplier
     4,                       !- Number of Vertices
     0.000000000000,          !- Vertex 1 X-coordinate {m}
-    -0.100000000000,         !- Vertex 1 Y-coordinate {m}
+    2.730000000000,          !- Vertex 1 Y-coordinate {m}
     2.100000000000,          !- Vertex 1 Z-coordinate {m}
     0.000000000000,          !- Vertex 2 X-coordinate {m}
-    -0.100000000000,         !- Vertex 2 Y-coordinate {m}
+    2.730000000000,          !- Vertex 2 Y-coordinate {m}
     0.000000000000,          !- Vertex 2 Z-coordinate {m}
     0.000000000000,          !- Vertex 3 X-coordinate {m}
-    -0.900000000000,         !- Vertex 3 Y-coordinate {m}
+    1.930000000000,          !- Vertex 3 Y-coordinate {m}
     0.000000000000,          !- Vertex 3 Z-coordinate {m}
     0.000000000000,          !- Vertex 4 X-coordinate {m}
-    -0.900000000000,         !- Vertex 4 Y-coordinate {m}
+    1.930000000000,          !- Vertex 4 Y-coordinate {m}
     2.100000000000;          !- Vertex 4 Z-coordinate {m}
 
 FenestrationSurface:Detailed,
-    Por_Q1_Cor_M,            !- Name
+    Por_Q1_Sala_C,           !- Name
     Door,                    !- Surface Type
     Porta_3_cm,              !- Construction Name
-    ParN_Q1_M,               !- Building Surface Name
-    Por_Cor_Q1_M,            !- Outside Boundary Condition Object
+    ParL_Q1_C,               !- Building Surface Name
+    Por_Sala_Q1_C,           !- Outside Boundary Condition Object
     ,                        !- View Factor to Ground
     ,                        !- Frame and Divider Name
     ,                        !- Multiplier
     4,                       !- Number of Vertices
-    0.980000000000,          !- Vertex 1 X-coordinate {m}
-    0.000000000000,          !- Vertex 1 Y-coordinate {m}
+    3.240000000000,          !- Vertex 1 X-coordinate {m}
+    1.930000000000,          !- Vertex 1 Y-coordinate {m}
     2.100000000000,          !- Vertex 1 Z-coordinate {m}
-    0.980000000000,          !- Vertex 2 X-coordinate {m}
-    0.000000000000,          !- Vertex 2 Y-coordinate {m}
+    3.240000000000,          !- Vertex 2 X-coordinate {m}
+    1.930000000000,          !- Vertex 2 Y-coordinate {m}
     0.000000000000,          !- Vertex 2 Z-coordinate {m}
-    0.180000000000,          !- Vertex 3 X-coordinate {m}
-    0.000000000000,          !- Vertex 3 Y-coordinate {m}
+    3.240000000000,          !- Vertex 3 X-coordinate {m}
+    2.730000000000,          !- Vertex 3 Y-coordinate {m}
     0.000000000000,          !- Vertex 3 Z-coordinate {m}
-    0.180000000000,          !- Vertex 4 X-coordinate {m}
-    0.000000000000,          !- Vertex 4 Y-coordinate {m}
+    3.240000000000,          !- Vertex 4 X-coordinate {m}
+    2.730000000000,          !- Vertex 4 Y-coordinate {m}
     2.100000000000;          !- Vertex 4 Z-coordinate {m}
 
 FenestrationSurface:Detailed,
-    Jan_Coz_M,               !- Name
+    Por_Q2_Sala_C,           !- Name
+    Door,                    !- Surface Type
+    Porta_3_cm,              !- Construction Name
+    ParL1_Q2,                !- Building Surface Name
+    Por_Sala_Q2_C,           !- Outside Boundary Condition Object
+    ,                        !- View Factor to Ground
+    ,                        !- Frame and Divider Name
+    ,                        !- Multiplier
+    4,                       !- Number of Vertices
+    3.240000000000,          !- Vertex 1 X-coordinate {m}
+    0.180000000000,          !- Vertex 1 Y-coordinate {m}
+    2.100000000000,          !- Vertex 1 Z-coordinate {m}
+    3.240000000000,          !- Vertex 2 X-coordinate {m}
+    0.180000000000,          !- Vertex 2 Y-coordinate {m}
+    0.000000000000,          !- Vertex 2 Z-coordinate {m}
+    3.240000000000,          !- Vertex 3 X-coordinate {m}
+    0.980000000000,          !- Vertex 3 Y-coordinate {m}
+    0.000000000000,          !- Vertex 3 Z-coordinate {m}
+    3.240000000000,          !- Vertex 4 X-coordinate {m}
+    0.980000000000,          !- Vertex 4 Y-coordinate {m}
+    2.100000000000;          !- Vertex 4 Z-coordinate {m}
+
+FenestrationSurface:Detailed,
+    Jan_Q2_C,                !- Name
     Window,                  !- Surface Type
     Vid87,                   !- Construction Name
-    ParS_SalaCoz_M,          !- Building Surface Name
+    ParO_Q2_C,               !- Building Surface Name
     ,                        !- Outside Boundary Condition Object
     ,                        !- View Factor to Ground
     ,                        !- Frame and Divider Name
     ,                        !- Multiplier
     4,                       !- Number of Vertices
-    0.140000000000,          !- Vertex 1 X-coordinate {m}
-    0.000000000000,          !- Vertex 1 Y-coordinate {m}
+    0.000000000000,          !- Vertex 1 X-coordinate {m}
+    1.840000000000,          !- Vertex 1 Y-coordinate {m}
     2.360000000000,          !- Vertex 1 Z-coordinate {m}
-    0.140000000000,          !- Vertex 2 X-coordinate {m}
-    0.000000000000,          !- Vertex 2 Y-coordinate {m}
+    0.000000000000,          !- Vertex 2 X-coordinate {m}
+    1.840000000000,          !- Vertex 2 Y-coordinate {m}
     1.200000000000,          !- Vertex 2 Z-coordinate {m}
-    1.510000000000,          !- Vertex 3 X-coordinate {m}
-    0.000000000000,          !- Vertex 3 Y-coordinate {m}
+    0.000000000000,          !- Vertex 3 X-coordinate {m}
+    0.470000000000,          !- Vertex 3 Y-coordinate {m}
     1.200000000000,          !- Vertex 3 Z-coordinate {m}
-    1.510000000000,          !- Vertex 4 X-coordinate {m}
-    0.000000000000,          !- Vertex 4 Y-coordinate {m}
+    0.000000000000,          !- Vertex 4 X-coordinate {m}
+    0.470000000000,          !- Vertex 4 Y-coordinate {m}
     2.360000000000;          !- Vertex 4 Z-coordinate {m}
 
 FenestrationSurface:Detailed,
-    Jan_Sala_M,              !- Name
+    Jan_Q1_C,                !- Name
     Window,                  !- Surface Type
     Vid87,                   !- Construction Name
-    ParS_SalaCoz_M,          !- Building Surface Name
-    ,                        !- Outside Boundary Condition Object
-    ,                        !- View Factor to Ground
-    ,                        !- Frame and Divider Name
-    ,                        !- Multiplier
-    4,                       !- Number of Vertices
-    2.340000000000,          !- Vertex 1 X-coordinate {m}
-    0.000000000000,          !- Vertex 1 Y-coordinate {m}
-    2.360000000000,          !- Vertex 1 Z-coordinate {m}
-    2.340000000000,          !- Vertex 2 X-coordinate {m}
-    0.000000000000,          !- Vertex 2 Y-coordinate {m}
-    1.200000000000,          !- Vertex 2 Z-coordinate {m}
-    3.710000000000,          !- Vertex 3 X-coordinate {m}
-    0.000000000000,          !- Vertex 3 Y-coordinate {m}
-    1.200000000000,          !- Vertex 3 Z-coordinate {m}
-    3.710000000000,          !- Vertex 4 X-coordinate {m}
-    0.000000000000,          !- Vertex 4 Y-coordinate {m}
-    2.360000000000;          !- Vertex 4 Z-coordinate {m}
-
-FenestrationSurface:Detailed,
-    Jan_Q1_M,                !- Name
-    Window,                  !- Surface Type
-    Vid87,                   !- Construction Name
-    ParS_Q1_M,               !- Building Surface Name
+    ParS_Q1_C,               !- Building Surface Name
     ,                        !- Outside Boundary Condition Object
     ,                        !- View Factor to Ground
     ,                        !- Frame and Divider Name
     ,                        !- Multiplier
     4,                       !- Number of Vertices
     0.780000000000,          !- Vertex 1 X-coordinate {m}
-    -2.410000000000,         !- Vertex 1 Y-coordinate {m}
+    0.000000000000,          !- Vertex 1 Y-coordinate {m}
     2.360000000000,          !- Vertex 1 Z-coordinate {m}
     0.780000000000,          !- Vertex 2 X-coordinate {m}
-    -2.410000000000,         !- Vertex 2 Y-coordinate {m}
+    0.000000000000,          !- Vertex 2 Y-coordinate {m}
     1.200000000000,          !- Vertex 2 Z-coordinate {m}
     2.150000000000,          !- Vertex 3 X-coordinate {m}
-    -2.410000000000,         !- Vertex 3 Y-coordinate {m}
+    0.000000000000,          !- Vertex 3 Y-coordinate {m}
     1.200000000000,          !- Vertex 3 Z-coordinate {m}
     2.150000000000,          !- Vertex 4 X-coordinate {m}
-    -2.410000000000,         !- Vertex 4 Y-coordinate {m}
+    0.000000000000,          !- Vertex 4 Y-coordinate {m}
     2.360000000000;          !- Vertex 4 Z-coordinate {m}
 
 FenestrationSurface:Detailed,
-    Jan_Q2_M,                !- Name
+    Jan_Sala_C,              !- Name
     Window,                  !- Surface Type
     Vid87,                   !- Construction Name
-    ParS_Q2_M,               !- Building Surface Name
+    ParS_SalaCoz_C,          !- Building Surface Name
     ,                        !- Outside Boundary Condition Object
     ,                        !- View Factor to Ground
     ,                        !- Frame and Divider Name
     ,                        !- Multiplier
     4,                       !- Number of Vertices
-    0.670000000000,          !- Vertex 1 X-coordinate {m}
-    -3.420000000000,         !- Vertex 1 Y-coordinate {m}
+    0.490000000000,          !- Vertex 1 X-coordinate {m}
+    0.000000000000,          !- Vertex 1 Y-coordinate {m}
     2.360000000000,          !- Vertex 1 Z-coordinate {m}
-    0.670000000000,          !- Vertex 2 X-coordinate {m}
-    -3.420000000000,         !- Vertex 2 Y-coordinate {m}
+    0.490000000000,          !- Vertex 2 X-coordinate {m}
+    0.000000000000,          !- Vertex 2 Y-coordinate {m}
     1.200000000000,          !- Vertex 2 Z-coordinate {m}
-    2.040000000000,          !- Vertex 3 X-coordinate {m}
-    -3.420000000000,         !- Vertex 3 Y-coordinate {m}
+    1.860000000000,          !- Vertex 3 X-coordinate {m}
+    0.000000000000,          !- Vertex 3 Y-coordinate {m}
     1.200000000000,          !- Vertex 3 Z-coordinate {m}
-    2.040000000000,          !- Vertex 4 X-coordinate {m}
-    -3.420000000000,         !- Vertex 4 Y-coordinate {m}
+    1.860000000000,          !- Vertex 4 X-coordinate {m}
+    0.000000000000,          !- Vertex 4 Y-coordinate {m}
+    2.360000000000;          !- Vertex 4 Z-coordinate {m}
+
+FenestrationSurface:Detailed,
+    Jan_Coz_C,               !- Name
+    Window,                  !- Surface Type
+    Vid87,                   !- Construction Name
+    ParS_SalaCoz_C,          !- Building Surface Name
+    ,                        !- Outside Boundary Condition Object
+    ,                        !- View Factor to Ground
+    ,                        !- Frame and Divider Name
+    ,                        !- Multiplier
+    4,                       !- Number of Vertices
+    2.690000000000,          !- Vertex 1 X-coordinate {m}
+    0.000000000000,          !- Vertex 1 Y-coordinate {m}
+    2.360000000000,          !- Vertex 1 Z-coordinate {m}
+    2.690000000000,          !- Vertex 2 X-coordinate {m}
+    0.000000000000,          !- Vertex 2 Y-coordinate {m}
+    1.200000000000,          !- Vertex 2 Z-coordinate {m}
+    4.060000000000,          !- Vertex 3 X-coordinate {m}
+    0.000000000000,          !- Vertex 3 Y-coordinate {m}
+    1.200000000000,          !- Vertex 3 Z-coordinate {m}
+    4.060000000000,          !- Vertex 4 X-coordinate {m}
+    0.000000000000,          !- Vertex 4 Y-coordinate {m}
     2.360000000000;          !- Vertex 4 Z-coordinate {m}
 
 
@@ -1129,7 +906,7 @@ FenestrationSurface:Detailed,
 
 People,
     People_sala,             !- Name
-    SalaCoz_M,               !- Zone or ZoneList Name
+    Sala_Coz_C,              !- Zone or ZoneList Name
     ocupacao_sala,           !- Number of People Schedule Name
     People,                  !- Number of People Calculation Method
     4,                       !- Number of People
@@ -1141,7 +918,7 @@ People,
 
 People,
     People_dorm1,            !- Name
-    Q1_M,                    !- Zone or ZoneList Name
+    Q1_C,                    !- Zone or ZoneList Name
     ocupacao_dorm,           !- Number of People Schedule Name
     People,                  !- Number of People Calculation Method
     2,                       !- Number of People
@@ -1153,7 +930,7 @@ People,
 
 People,
     People_dorm2,            !- Name
-    Q2_M,                    !- Zone or ZoneList Name
+    Q2_C,                    !- Zone or ZoneList Name
     ocupacao_dorm,           !- Number of People Schedule Name
     People,                  !- Number of People Calculation Method
     2,                       !- Number of People
@@ -1168,7 +945,7 @@ People,
 
 Lights,
     Ilum_dorm1,              !- Name
-    Q1_M,                    !- Zone or ZoneList Name
+    Q1_C,                    !- Zone or ZoneList Name
     ilum_dorm,               !- Schedule Name
     Watts/Area,              !- Design Level Calculation Method
     ,                        !- Lighting Level {W}
@@ -1182,7 +959,7 @@ Lights,
 
 Lights,
     Ilum_dorm2,              !- Name
-    Q2_M,                    !- Zone or ZoneList Name
+    Q2_C,                    !- Zone or ZoneList Name
     ilum_dorm,               !- Schedule Name
     Watts/Area,              !- Design Level Calculation Method
     ,                        !- Lighting Level {W}
@@ -1196,7 +973,7 @@ Lights,
 
 Lights,
     Ilum_sala,               !- Name
-    SalaCoz_M,               !- Zone or ZoneList Name
+    Sala_Coz_C,              !- Zone or ZoneList Name
     ilum_sala,               !- Schedule Name
     Watts/Area,              !- Design Level Calculation Method
     ,                        !- Lighting Level {W}
@@ -1213,7 +990,7 @@ Lights,
 
 ElectricEquipment,
     Eq_sala,                 !- Name
-    SalaCoz_M,               !- Zone or ZoneList Name
+    Sala_Coz_C,              !- Zone or ZoneList Name
     eq_sala,                 !- Schedule Name
     EquipmentLevel,          !- Design Level Calculation Method
     120,                     !- Design Level {W}
@@ -1252,34 +1029,6 @@ Output:Table:SummaryReports,
 OutputControl:Table:Style,
     Comma,                   !- Column Separator
     JtoKWH;                  !- Unit Conversion
-
-
-!-   ===========  ALL OBJECTS IN CLASS: OUTPUT:VARIABLE ===========
-
-Output:Variable,
-    *,                       !- Key Value
-    Zone Outdoor Air Drybulb Temperature ,  !- Variable Name
-    Hourly;                  !- Reporting Frequency
-
-Output:Variable,
-    *,                       !- Key Value
-    Zone Operative Temperature ,  !- Variable Name
-    Hourly;                  !- Reporting Frequency
-
-Output:Variable,
-    *,                       !- Key Value
-    Zone People Occupant Count,  !- Variable Name
-    Hourly;                  !- Reporting Frequency
-
-Output:Variable,
-    ,                        !- Key Value
-    Zone Operative Temperature,  !- Variable Name
-    Hourly;                  !- Reporting Frequency
-
-Output:Variable,
-    ,                        !- Key Value
-    Zone Mean Air Temperature,  !- Variable Name
-    Hourly;                  !- Reporting Frequency
 
 
 !-   ===========  ALL OBJECTS IN CLASS: OUTPUT:DIAGNOSTICS ===========

@@ -360,4 +360,32 @@ HVACTemplate:Zone:IdealLoadsAirSystem,
     None,                    !- Demand Controlled Ventilation Type
     NoEconomizer,            !- Outdoor Air Economizer Type
     None;                    !- Heat Recovery Type
+
+
+!-   ===========  ALL OBJECTS IN CLASS: OUTPUT:VARIABLE ===========
+
+Output:Variable,
+    *,                       !- Key Value
+    Zone Ideal Loads Zone Total Heating Energy,  !- Variable Name
+    Hourly;                  !- Reporting Frequency
+
+Output:Variable,
+    *,                       !- Key Value
+    Zone Ideal Loads Zone Total Cooling Energy,  !- Variable Name
+    Hourly;                  !- Reporting Frequency
+
+Output:Variable,
+    *,                       !- Key Value
+    Zone People Occupant Count,  !- Variable Name
+    Hourly;                  !- Reporting Frequency
+
+Output:Variable,
+    ,                        !- Key Value
+    Zone Operative Temperature,  !- Variable Name
+    Hourly;                  !- Reporting Frequency
+
+Output:Variable,
+    ,                        !- Key Value
+    Zone Mean Air Temperature,  !- Variable Name
+    Hourly;                  !- Reporting Frequency
     
