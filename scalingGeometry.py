@@ -3,11 +3,13 @@ import json
 def constant_vertex(vertex, vertex_list, scale):
     # Checks which vertex it is, so it defines the new value,
     # in order to keep the same opening area
-
-    if vertex == min(vertex_list):
-        new_vertex = ((max(vertex_list)-min(vertex_list))*(scale-1))
+    
+    if max(vertex_list) == min(vertex_list):
+        new_vertex = vertex*scale
+    elif vertex == min(vertex_list):
+        new_vertex = (scale*(max(vertex_list)+min(vertex_list))-(max(vertex_list)-min(vertex_list)))*.5
     elif vertex == max(vertex_list):
-        new_vertex = ((max(vertex_list)-min(vertex_list))*(scale+1))
+        new_vertex = (scale*(max(vertex_list)+min(vertex_list))+(max(vertex_list)-min(vertex_list)))*.5
 
     return(new_vertex)
 
