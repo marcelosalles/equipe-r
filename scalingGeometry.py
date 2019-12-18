@@ -128,3 +128,27 @@ FILE_NAME = 'singlezone_gen/hive_12-04_floor0_roof0.epJSON'
 scaling(scalex=2, scaley=.5,scalez=1, ratio_of_building_afn=0.85, 
     window_scale=False, shading_scale=False,
     input_file= FILE_NAME, output_name='scaling_test.epJSON')
+
+'''
+
+- abre o idf
+- converte pra json
+- enumera as zonas
+    procurando no objeto "Zone"
+- calcula as areas das zonas
+    procurando em "BuildingSurface:Detailed", "surface_type": "Floor", e lendo os vertices
+- enumera as surfaces de cada zona
+    procurando em "BuildingSurface:Detailed", e adicionando a lista das surfaces, pelo "zone_name" (só walls)
+- enumera as janelas de cada zona, a partir das surfaces
+    para cada zona, lendo "building_surface_name" e "surface_type": "Window" do "FenestrationSurface:Detailed"
+- calcula as áreas das janelas
+    lendo os vertices das janelas (conferir se varia no x ou y)
+- corrige as áreas das janelas
+    multiplicando W (ou H) pelo fator "area ref/area real"
+    *conferir se W (ou H) não passa da aresta da Wall
+    *conferir se a janela não se sobrepoem com a porta
+    **definir se vai consertar autmaticamente, ou só avisar
+- salva o json
+- converte pra idf
+
+'''
